@@ -33,3 +33,6 @@ newtype WireId = WireId { unWireId :: String }
 
 instance Show WireId where
   show (WireId s) = "wire:" ++ s
+
+instance Show NodeId where
+  show (NodeId n) = "[" ++ show n ++ "]"
