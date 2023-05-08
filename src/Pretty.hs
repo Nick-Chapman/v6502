@@ -46,6 +46,8 @@ ppExp prec = \case
   EOr x y -> bracket 3 (ppExp 3 x ++ "|" ++ ppExp 3 y)
   EXor x y -> bracket 4 (ppExp 4 x ++ "^" ++ ppExp 4 y)
   EIte x y z -> bracket 5 (ppExp 4 x ++ " ? " ++ ppExp 4 y ++ " : " ++ ppExp 5 z)
+  EConst bool -> if bool then "1" else "0"
+
   where
     -- the small the arg passed to bracket, the less like likely we bracket
     bracket me s =

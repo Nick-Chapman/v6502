@@ -24,6 +24,7 @@ data Exp
   | EAnd Exp Exp
   | EXor Exp Exp
   | EIte Exp Exp Exp
+  | EConst Bool
 
 newtype NodeId = NodeId { unNodeId :: Int }
   deriving (Eq,Ord)

@@ -12,7 +12,12 @@ toName i@(NodeId num) =
   where m = Map.fromList [ (NodeId i,s) | (s,i) <- pairs ]
 
 ofName :: String -> NodeId
-ofName = undefined
+ofName s =
+  case Map.lookup s m of
+    Just i -> NodeId i
+    Nothing -> error (show ("ofName",s))
+
+  where m = Map.fromList pairs
 
 -- converted by hand from ../data/chip_6502_nodes.inc
 pairs :: [(String,Int)]

@@ -1,9 +1,10 @@
 
 module Norm (normalize) where
 
-import Logic (Line(..),AssignDef(..),WireDef(..),MuxDef(..),WireId,Exp(..),Vec(..))
 import Data.List (sortBy)
 import Data.Ord (comparing)
+import Exp (eNot,eOr,eAnd,eIte,subWire)
+import Logic (Line(..),AssignDef(..),WireDef(..),MuxDef(..),WireId,Exp(..),Vec(..))
 
 ----------------------------------------------------------------------
 -- normalize
@@ -31,9 +32,9 @@ expandMuxDef MuxDef{width=w,name=_,o,i,s=Vec ss,d=Vec ds} =
   if (length ss /= w) then error "vec-s" else
     if (length ds /= w) then error "vec-d" else do
       --assign o = (|s) ? &(d|(~s)) : i;
-      let cond = foldl1 EOr ss
-      let exp = foldl1 EAnd [ EOr d (ENot s) | (s,d) <- zip ss ds ]
-      AssignDef o (EIte cond exp i)
+      let cond = foldl1 eOr ss
+      let exp = foldl1 eAnd [ eOr d (eNot s) | (s,d) <- zip ss ds ]
+      AssignDef o (eIte cond exp i)
 
 ----------------------------------------------------------------------
 -- inline wire defs
@@ -58,18 +59,6 @@ inlineWire Logic{assignDefs=as,wireDefs=ws,muxDefs=ms} wToBeInlined = do
   let ms' = [ fm x | x <- ms ]
   Logic{assignDefs=as',wireDefs=ws',muxDefs=ms'}
 
-subWire :: (WireId -> Exp) -> Exp -> Exp
-subWire f = trav
-  where
-    trav = \case
-      ENode n -> ENode n
-      EWire w -> f w
-      ENot x -> ENot (trav x)
-      EAnd x y -> EAnd (trav x) (trav y)
-      EOr x y -> EOr (trav x) (trav y)
-      EXor x y -> EXor (trav x) (trav y)
-      EIte x y z -> EIte (trav x) (trav y) (trav z)
-
 wrefsOfLogic :: Logic -> [WireId]
 wrefsOfLogic logic = [ w | e <- expsOfLogic logic, w <- wrefsOfExp e ]
 
@@ -84,6 +73,7 @@ wrefsOfExp = loop []
       EOr x y -> loop (loop acc x) y
       EXor x y -> loop (loop acc x) y
       EIte x y z -> loop (loop (loop acc x) y) z
+      EConst{} -> acc
 
 ----------------------------------------------------------------------
 -- Logic
