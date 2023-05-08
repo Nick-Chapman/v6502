@@ -4,18 +4,38 @@ import Data.List (sortBy)
 import Data.Ord (comparing)
 import Logic (Line(..),AssignDef(..),WireDef(..),MuxDef(..),WireId,Exp(..),Vec(..))
 import ParseLogic (parseLogicLines)
-import Pretty (ppLine)
+import Pretty (ppLine,ppAssignDef)
 
 main :: IO ()
 main = do
   logic0 <- parseLogicRaw <$> readFile "data/logic.inc"
   generateFile "logic0" logic0
-  let logic1 = collateLogic logic0
+  {-let logic1 = collateLogic logic0
   generateFile "logic1" logic1
   let logic2 = inlineWires logic1
   generateFile "logic2" logic2
   let logic3 = (collateLogic . uncollateLogic) (expandMuxes logic2)
-  generateFile "logic3" logic3
+  generateFile "logic3" logic3-}
+  let logic1 = normalize logic0
+  generateFile "logic1-just-assigns" logic1
+
+----------------------------------------------------------------------
+-- normalize
+
+normalize :: LogicRaw -> Assigns
+normalize logic0 = do
+  let logic1 = collateLogic logic0
+  let logic2 = inlineWires logic1
+  let logic3 = (collateLogic . uncollateLogic) (expandMuxes logic2)
+  let Logic{assignDefs=as,wireDefs=ws,muxDefs=ms} = logic3
+  case (ws,ms) of
+    ([],[]) -> Assigns as
+    _ -> error "normalize"
+
+data Assigns = Assigns [AssignDef]
+
+instance Show Assigns where
+  show (Assigns as) = unlines (map ppAssignDef as)
 
 ----------------------------------------------------------------------
 -- expand mux defs
