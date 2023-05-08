@@ -6,24 +6,37 @@ import Logic (Line(..),AssignDef(..),WireDef(..),MuxDef(..),WireId,Exp(..),Vec(.
 import ParseLogic (parseLogicLines)
 import Pretty (ppLine)
 
-import qualified Data.Map as Map
-import Data.Map (Map)
-
 main :: IO ()
 main = do
   logic0 <- parseLogicRaw <$> readFile "data/logic.inc"
-  let logic1 = collateLogic logic0
   generateFile "logic0" logic0
+  let logic1 = collateLogic logic0
   generateFile "logic1" logic1
-  let wu = wireUsage logic1
-  mapM_ print (Map.toList wu)
+  let logic2 = inlineWires logic1
+  generateFile "logic2" logic2
 
--- check wireId refs...
+----------------------------------------------------------------------
+-- inline wire defs
 
-type WireUsage = Map WireId Int
+inlineWires :: Logic -> Logic
+inlineWires logic = do
+  let ws = wrefsOfLogic logic
+  foldl inlineWire logic ws
 
-wireUsage :: Logic -> WireUsage
-wireUsage = hist . wrefsOfLogic
+inlineWire :: Logic -> WireId -> Logic
+inlineWire Logic{assignDefs=as,wireDefs=ws,muxDefs=ms} wToBeInlined = do
+  let wBody = the [ e | WireDef w e <- ws, w == wToBeInlined ]
+
+  let f = \case EWire w -> if w == wToBeInlined then wBody else EWire w; e -> e
+  let fa (AssignDef x e) = AssignDef x (f e)
+  let fw (WireDef x e) = WireDef x (f e)
+  let fv (Vec xs) = Vec (map f xs)
+  let fm m@MuxDef{i,s,d} = m { i = f i, s = fv s, d = fv d }
+
+  let as' = [ fa x | x <- as ]
+  let ws' = [ fw x | x@(WireDef w _) <- ws, w /= wToBeInlined ]
+  let ms' = [ fm x | x <- ms ]
+  Logic{assignDefs=as',wireDefs=ws',muxDefs=ms'}
 
 wrefsOfLogic :: Logic -> [WireId]
 wrefsOfLogic logic = expsOfLogic logic >>= wrefsOfExp
@@ -94,14 +107,17 @@ parseLogicRaw = LogicRaw . parseLogicLines
 ----------------------------------------------------------------------
 -- misc
 
-hist :: Ord a => [a] -> Map a Int
-hist ks = Map.fromList [ (k,length xs) | (k,xs) <- collate [ (k,()) | k <- ks ] ]
+--hist :: Ord a => [a] -> Map a Int
+--hist ks = Map.fromList [ (k,length xs) | (k,xs) <- collate [ (k,()) | k <- ks ] ]
 
-collate :: Ord k => [(k,v)] -> [(k,[v])]
-collate xs = Map.toList (Map.fromListWith (++) [ (k,[v]) | (k,v) <- xs ])
+--collate :: Ord k => [(k,v)] -> [(k,[v])]
+--collate xs = Map.toList (Map.fromListWith (++) [ (k,[v]) | (k,v) <- xs ])
 
 generateFile :: Show a => String -> a -> IO ()
 generateFile tag a = do
   let fp :: FilePath = "gen/" ++ tag ++ ".out"
   putStrLn $ "Writing file: " <> fp
   writeFile fp (show a)
+
+the :: [a] -> a
+the = \case [x] -> x; xs -> error (show ("the",length xs))
