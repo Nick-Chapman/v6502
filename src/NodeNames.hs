@@ -7,8 +7,8 @@ import Logic (NodeId(..))
 toName :: NodeId -> String
 toName i@(NodeId num) =
   case Map.lookup i m of
-    Just s -> s
-    Nothing -> "NODE-" ++ show num
+    Just s -> show num ++ "-" ++ s
+    Nothing -> show num ++ "-???"
   where m = Map.fromList [ (NodeId i,s) | (s,i) <- pairs ]
 
 ofName :: String -> NodeId

@@ -1,6 +1,7 @@
 
 module Top (main) where
 
+import Data.Map (Map)
 import Data.Set (size)
 import Exp (subNode)
 import Logic (Line,AssignDef(..),Exp(..),NodeId)
@@ -8,6 +9,7 @@ import NodeNames (toName,ofName)
 import Norm (normalize)
 import ParseLogic (parseLogicLines)
 import Pretty (ppLine,ppAssignDef)
+import qualified Data.Map as Map
 import qualified Data.Set as Set
 
 main :: IO ()
@@ -21,6 +23,41 @@ main = do
   let logic2 = inlineFixedInputs logic1
   generateFile "logic2" (Assigns logic2)
   see "2" logic2
+
+  let outputs = Set.fromList (map ofName outNames)
+        where outNames = ["rw","sync"]
+                ++ [ "db"++show @Int n | n <- [0..7] ]
+                ++ [ "ab"++show @Int n | n <- [0..15] ]
+
+  let triv2 = detectTrivNodes logic2
+  let once2 = detectUsedOne logic2
+  let toElim2 = Set.toList (Set.fromList (triv2 ++ once2) `Set.difference` outputs)
+
+  --print ("outputs", Set.map toName outputs)
+  --print ("triv2", map toName triv2)
+  --print ("once2", map toName once2)
+  --print ("toElim2", map toName toElim2)
+
+  let logic3 = foldl inlineNodeId logic2 toElim2
+  generateFile "logic3" (Assigns logic3)
+  see "3" logic3
+
+detectTrivNodes :: [AssignDef] -> [NodeId]
+detectTrivNodes as = [ n | AssignDef n e <- as, isTrivRHS e ]
+
+detectUsedOne :: [AssignDef] -> [NodeId]
+detectUsedOne as = do
+  let used = [ n | AssignDef _ e <- as, n <- nrefsOfExp e ]
+  [ n | (n,1) <- Map.toList (hist used) ]
+
+
+inlineNodeId :: [AssignDef] -> NodeId -> [AssignDef]
+inlineNodeId as nToBeInlined = do
+  let nBody = the [ e | AssignDef n e <- as, n == nToBeInlined ]
+  let f = subNode (\n -> if n == nToBeInlined then nBody else ENode n)
+  [ AssignDef n (f e) | AssignDef n e <- as, n /= nToBeInlined ]
+
+
 
 
 see :: String -> [AssignDef] -> IO ()
@@ -80,3 +117,33 @@ inlineFixedInput as (name,value) = do
   let nToBeInlined = ofName name
   let f = subNode (\n -> if n == nToBeInlined then EConst value else ENode n)
   [ AssignDef n (f e) | AssignDef n e <- as ]
+
+
+
+isTrivRHS :: Exp -> Bool
+isTrivRHS = \case
+  ENode{} -> True
+  EWire{} -> True
+  EConst{} -> True
+  ENot x -> isTrivRHS x
+  EAnd{} -> False
+  EOr{} -> False
+  EXor{} -> False
+  EIte{} -> False
+
+--nub :: Ord a => [a] -> [a]
+--nub = Set.toList . Set.fromList
+
+----------------------------------------------------------------------
+-- misc
+
+--copied
+the :: [a] -> a
+the = \case [x] -> x; xs -> error (show ("the",length xs))
+
+
+hist :: Ord a => [a] -> Map a Int
+hist ks = Map.fromList [ (k,length xs) | (k,xs) <- collate [ (k,()) | k <- ks ] ]
+
+collate :: Ord k => [(k,v)] -> [(k,[v])]
+collate xs = Map.toList (Map.fromListWith (++) [ (k,[v]) | (k,v) <- xs ])
