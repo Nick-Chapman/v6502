@@ -46,7 +46,7 @@ inlineWire :: Logic -> WireId -> Logic
 inlineWire Logic{assignDefs=as,wireDefs=ws,muxDefs=ms} wToBeInlined = do
   let wBody = the [ e | WireDef w e <- ws, w == wToBeInlined ]
 
-  let f = \case EWire w -> if w == wToBeInlined then wBody else EWire w; e -> e
+  let f = subWire (\w -> if w == wToBeInlined then wBody else EWire w)
   let fa (AssignDef x e) = AssignDef x (f e)
   let fw (WireDef x e) = WireDef x (f e)
   let fv (Vec xs) = Vec (map f xs)
@@ -57,14 +57,27 @@ inlineWire Logic{assignDefs=as,wireDefs=ws,muxDefs=ms} wToBeInlined = do
   let ms' = [ fm x | x <- ms ]
   Logic{assignDefs=as',wireDefs=ws',muxDefs=ms'}
 
+
+subWire :: (WireId -> Exp) -> Exp -> Exp
+subWire f = trav
+  where
+    trav = \case
+      ENode n -> ENode n
+      EWire w -> f w
+      ENot x -> ENot (trav x)
+      EAnd x y -> EAnd (trav x) (trav y)
+      EOr x y -> EOr (trav x) (trav y)
+      EXor x y -> EXor (trav x) (trav y)
+      EIte x y z -> EIte (trav x) (trav y) (trav z)
+
 wrefsOfLogic :: Logic -> [WireId]
-wrefsOfLogic logic = expsOfLogic logic >>= wrefsOfExp
+wrefsOfLogic logic = [ w | e <- expsOfLogic logic, w <- wrefsOfExp e ]
 
 wrefsOfExp :: Exp -> [WireId]
 wrefsOfExp = loop []
   where
     loop acc = \case
-      ENode{} -> []
+      ENode{} -> acc -- AGGHH, was bug! []
       EWire w -> w : acc
       ENot x -> loop acc x
       EAnd x y -> loop (loop acc x) y
