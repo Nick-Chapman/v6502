@@ -14,6 +14,25 @@ main = do
   generateFile "logic1" logic1
   let logic2 = inlineWires logic1
   generateFile "logic2" logic2
+  let logic3 = (collateLogic . uncollateLogic) (expandMuxes logic2)
+  generateFile "logic3" logic3
+
+----------------------------------------------------------------------
+-- expand mux defs
+
+expandMuxes :: Logic -> Logic
+expandMuxes Logic{assignDefs=as,wireDefs=ws,muxDefs=ms} = do
+  let as2 = map expandMuxDef ms
+  Logic{assignDefs=as++as2,wireDefs=ws,muxDefs=[]}
+
+expandMuxDef :: MuxDef -> AssignDef
+expandMuxDef MuxDef{width=w,name=_,o,i,s=Vec ss,d=Vec ds} =
+  if (length ss /= w) then error "vec-s" else
+    if (length ds /= w) then error "vec-d" else do
+      --assign o = (|s) ? &(d|(~s)) : i;
+      let cond = foldl1 EOr ss
+      let exp = foldl1 EAnd [ EOr d (ENot s) | (s,d) <- zip ss ds ]
+      AssignDef o (EIte cond exp i)
 
 ----------------------------------------------------------------------
 -- inline wire defs
