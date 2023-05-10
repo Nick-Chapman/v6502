@@ -1,11 +1,25 @@
 
-module NodeNames (toName,ofName) where
+module NodeNames (isNamed,toName,toNumName,ofName) where
 
 import qualified Data.Map as Map
 import Logic (NodeId(..))
 
+isNamed :: NodeId -> Bool
+isNamed i@(NodeId{}) =
+  case Map.lookup i m of
+    Just{} -> True
+    Nothing -> False
+  where m = Map.fromList [ (NodeId i,s) | (s,i) <- pairs ]
+
 toName :: NodeId -> String
 toName i@(NodeId num) =
+  case Map.lookup i m of
+    Just s -> s
+    Nothing -> "NODE-" ++ show num
+  where m = Map.fromList [ (NodeId i,s) | (s,i) <- pairs ]
+
+toNumName :: NodeId -> String
+toNumName i@(NodeId num) =
   case Map.lookup i m of
     Just s -> show num ++ "-" ++ s
     Nothing -> show num ++ "-???"

@@ -1,8 +1,8 @@
 
-diff: .built
+top: sim
 	git diff gen
 
-.built: src/*.hs Makefile
-	stack run
-	touch .built
+sim: gen/sim1.trace
 
+gen/sim1.trace: src/*.hs Makefile
+	stack run | tee $@

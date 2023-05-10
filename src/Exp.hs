@@ -1,7 +1,28 @@
 
-module Exp (eNot,eAnd,eOr,eIte,subWire,subNode) where
+module Exp (nrefsOfAssigns,nrefsOfExp,eNot,eAnd,eOr,eIte,subWire,subNode) where
 
-import Logic (WireId(..),NodeId(..),Exp(..))
+import Data.Set (Set)
+import Logic (AssignDef(..),WireId(..),NodeId(..),Exp(..))
+import qualified Data.Set as Set
+
+nrefsOfAssigns :: [AssignDef] -> Set NodeId
+nrefsOfAssigns assigns = do
+  let defs = [ n | AssignDef n _ <- assigns ]
+  let refs = [ n | AssignDef _ e <- assigns, n <- nrefsOfExp e ]
+  Set.fromList (defs ++ refs)
+
+nrefsOfExp :: Exp -> [NodeId]
+nrefsOfExp = loop []
+  where
+    loop acc = \case
+      ENode n -> n : acc
+      EWire{} -> acc
+      ENot x -> loop acc x
+      EAnd x y -> loop (loop acc x) y
+      EOr x y -> loop (loop acc x) y
+      EXor x y -> loop (loop acc x) y
+      EIte x y z -> loop (loop (loop acc x) y) z
+      EConst{} -> acc
 
 subWire :: (WireId -> Exp) -> Exp -> Exp
 subWire f = trav
