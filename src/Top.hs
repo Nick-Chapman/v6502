@@ -16,6 +16,7 @@ import qualified Sim (main)
 main :: IO ()
 main = do
   logic0 <- parseLogicLines <$> readFile "data/logic.inc"
+  --logic0 <- parseLogicLines <$> readFile "data/logic_unopt.inc"
   generateFile "logic0" (LogicRaw logic0)
   let logic1 = normalize logic0
   generateFile "logic1-just-assigns" (Assigns logic1)
@@ -30,18 +31,19 @@ main = do
                 ++ [ "db"++show @Int n | n <- [0..7] ]
                 ++ [ "ab"++show @Int n | n <- [0..15] ]
 
-  let triv2 = detectTrivNodes logic2
-  let once2 = detectUsedOne logic2
-  let toElim2 = Set.toList (Set.fromList (triv2 ++ once2) `Set.difference` outputs)
+  let defined2 = Set.fromList [ n | AssignDef n _ <- logic2 ]
+  let triv2 = Set.fromList (detectTrivNodes logic2)
+  let once2 = Set.fromList (detectUsedOne logic2) `Set.intersection` defined2
+  let toElim2 = (triv2 `Set.union` once2) `Set.difference` outputs
 
   --print ("outputs", Set.map toNumName outputs)
-  --print ("triv2", map toNumName triv2)
-  --print ("once2", map toNumName once2)
-  --print ("toElim2", map toNumName toElim2)
+  --print ("#triv2", length triv2)
+  --print ("#once2", length once2)
+  --print ("#toElim2", length toElim2)
 
   let logic3 = foldl inlineNodeId logic2 toElim2
   generateFile "logic3" (Assigns logic3)
-  let _ = see "3" logic3
+  --see "3" logic3
 
   let logic = logic2 -- or 3 -- choose here
   see "logic" logic
@@ -59,7 +61,7 @@ detectUsedOne as = do
 
 inlineNodeId :: [AssignDef] -> NodeId -> [AssignDef]
 inlineNodeId as nToBeInlined = do
-  let nBody = the [ e | AssignDef n e <- as, n == nToBeInlined ]
+  let nBody = the (show nToBeInlined) [ e | AssignDef n e <- as, n == nToBeInlined ]
   let f = subNode (\n -> if n == nToBeInlined then nBody else ENode n)
   [ AssignDef n (f e) | AssignDef n e <- as, n /= nToBeInlined ]
 
@@ -130,8 +132,8 @@ isTrivRHS = \case
 -- misc
 
 --copied
-the :: [a] -> a
-the = \case [x] -> x; xs -> error (show ("the",length xs))
+the :: String -> [a] -> a
+the s = \case [x] -> x; xs -> error (show ("the",s,length xs))
 
 
 hist :: Ord a => [a] -> Map a Int
