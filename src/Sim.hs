@@ -221,7 +221,7 @@ instance Show HighLevelStateView where
       , "r=" ++ show (Bit (look (ofName "res")))
       , "c=" ++ show (Bit (look (ofName "clk0")))
 
---    , "IR=" ++ show (bitsToByte (map look (ofNameB "ir"))) -- bogus nids
+      , "IR=" ++ show (bitsToByte (map look (ofNameB "ir"))) -- bogus nids
 
       , "PC=" ++ show (bitsToAddr (map look (ofNameB "pch" ++ ofNameB "pcl")))
       , "SP=" ++ show (bitsToByte (map look (ofNameB "s")))

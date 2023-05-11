@@ -15,8 +15,8 @@ import qualified Sim (main)
 
 main :: IO ()
 main = do
-  logic0 <- parseLogicLines <$> readFile "data/logic.inc"
-  --logic0 <- parseLogicLines <$> readFile "data/logic_unopt.inc"
+  --logic0 <- parseLogicLines <$> readFile "data/logic.inc"
+  logic0 <- parseLogicLines <$> readFile "data/logic_unopt.inc"
   generateFile "logic0" (LogicRaw logic0)
   let logic1 = normalize logic0
   generateFile "logic1-just-assigns" (Assigns logic1)

@@ -2,41 +2,41 @@ Writing file: gen/logic0.out
 Writing file: gen/logic1-just-assigns.out
 Writing file: gen/logic2.out
 Writing file: gen/logic3.out
-("logic","#assigns",816)
-("logic","#defs",816)
-("logic","#refs",815)
+("logic","#assigns",1190)
+("logic","#defs",1190)
+("logic","#refs",1187)
 ("logic","rNd",2,fromList ["1171-clk0","159-res"])
-("logic","dNr",3,fromList ["1156-rw","251-???","539-sync"])
-("sim, #assigns=",816)
-("#keys",818)
-i=  1 *UNSTABLE* r=0 c=1 PC=[0000] SP=[00] A=[00] X=[00] Y=[00] ab=[0000] rw=1 db=[ea]
-i=  2 {stab: 13} r=0 c=0 PC=[0000] SP=[00] A=[00] X=[00] Y=[00] ab=[0000] rw=1 db=[ea]
-i=  3 {stab:  6} r=0 c=1 PC=[0000] SP=[00] A=[00] X=[00] Y=[00] ab=[0000] rw=1 db=[ea]
-i=  4 {stab:  8} r=0 c=0 PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
-i=  5 {stab:  5} r=0 c=1 PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
-i=  6 {stab:  9} r=0 c=0 PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
-i=  7 {stab:  5} r=1 c=1 PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
-i=  8 {stab:  5} r=1 c=0 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
-i=  9 {stab:  7} r=1 c=1 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
-i= 10 {stab:  8} r=1 c=0 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
-i= 11 {stab:  7} r=1 c=1 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
-i= 12 {stab:  8} r=1 c=0 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
-i= 13 {stab:  5} r=1 c=1 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
-i= 14 {stab: 13} r=1 c=0 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[0100] rw=1 db=[ea]
-i= 15 {stab:  5} r=1 c=1 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[0100] rw=1 db=[ea]
-i= 16 {stab:  8} r=1 c=0 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01ff] rw=1 db=[ea]
-i= 17 {stab:  5} r=1 c=1 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01ff] rw=1 db=[ea]
-i= 18 {stab:  9} r=1 c=0 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01fe] rw=1 db=[ea]
-i= 19 {stab:  5} r=1 c=1 PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01fe] rw=1 db=[ea]
-i= 20 {stab: 12} r=1 c=0 PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffc] rw=1 db=[ea]
-i= 21 {stab:  7} r=1 c=1 PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffc] rw=1 db=[ea]
-i= 22 {stab:  9} r=1 c=0 PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffd] rw=1 db=[ea]
-i= 23 {stab:  7} r=1 c=1 PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffd] rw=1 db=[ea]
-i= 24 {stab:  9} r=1 c=0 PC=[eaea] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaea] rw=1 db=[ea]
-i= 25 {stab:  8} r=1 c=1 PC=[eaea] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaea] rw=1 db=[ea]
-i= 26 {stab:  8} r=1 c=0 PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
-i= 27 {stab:  8} r=1 c=1 PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
-i= 28 {stab:  8} r=1 c=0 PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
-i= 29 {stab:  8} r=1 c=1 PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
-i= 30 {stab:  8} r=1 c=0 PC=[eaec] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaec] rw=1 db=[ea]
+("logic","dNr",5,fromList ["1156-rw","1247-???","353-???","43-???","539-sync"])
+("sim, #assigns=",1190)
+("#keys",1192)
+i=  1 *UNSTABLE* r=0 c=1 IR=[ff] PC=[0000] SP=[00] A=[00] X=[00] Y=[00] ab=[0000] rw=1 db=[ea]
+i=  2 {stab: 14} r=0 c=0 IR=[00] PC=[0000] SP=[00] A=[00] X=[00] Y=[00] ab=[0000] rw=1 db=[ea]
+i=  3 {stab:  8} r=0 c=1 IR=[00] PC=[0000] SP=[00] A=[00] X=[00] Y=[00] ab=[0000] rw=1 db=[ea]
+i=  4 {stab:  9} r=0 c=0 IR=[00] PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
+i=  5 {stab:  8} r=0 c=1 IR=[00] PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
+i=  6 {stab: 11} r=0 c=0 IR=[00] PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
+i=  7 {stab:  7} r=1 c=1 IR=[00] PC=[ea00] SP=[00] A=[00] X=[00] Y=[00] ab=[ea00] rw=1 db=[ea]
+i=  8 {stab:  7} r=1 c=0 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
+i=  9 {stab:  8} r=1 c=1 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
+i= 10 {stab: 10} r=1 c=0 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
+i= 11 {stab:  8} r=1 c=1 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
+i= 12 {stab: 10} r=1 c=0 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
+i= 13 {stab:  8} r=1 c=1 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[eae9] rw=1 db=[ea]
+i= 14 {stab: 12} r=1 c=0 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[0100] rw=1 db=[ea]
+i= 15 {stab:  7} r=1 c=1 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[0100] rw=1 db=[ea]
+i= 16 {stab:  9} r=1 c=0 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01ff] rw=1 db=[ea]
+i= 17 {stab:  7} r=1 c=1 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01ff] rw=1 db=[ea]
+i= 18 {stab: 10} r=1 c=0 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01fe] rw=1 db=[ea]
+i= 19 {stab:  8} r=1 c=1 IR=[00] PC=[eae9] SP=[00] A=[00] X=[00] Y=[00] ab=[01fe] rw=1 db=[ea]
+i= 20 {stab: 14} r=1 c=0 IR=[00] PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffc] rw=1 db=[ea]
+i= 21 {stab: 10} r=1 c=1 IR=[00] PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffc] rw=1 db=[ea]
+i= 22 {stab: 11} r=1 c=0 IR=[00] PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffd] rw=1 db=[ea]
+i= 23 {stab:  8} r=1 c=1 IR=[00] PC=[eae9] SP=[fd] A=[00] X=[00] Y=[00] ab=[fffd] rw=1 db=[ea]
+i= 24 {stab: 11} r=1 c=0 IR=[00] PC=[eaea] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaea] rw=1 db=[ea]
+i= 25 {stab: 11} r=1 c=1 IR=[00] PC=[eaea] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaea] rw=1 db=[ea]
+i= 26 {stab: 10} r=1 c=0 IR=[ea] PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
+i= 27 {stab: 11} r=1 c=1 IR=[ea] PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
+i= 28 {stab:  9} r=1 c=0 IR=[ea] PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
+i= 29 {stab: 11} r=1 c=1 IR=[ea] PC=[eaeb] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaeb] rw=1 db=[ea]
+i= 30 {stab: 10} r=1 c=0 IR=[ea] PC=[eaec] SP=[fd] A=[00] X=[00] Y=[00] ab=[eaec] rw=1 db=[ea]
 "*finish*"
