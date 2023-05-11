@@ -2,7 +2,7 @@
 module ParseLogic (parseLogicLines) where
 
 import Logic (Line(..),MuxDef(..),AssignDef(..),WireDef(..),Vec(..),NodeId(..),Exp(..),WireId(..))
-import Par4 (Par,parse,terminated,separated,nl,alts,key,lit,ws0,int,some,sat)
+import Par4 (Par,parse,terminated,separated,nl,alts,key,lit,ws0,int,some,sat,many)
 import qualified Data.Char as Char
 
 parseLogicLines :: String -> [Line]
@@ -47,7 +47,14 @@ logicGram = terminated nl line
       nibble
       e <- exp5
       lit ';'
+      nibble
+      eolComment
       pure (LineA (AssignDef n e))
+
+    eolComment = alts [pure (), do
+      key "//"
+      _ <- many (sat (\c -> c /= '\n'))
+      pure ()]
 
     oref :: Par NodeId
     oref = do lit 'o' ; index
