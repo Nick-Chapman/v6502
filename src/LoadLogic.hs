@@ -45,7 +45,7 @@ getLogic = do
   --see "3" assigns3
 
   let assigns = assigns2 -- or 3 -- choose here
-  see "logic" assigns
+  let _ = see "logic" assigns
   pure Logic { name = "logic2", assigns }
 
 detectTrivNodes :: [AssignDef] -> [NodeId]
@@ -77,7 +77,7 @@ see tag logic = do
 generateFile :: Show a => String -> a -> IO ()
 generateFile tag a = do
   let fp :: FilePath = "gen/" ++ tag ++ ".out"
-  putStrLn $ "Writing file: " <> fp
+  --putStrLn $ "Writing file: " <> fp
   writeFile fp (show a)
 
 data LogicRaw = LogicRaw [Line]

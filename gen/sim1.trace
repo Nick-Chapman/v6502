@@ -1,12 +1,3 @@
-Writing file: gen/logic0.out
-Writing file: gen/logic1-just-assigns.out
-Writing file: gen/logic2.out
-Writing file: gen/logic3.out
-("logic","#assigns",1190)
-("logic","#defs",1190)
-("logic","#refs",1187)
-("logic","rNd",2,fromList ["1171-clk0","159-res"])
-("logic","dNr",5,fromList ["1156-rw","1247-???","353-???","43-???","539-sync"])
 ("sim, #assigns=",1190)
 ("#keys",1192)
 i=  1 *UNSTABLE* r=0 c=1 IR=[ff] PC=[0000] SP=[00] A=[00] X=[00] Y=[00] ab=[0000] rw=1 db=[ea]
