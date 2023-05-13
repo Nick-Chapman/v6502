@@ -5,4 +5,4 @@ top: sim
 sim: gen/sim1.trace
 
 gen/sim1.trace: src/*.hs Makefile
-	stack run > $@
+	stack run sim1 > $@
