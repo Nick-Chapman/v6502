@@ -5,6 +5,7 @@ import Data.List (sortBy)
 import Data.Ord (comparing)
 import Exp (eNot,eOr,eAnd,eIte,subWire)
 import Logic (Line(..),AssignDef(..),WireDef(..),MuxDef(..),WireId,Exp(..),Vec(..))
+import Misc (the)
 
 ----------------------------------------------------------------------
 -- normalize
@@ -46,7 +47,7 @@ inlineWires logic = do
 
 inlineWire :: Logic -> WireId -> Logic
 inlineWire Logic{assignDefs=as,wireDefs=ws,muxDefs=ms} wToBeInlined = do
-  let wBody = the [ e | WireDef w e <- ws, w == wToBeInlined ]
+  let wBody = the "inlineWire" [ e | WireDef w e <- ws, w == wToBeInlined ]
 
   let f = subWire (\w -> if w == wToBeInlined then wBody else EWire w)
   let fa (AssignDef x e) = AssignDef x (f e)
@@ -110,9 +111,3 @@ collateLogic lines = Logic
   , wireDefs = sortBy (comparing wLeft) [ x | LineW x <- lines ]
   , muxDefs = [ x | LineM x <- lines ]
   }
-
-----------------------------------------------------------------------
--- misc
-
-the :: [a] -> a
-the = \case [x] -> x; xs -> error (show ("the",length xs))

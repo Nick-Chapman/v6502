@@ -8,6 +8,7 @@ import Data.Set (Set)
 import Data.Word (Word8,Word16)
 import Exp (nrefsOfAssigns)
 import Logic (AssignDef(..),Exp(..),NodeId)
+import Misc (zipMap)
 import NodeNames (toName,ofName)
 import Text.Printf (printf)
 import qualified Data.Map as Map
@@ -268,9 +269,3 @@ splitB (Byte w8) =
   where
     bitsOf :: Word8 -> [Bool]
     bitsOf n = ((n `mod` 2) == 1) : bitsOf (n `div` 2)
-
-----------------------------------------------------------------------
--- misc
-
-zipMap :: Ord k => Map k v1 -> Map k v2 -> Map k (v1,v2)
-zipMap = Map.intersectionWith (\a b -> (a,b))
