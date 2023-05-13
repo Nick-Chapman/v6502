@@ -3,7 +3,7 @@ module LoadLogic (getLogic) where
 
 import Data.Set (size)
 import Exp (nrefsOfExp,subNode)
-import Logic (Line,AssignDef(..),Exp(..),NodeId)
+import Logic (Logic(..),Line,AssignDef(..),Exp(..),NodeId)
 import Misc (the,hist)
 import NodeNames (toNumName,ofName)
 import Norm (normalize)
@@ -12,27 +12,27 @@ import Pretty (ppLine,ppAssignDef)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 
-getLogic :: IO [AssignDef]
+getLogic :: IO Logic
 getLogic = do
-  --logic0 <- parseLogicLines <$> readFile "data/logic.inc"
-  logic0 <- parseLogicLines <$> readFile "data/logic_unopt.inc"
-  generateFile "logic0" (LogicRaw logic0)
-  let logic1 = normalize logic0
-  generateFile "logic1-just-assigns" (Assigns logic1)
-  --see "1" logic1
+  --assigns0 <- parseLogicLines <$> readFile "data/logic.inc"
+  assigns0 <- parseLogicLines <$> readFile "data/logic_unopt.inc"
+  generateFile "logic0" (LogicRaw assigns0)
+  let assigns1 = normalize assigns0
+  generateFile "logic1-just-assigns" (Assigns assigns1)
+  --see "1" assigns1
 
-  let logic2 = inlineFixedInputs logic1
-  generateFile "logic2" (Assigns logic2)
-  --see "2" logic2
+  let assigns2 = inlineFixedInputs assigns1
+  generateFile "logic2" (Assigns assigns2)
+  --see "2" assigns2
 
   let outputs = Set.fromList (map ofName outNames)
         where outNames = ["rw","sync"]
                 ++ [ "db"++show @Int n | n <- [0..7] ]
                 ++ [ "ab"++show @Int n | n <- [0..15] ]
 
-  let defined2 = Set.fromList [ n | AssignDef n _ <- logic2 ]
-  let triv2 = Set.fromList (detectTrivNodes logic2)
-  let once2 = Set.fromList (detectUsedOne logic2) `Set.intersection` defined2
+  let defined2 = Set.fromList [ n | AssignDef n _ <- assigns2 ]
+  let triv2 = Set.fromList (detectTrivNodes assigns2)
+  let once2 = Set.fromList (detectUsedOne assigns2) `Set.intersection` defined2
   let toElim2 = (triv2 `Set.union` once2) `Set.difference` outputs
 
   --print ("outputs", Set.map toNumName outputs)
@@ -40,13 +40,13 @@ getLogic = do
   --print ("#once2", length once2)
   --print ("#toElim2", length toElim2)
 
-  let logic3 = foldl inlineNodeId logic2 toElim2
-  generateFile "logic3" (Assigns logic3)
-  --see "3" logic3
+  let assigns3 = foldl inlineNodeId assigns2 toElim2
+  generateFile "logic3" (Assigns assigns3)
+  --see "3" assigns3
 
-  let logic = logic2 -- or 3 -- choose here
-  see "logic" logic
-  pure logic
+  let assigns = assigns2 -- or 3 -- choose here
+  see "logic" assigns
+  pure Logic { name = "logic2", assigns }
 
 detectTrivNodes :: [AssignDef] -> [NodeId]
 detectTrivNodes as = [ n | AssignDef n e <- as, isTrivRHS e ]

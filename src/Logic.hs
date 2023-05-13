@@ -1,6 +1,8 @@
 
 module Logic where
 
+data Logic = Logic { name :: String, assigns :: [AssignDef] }
+
 data Line = LineA AssignDef | LineW WireDef | LineM MuxDef
 
 data AssignDef = AssignDef { aLeft :: NodeId, aRight :: Exp }

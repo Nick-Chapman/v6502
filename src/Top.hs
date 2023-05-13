@@ -3,7 +3,8 @@ module Top (main) where
 
 import LoadLogic (getLogic)
 import System.Environment (getArgs)
-import qualified Sim (main)
+import qualified Sim1 (main)
+import qualified Sim2 (main)
 
 main :: IO ()
 main = do
@@ -12,19 +13,20 @@ main = do
 
 parse :: [String] -> Config
 parse = \case
-  [] -> Config { mode = Dev }
+  [] -> Config { mode = Sim2 }
   ["sim1"] -> Config { mode = Sim1 }
   args ->
     error (show ("parse",args))
 
 data Config = Config { mode :: Mode }
-data Mode = Sim1 | Dev
+data Mode = Sim1 | Sim2
 
 run :: Config -> IO ()
 run Config{mode} = case mode of
   Sim1 -> do
     logic <- getLogic
-    Sim.main logic
-  Dev -> do
-    print "*dev*"
+    Sim1.main logic
+  Sim2 -> do
+    logic <- getLogic
+    Sim2.main logic
     pure ()

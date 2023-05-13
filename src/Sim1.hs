@@ -1,5 +1,5 @@
 
-module Sim (main) where
+module Sim1 (main) where
 
 import Data.List (sort,intercalate)
 import Data.List.Split (chunksOf)
@@ -7,15 +7,15 @@ import Data.Map (Map)
 import Data.Set (Set)
 import Data.Word (Word8,Word16)
 import Exp (nrefsOfAssigns)
-import Logic (AssignDef(..),Exp(..),NodeId)
+import Logic (Logic(..),AssignDef(..),Exp(..),NodeId)
 import Misc (zipMap)
 import NodeNames (toName,ofName)
 import Text.Printf (printf)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 
-main :: [AssignDef] -> IO ()
-main theAssigns = do
+main :: Logic -> IO ()
+main Logic{assigns=theAssigns} = do
   print ("sim, #assigns=",length theAssigns)
   let keys = initKeys theAssigns
   print ("#keys",let (Keys set) = keys in Set.size set)
