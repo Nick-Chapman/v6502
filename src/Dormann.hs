@@ -27,6 +27,9 @@ simWithImage = loop 0
   where
     loop :: Int -> Image -> Sim -> IO ()
     loop i image sim = {-if i==100 then pure () else-} case sim of
+      Stabilization _iopt sim -> do
+        --print ("stabilization",_iopt)
+        loop i image sim
       NewState _state sim -> do
         --print (StateSum i _state)
         --print "NEW-STATE"

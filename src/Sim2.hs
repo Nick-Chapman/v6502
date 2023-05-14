@@ -35,7 +35,8 @@ theSim v = do
 
 
 data Sim
-  = NewState State Sim
+  = Stabilization (Maybe Int) Sim
+  | NewState State Sim
   | Decide CycleKind Sim
   | ReadMem Addr (Byte -> Sim)
   | WriteMem Addr Byte Sim
@@ -49,6 +50,9 @@ run n sim mem = loop 0 sim
     loop i sim = do
       if i == n then print "*stop*" else do
         case sim of
+          Stabilization iopt sim -> do
+            print ("stabilization",iopt)
+            loop i sim
           NewState _state sim -> do
             print (StateSum i _state)
             loop i sim
@@ -106,7 +110,8 @@ simGivenLogic logic = do
 
     stabG :: StabMode -> Bool -> Inputs -> State -> (State -> Sim) -> Sim
     stabG mode res i s k = do
-      let s' = stabilize mode logic (i ++ [("res",res)] ++ fixedInputs) s
+      let (iopt,s') = stabilize mode logic (i ++ [("res",res)] ++ fixedInputs) s
+      Stabilization iopt $ do
       NewState s' $ do
       k s'
 
@@ -333,17 +338,17 @@ ofNameB prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..7] ]
 
 data StabMode = Strict | Permissive
 
-stabilize :: StabMode -> Logic -> Inputs -> State -> State
-stabilize mode logic inputs s0 = loop max (applyInputs inputs s0)
+stabilize :: StabMode -> Logic -> Inputs -> State -> (Maybe Int,State)
+stabilize mode logic inputs s0 = loop 0 (applyInputs inputs s0)
   where
     max = 50
     err = error (show ("failed to stabilize in",max))
-    loop :: Int -> State -> State
+    loop :: Int -> State -> (Maybe Int, State)
     loop i s1 = do
-      let s2 = oneStep  logic inputs s1
-      if s1 == s2 then s1 else
-        if i == 0 then (case mode of Strict -> err; Permissive -> s1) else
-          loop (i-1) s2
+      let s2 = oneStep logic inputs s1
+      if s1 == s2 then (Just i, s1) else
+        if i == max then (case mode of Strict -> err; Permissive -> (Nothing,s1)) else
+          loop (i+1) s2
 
 
 oneStep :: Logic -> Inputs -> State -> State

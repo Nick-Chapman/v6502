@@ -5,145 +5,217 @@ unoptimized
 - rNd      = ["rdy","irq","res","vss","vcc","clk0","nmi","so"]
 - dNr      = ["NODE-43","NODE-353","sync","rw","NODE-1247"]
 
+("stabilization",Nothing)
 i=  0 rw=1 sync=1 c=1 r=0 IR=[ff] PC=[0000] A=[00] X=[00] ab=[0000] db=[ff]
+("stabilization",Just 15)
 i=  0 rw=1 sync=0 c=0 r=0 IR=[00] PC=[0000] A=[00] X=[00] ab=[0000] db=[00]
+("stabilization",Just 7)
 i=  0 rw=1 sync=0 c=1 r=0 IR=[00] PC=[0000] A=[00] X=[00] ab=[0000] db=[00]
+("stabilization",Just 8)
 i=  0 rw=1 sync=0 c=0 r=0 IR=[00] PC=[0000] A=[00] X=[00] ab=[0000] db=[00]
 ("Decide:",ReadCycle)
 ("read-mem",[0000],"-->",[ea])
+("stabilization",Just 7)
 i=  1 rw=1 sync=0 c=1 r=1 IR=[00] PC=[0000] A=[00] X=[00] ab=[0000] db=[ea]
+("stabilization",Just 10)
 i=  1 rw=1 sync=0 c=0 r=1 IR=[00] PC=[ea00] A=[00] X=[00] ab=[ea00] db=[ea]
 ("Decide:",ReadCycle)
 ("read-mem",[ea00],"-->",[ea])
+("stabilization",Just 7)
 i=  2 rw=1 sync=0 c=1 r=1 IR=[00] PC=[ea00] A=[00] X=[00] ab=[ea00] db=[ea]
+("stabilization",Just 9)
 i=  2 rw=1 sync=1 c=0 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[eae9] db=[ea]
 ("Decide:",ReadCycle)
 ("read-mem",[eae9],"-->",[ea])
+("stabilization",Just 7)
 i=  3 rw=1 sync=1 c=1 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[eae9] db=[ea]
+("stabilization",Just 9)
 i=  3 rw=1 sync=0 c=0 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[eae9] db=[e9]
 ("Decide:",ReadCycle)
 ("read-mem",[eae9],"-->",[ea])
+("stabilization",Just 7)
 i=  4 rw=1 sync=0 c=1 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[eae9] db=[ea]
+("stabilization",Just 11)
 i=  4 rw=1 sync=0 c=0 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[0100] db=[ea]
 ("Decide:",ReadCycle)
 ("read-mem",[0100],"-->",[ea])
+("stabilization",Just 6)
 i=  5 rw=1 sync=0 c=1 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[0100] db=[ea]
+("stabilization",Just 8)
 i=  5 rw=1 sync=0 c=0 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[01ff] db=[e9]
 ("Decide:",ReadCycle)
 ("read-mem",[01ff],"-->",[ea])
+("stabilization",Just 6)
 i=  6 rw=1 sync=0 c=1 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[01ff] db=[ea]
+("stabilization",Just 9)
 i=  6 rw=1 sync=0 c=0 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[01fe] db=[66]
 ("Decide:",ReadCycle)
 ("read-mem",[01fe],"-->",[ea])
+("stabilization",Just 7)
 i=  7 rw=1 sync=0 c=1 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[01fe] db=[ea]
+("stabilization",Just 13)
 i=  7 rw=1 sync=0 c=0 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[fffc] db=[ff]
 ("Decide:",ReadCycle)
 ("read-mem",[fffc],"-->",[22])
+("stabilization",Just 9)
 i=  8 rw=1 sync=0 c=1 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[fffc] db=[22]
+("stabilization",Just 10)
 i=  8 rw=1 sync=0 c=0 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[fffd] db=[22]
 ("Decide:",ReadCycle)
 ("read-mem",[fffd],"-->",[11])
+("stabilization",Just 7)
 i=  9 rw=1 sync=0 c=1 r=1 IR=[00] PC=[eae9] A=[00] X=[00] ab=[fffd] db=[11]
+("stabilization",Just 10)
 i=  9 rw=1 sync=1 c=0 r=1 IR=[00] PC=[1122] A=[00] X=[00] ab=[1122] db=[11]
 ("Decide:",ReadCycle)
 ("read-mem",[1122],"-->",[a2])
+("stabilization",Just 9)
 i= 10 rw=1 sync=1 c=1 r=1 IR=[00] PC=[1122] A=[00] X=[00] ab=[1122] db=[a2]
+("stabilization",Just 10)
 i= 10 rw=1 sync=0 c=0 r=1 IR=[a2] PC=[1123] A=[00] X=[00] ab=[1123] db=[10]
 ("Decide:",ReadCycle)
 ("read-mem",[1123],"-->",[77])
+("stabilization",Just 7)
 i= 11 rw=1 sync=0 c=1 r=1 IR=[a2] PC=[1123] A=[00] X=[00] ab=[1123] db=[77]
+("stabilization",Just 10)
 i= 11 rw=1 sync=1 c=0 r=1 IR=[a2] PC=[1124] A=[00] X=[77] ab=[1124] db=[77]
 ("Decide:",ReadCycle)
 ("read-mem",[1124],"-->",[8e])
+("stabilization",Just 7)
 i= 12 rw=1 sync=1 c=1 r=1 IR=[a2] PC=[1124] A=[00] X=[77] ab=[1124] db=[8e]
+("stabilization",Just 11)
 i= 12 rw=1 sync=0 c=0 r=1 IR=[8e] PC=[1125] A=[00] X=[77] ab=[1125] db=[ee]
 ("Decide:",ReadCycle)
 ("read-mem",[1125],"-->",[44])
+("stabilization",Just 7)
 i= 13 rw=1 sync=0 c=1 r=1 IR=[8e] PC=[1125] A=[00] X=[77] ab=[1125] db=[44]
+("stabilization",Just 10)
 i= 13 rw=1 sync=0 c=0 r=1 IR=[8e] PC=[1126] A=[00] X=[77] ab=[1126] db=[44]
 ("Decide:",ReadCycle)
 ("read-mem",[1126],"-->",[33])
+("stabilization",Just 6)
 i= 14 rw=1 sync=0 c=1 r=1 IR=[8e] PC=[1126] A=[00] X=[77] ab=[1126] db=[33]
+("stabilization",Just 10)
 i= 14 rw=0 sync=0 c=0 r=1 IR=[8e] PC=[1127] A=[00] X=[77] ab=[3344] db=[77]
 ("Decide:",WriteCycle)
+("stabilization",Just 7)
 i= 14 rw=0 sync=0 c=1 r=1 IR=[8e] PC=[1127] A=[00] X=[77] ab=[3344] db=[77]
 ("WRITE-MEM",[3344],"<--",[77])
+("stabilization",Just 8)
 i= 15 rw=1 sync=1 c=0 r=1 IR=[8e] PC=[1127] A=[00] X=[77] ab=[1127] db=[77]
 ("Decide:",ReadCycle)
 ("read-mem",[1127],"-->",[e8])
+("stabilization",Just 10)
 i= 16 rw=1 sync=1 c=1 r=1 IR=[8e] PC=[1127] A=[00] X=[77] ab=[1127] db=[e8]
+("stabilization",Just 9)
 i= 16 rw=1 sync=0 c=0 r=1 IR=[e8] PC=[1128] A=[00] X=[77] ab=[1128] db=[76]
 ("Decide:",ReadCycle)
 ("read-mem",[1128],"-->",[4c])
+("stabilization",Just 10)
 i= 17 rw=1 sync=0 c=1 r=1 IR=[e8] PC=[1128] A=[00] X=[77] ab=[1128] db=[4c]
+("stabilization",Just 13)
 i= 17 rw=1 sync=1 c=0 r=1 IR=[e8] PC=[1128] A=[00] X=[77] ab=[1128] db=[ff]
 ("Decide:",ReadCycle)
 ("read-mem",[1128],"-->",[4c])
+("stabilization",Just 8)
 i= 18 rw=1 sync=1 c=1 r=1 IR=[e8] PC=[1128] A=[00] X=[77] ab=[1128] db=[4c]
+("stabilization",Just 11)
 i= 18 rw=1 sync=0 c=0 r=1 IR=[4c] PC=[1129] A=[00] X=[78] ab=[1129] db=[78]
 ("Decide:",ReadCycle)
 ("read-mem",[1129],"-->",[24])
+("stabilization",Just 7)
 i= 19 rw=1 sync=0 c=1 r=1 IR=[4c] PC=[1129] A=[00] X=[78] ab=[1129] db=[24]
+("stabilization",Just 9)
 i= 19 rw=1 sync=0 c=0 r=1 IR=[4c] PC=[112a] A=[00] X=[78] ab=[112a] db=[24]
 ("Decide:",ReadCycle)
 ("read-mem",[112a],"-->",[11])
+("stabilization",Just 7)
 i= 20 rw=1 sync=0 c=1 r=1 IR=[4c] PC=[112a] A=[00] X=[78] ab=[112a] db=[11]
+("stabilization",Just 9)
 i= 20 rw=1 sync=1 c=0 r=1 IR=[4c] PC=[1124] A=[00] X=[78] ab=[1124] db=[11]
 ("Decide:",ReadCycle)
 ("read-mem",[1124],"-->",[8e])
+("stabilization",Just 7)
 i= 21 rw=1 sync=1 c=1 r=1 IR=[4c] PC=[1124] A=[00] X=[78] ab=[1124] db=[8e]
+("stabilization",Just 11)
 i= 21 rw=1 sync=0 c=0 r=1 IR=[8e] PC=[1125] A=[00] X=[78] ab=[1125] db=[11]
 ("Decide:",ReadCycle)
 ("read-mem",[1125],"-->",[44])
+("stabilization",Just 7)
 i= 22 rw=1 sync=0 c=1 r=1 IR=[8e] PC=[1125] A=[00] X=[78] ab=[1125] db=[44]
+("stabilization",Just 10)
 i= 22 rw=1 sync=0 c=0 r=1 IR=[8e] PC=[1126] A=[00] X=[78] ab=[1126] db=[44]
 ("Decide:",ReadCycle)
 ("read-mem",[1126],"-->",[33])
+("stabilization",Just 5)
 i= 23 rw=1 sync=0 c=1 r=1 IR=[8e] PC=[1126] A=[00] X=[78] ab=[1126] db=[33]
+("stabilization",Just 10)
 i= 23 rw=0 sync=0 c=0 r=1 IR=[8e] PC=[1127] A=[00] X=[78] ab=[3344] db=[78]
 ("Decide:",WriteCycle)
+("stabilization",Just 7)
 i= 23 rw=0 sync=0 c=1 r=1 IR=[8e] PC=[1127] A=[00] X=[78] ab=[3344] db=[78]
 ("WRITE-MEM",[3344],"<--",[78])
+("stabilization",Just 8)
 i= 24 rw=1 sync=1 c=0 r=1 IR=[8e] PC=[1127] A=[00] X=[78] ab=[1127] db=[78]
 ("Decide:",ReadCycle)
 ("read-mem",[1127],"-->",[e8])
+("stabilization",Just 10)
 i= 25 rw=1 sync=1 c=1 r=1 IR=[8e] PC=[1127] A=[00] X=[78] ab=[1127] db=[e8]
+("stabilization",Just 9)
 i= 25 rw=1 sync=0 c=0 r=1 IR=[e8] PC=[1128] A=[00] X=[78] ab=[1128] db=[77]
 ("Decide:",ReadCycle)
 ("read-mem",[1128],"-->",[4c])
+("stabilization",Just 10)
 i= 26 rw=1 sync=0 c=1 r=1 IR=[e8] PC=[1128] A=[00] X=[78] ab=[1128] db=[4c]
+("stabilization",Just 13)
 i= 26 rw=1 sync=1 c=0 r=1 IR=[e8] PC=[1128] A=[00] X=[78] ab=[1128] db=[ff]
 ("Decide:",ReadCycle)
 ("read-mem",[1128],"-->",[4c])
+("stabilization",Just 8)
 i= 27 rw=1 sync=1 c=1 r=1 IR=[e8] PC=[1128] A=[00] X=[78] ab=[1128] db=[4c]
+("stabilization",Just 11)
 i= 27 rw=1 sync=0 c=0 r=1 IR=[4c] PC=[1129] A=[00] X=[79] ab=[1129] db=[79]
 ("Decide:",ReadCycle)
 ("read-mem",[1129],"-->",[24])
+("stabilization",Just 7)
 i= 28 rw=1 sync=0 c=1 r=1 IR=[4c] PC=[1129] A=[00] X=[79] ab=[1129] db=[24]
+("stabilization",Just 9)
 i= 28 rw=1 sync=0 c=0 r=1 IR=[4c] PC=[112a] A=[00] X=[79] ab=[112a] db=[24]
 ("Decide:",ReadCycle)
 ("read-mem",[112a],"-->",[11])
+("stabilization",Just 7)
 i= 29 rw=1 sync=0 c=1 r=1 IR=[4c] PC=[112a] A=[00] X=[79] ab=[112a] db=[11]
+("stabilization",Just 9)
 i= 29 rw=1 sync=1 c=0 r=1 IR=[4c] PC=[1124] A=[00] X=[79] ab=[1124] db=[11]
 ("Decide:",ReadCycle)
 ("read-mem",[1124],"-->",[8e])
+("stabilization",Just 7)
 i= 30 rw=1 sync=1 c=1 r=1 IR=[4c] PC=[1124] A=[00] X=[79] ab=[1124] db=[8e]
+("stabilization",Just 11)
 i= 30 rw=1 sync=0 c=0 r=1 IR=[8e] PC=[1125] A=[00] X=[79] ab=[1125] db=[11]
 ("Decide:",ReadCycle)
 ("read-mem",[1125],"-->",[44])
+("stabilization",Just 7)
 i= 31 rw=1 sync=0 c=1 r=1 IR=[8e] PC=[1125] A=[00] X=[79] ab=[1125] db=[44]
+("stabilization",Just 10)
 i= 31 rw=1 sync=0 c=0 r=1 IR=[8e] PC=[1126] A=[00] X=[79] ab=[1126] db=[44]
 ("Decide:",ReadCycle)
 ("read-mem",[1126],"-->",[33])
+("stabilization",Just 5)
 i= 32 rw=1 sync=0 c=1 r=1 IR=[8e] PC=[1126] A=[00] X=[79] ab=[1126] db=[33]
+("stabilization",Just 10)
 i= 32 rw=0 sync=0 c=0 r=1 IR=[8e] PC=[1127] A=[00] X=[79] ab=[3344] db=[79]
 ("Decide:",WriteCycle)
+("stabilization",Just 7)
 i= 32 rw=0 sync=0 c=1 r=1 IR=[8e] PC=[1127] A=[00] X=[79] ab=[3344] db=[79]
 ("WRITE-MEM",[3344],"<--",[79])
+("stabilization",Just 10)
 i= 33 rw=1 sync=1 c=0 r=1 IR=[8e] PC=[1127] A=[00] X=[79] ab=[1127] db=[79]
 ("Decide:",ReadCycle)
 ("read-mem",[1127],"-->",[e8])
+("stabilization",Just 10)
 i= 34 rw=1 sync=1 c=1 r=1 IR=[8e] PC=[1127] A=[00] X=[79] ab=[1127] db=[e8]
+("stabilization",Just 9)
 i= 34 rw=1 sync=0 c=0 r=1 IR=[e8] PC=[1128] A=[00] X=[79] ab=[1128] db=[78]
 ("Decide:",ReadCycle)
 ("read-mem",[1128],"-->",[4c])
