@@ -1,22 +1,23 @@
 
 module Dormann (main) where
 
+import Control.Monad (when)
 import Misc (loadBytes)
 import Data.Map (Map)
 import Data.Word (Word8,Word16)
-import Sim2 (Sim(..),Addr(..),Byte(..))
+import Sim2 (Version,Sim(..),Addr(..),Byte(..))
 import qualified Data.Map as Map
 import qualified Sim2
 
-main :: IO ()
-main = do
+main :: Version -> IO ()
+main v = do
   print "dormannn-start"
   let path = "../6502_65C02_functional_tests/bin_files/6502_functional_test.bin"
   image0 <- loadImage path
   let image = foldl writeMem image0 [ (Addr 0xfffc, Byte 0x00)
                                     , (Addr 0xfffd, Byte 0x04)
                                     ]
-  sim <- Sim2.theSim
+  sim <- Sim2.theSim v
   simWithImage image sim
   print "dormannn-end"
 
@@ -35,7 +36,7 @@ simWithImage = loop 0
         loop i image sim
       ReadMem a f -> do
         let b = readMem image a
-        print ("read",i, a,"-->",b)
+        when (i `mod` 100 ==0) $ print ("read",i, a,"-->",b)
         loop (i+1) image (f b)
       WriteMem a b sim -> do
         print ("WRITE",i, a,"<--",b)

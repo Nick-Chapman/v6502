@@ -1,6 +1,7 @@
 
 module Sim2
   ( main
+  , Version(..)
   , Sim(..), theSim
   , Addr(..), Byte (..),
   ) where
@@ -9,7 +10,7 @@ import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Set (size,difference,union)
 import Data.Word (Word8,Word16)
-import Exp (nrefsOfExp)
+import Exp (nrefsOfExp,subNode)
 import Logic (AssignDef(..),Exp(..),NodeId)
 import NodeNames (ofName,toName)
 import Norm (normalize)
@@ -17,18 +18,21 @@ import ParseLogic (parseLogicLines)
 import Text.Printf (printf)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
+import Misc (hist,the)
 
-theSim :: IO Sim
-theSim = do
-  logic <- getLogic
+
+main :: Version -> IO ()
+main v = do
+  sim <- theSim v
+  let mem = memHardWiredNop
+  run 35 sim mem
+
+theSim :: Version -> IO Sim
+theSim v = do
+  logic <- getLogic v
+  print (Summary logic)
   pure (simGivenLogic logic)
 
-main :: IO ()
-main = do
-  logic <- getLogic
-  print (Summary logic)
-  let mem = memHardWiredNop
-  run 35 logic mem
 
 data Sim
   = NewState State Sim
@@ -38,8 +42,8 @@ data Sim
 
 data CycleKind = ReadCycle | WriteCycle deriving Show
 
-run :: Int -> Logic -> Mem -> IO ()
-run n logic mem = loop 0 (simGivenLogic logic)
+run :: Int -> Sim -> Mem -> IO ()
+run n sim mem = loop 0 sim
   where
     loop :: Int -> Sim -> IO ()
     loop i sim = do
@@ -140,11 +144,56 @@ data Logic = Logic { name :: String, m :: Map NodeId Exp }
 
 ----------------------------------------------------------------------
 
-getLogic :: IO Logic
-getLogic = do
-  assigns <- normalize <$> parseLogicLines <$> readFile "data/logic_unopt.inc"
+data Version = Raw | Simp
+
+instance Show Version where
+  show = \case Raw -> "unoptimized"; Simp -> "simplified"
+
+getLogic :: Version -> IO Logic
+getLogic v = do
+  let conv = case v of Raw -> id; Simp -> simplify
+  assigns <- conv <$> normalize <$> parseLogicLines <$> readFile "data/logic_unopt.inc"
   let m = Map.fromList [ (n,e) | AssignDef n e <- assigns ]
-  pure Logic{ name = "unoptimized", m }
+  pure Logic{ name = show v, m }
+
+simplify :: [AssignDef] -> [AssignDef]
+simplify assigns = do
+  let save = Set.fromList (map ofName saveNames)
+        where saveNames = ["rw","sync"]
+                ++ [ "db"++show @Int n | n <- [0..7] ]
+                ++ [ "ab"++show @Int n | n <- [0..15] ]
+                ++ [ "ir"++show @Int n | n <- [0..7] ]
+
+  let defined2 = Set.fromList [ n | AssignDef n _ <- assigns ]
+  let triv2 = Set.fromList (detectTrivNodes assigns)
+  let once2 = Set.fromList (detectUsedOne assigns) `Set.intersection` defined2
+  let toElim2 = (triv2 `Set.union` once2) `Set.difference` save
+  foldl inlineNodeId assigns toElim2
+
+detectTrivNodes :: [AssignDef] -> [NodeId]
+detectTrivNodes as = [ n | AssignDef n e <- as, isTrivRHS e ]
+
+detectUsedOne :: [AssignDef] -> [NodeId]
+detectUsedOne as = do
+  let used = [ n | AssignDef _ e <- as, n <- nrefsOfExp e ]
+  [ n | (n,1) <- Map.toList (hist used) ]
+
+inlineNodeId :: [AssignDef] -> NodeId -> [AssignDef]
+inlineNodeId as nToBeInlined = do
+  let nBody = the (show nToBeInlined) [ e | AssignDef n e <- as, n == nToBeInlined ]
+  let f = subNode (\n -> if n == nToBeInlined then nBody else ENode n)
+  [ AssignDef n (f e) | AssignDef n e <- as, n /= nToBeInlined ]
+
+isTrivRHS :: Exp -> Bool
+isTrivRHS = \case
+  ENode{} -> True
+  EWire{} -> True
+  EConst{} -> True
+  ENot x -> isTrivRHS x
+  EAnd{} -> False
+  EOr{} -> False
+  EXor{} -> False
+  EIte{} -> False
 
 ----------------------------------------------------------------------
 data Summary = Summary Logic
