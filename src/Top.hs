@@ -27,6 +27,5 @@ run Config{mode} = case mode of
     logic <- getLogic
     Sim1.main logic
   Sim2 -> do
-    logic <- getLogic
-    Sim2.main logic
+    Sim2.main
     pure ()
