@@ -9,4 +9,4 @@ gen/sim1.trace: src/*.hs Makefile
 	stack run sim1 > $@
 
 gen/sim2.trace: src/*.hs Makefile
-	stack run > $@
+	stack run sim2 > $@

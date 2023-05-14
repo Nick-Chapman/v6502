@@ -1,5 +1,9 @@
 
-module Sim2(main) where
+module Sim2
+  ( main
+  , Sim(..), theSim
+  , Addr(..), Byte (..),
+  ) where
 
 import Data.List (intercalate)
 import Data.Map (Map)
@@ -13,6 +17,11 @@ import ParseLogic (parseLogicLines)
 import Text.Printf (printf)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
+
+theSim :: IO Sim
+theSim = do
+  logic <- getLogic
+  pure (simGivenLogic logic)
 
 main :: IO ()
 main = do
@@ -30,7 +39,7 @@ data Sim
 data CycleKind = ReadCycle | WriteCycle deriving Show
 
 run :: Int -> Logic -> Mem -> IO ()
-run n logic mem = loop 0 (sim logic)
+run n logic mem = loop 0 (simGivenLogic logic)
   where
     loop :: Int -> Sim -> IO ()
     loop i sim = do
@@ -57,8 +66,8 @@ run n logic mem = loop 0 (sim logic)
 -- So new address (& R/W) appear after negative clock edges
 -- And new data-bytes are writen-to or read-from memory on positive clock edges
 
-sim :: Logic -> Sim
-sim logic = do
+simGivenLogic :: Logic -> Sim
+simGivenLogic logic = do
   let s0 = initState logic
   stabDuringResetPermissive posClk s0 $ \s1 -> do
   stabDuringReset negClk s1 $ \s2 -> do
