@@ -21,51 +21,35 @@ main = do
   let mem = memHardWiredNop
   run 35 logic mem
 
+data Sim
+  = NewState State Sim
+  | Decide CycleKind Sim
+  | ReadMem Addr (Byte -> Sim)
+  | WriteMem Addr Byte Sim
+
+data CycleKind = ReadCycle | WriteCycle deriving Show
+
 run :: Int -> Logic -> Mem -> IO ()
-run n logic mem = loop state0 0 (sim logic)
+run n logic mem = loop 0 (sim logic)
   where
-    state0 = initState logic
-    loop :: State -> Int -> Sim -> IO ()
-    loop _s0 i sim = do
+    loop :: Int -> Sim -> IO ()
+    loop i sim = do
       if i == n then print "*stop*" else do
         case sim of
-          ReadCycle s1 a f -> do
-            print (StateSum i s1)
+          NewState _state sim -> do
+            print (StateSum i _state)
+            loop i sim
+          Decide _kind sim -> do
+            print ("Decide:",_kind)
+            loop i sim
+          ReadMem a f -> do
             let b = readMem mem a
-            print ("read",a,"-->",b)
-            let (s2,sim) = f b
-            print (StateSum i s2)
-            loop s2 (i+1) sim
-          WriteCycle s1 a s2 b sim -> do
-            print (StateSum i s1)
-            print ("WRITE",a,"<--",b)
-            print (StateSum i s2)
-            loop s2 (i+1) sim
+            print ("read-mem",a,"-->",b)
+            loop (i+1) (f b)
+          WriteMem _a _b sim -> do
+            print ("WRITE-MEM",_a,"<--",_b)
+            loop (i+1) sim
 
-
-sim :: Logic -> Sim
-sim logic = loop (reset logic)
-  where
-    res1 = [("res",True)]
-    loop :: State -> Sim
-    loop s0 = do
-      let addr = getAB s0
-      if (getRW s0)
-        then
-        do
-          ReadCycle s0 addr $ \byte -> do
-            let s1 = stabilize logic (setDB byte ++ posClk ++ res1 ++ fixedInputs) s0
-            let s2 = stabilize logic (negClk ++ res1 ++ fixedInputs) s1
-            (s1, loop s2)
-        else
-        do
-          let s1 = stabilize logic (posClk ++ res1 ++ fixedInputs) s0
-          let byte = getDB s1
-          let s2 = stabilize logic (negClk ++ res1 ++ fixedInputs) s1
-          WriteCycle s0 addr s1 byte (loop s2)
-
-
-----------------------------------------------------------------------
 
 -- When clock is high: Addr & R/W line are changed by 6502
 -- When clock is low: Data(Byte) is changed, by 6502 (Write), by Mem (Read)
@@ -73,21 +57,46 @@ sim logic = loop (reset logic)
 -- So new address (& R/W) appear after negative clock edges
 -- And new data-bytes are writen-to or read-from memory on positive clock edges
 
-data Sim
-  = ReadCycle State Addr (Byte -> (State,Sim))
-  | WriteCycle State Addr State Byte Sim
-
-reset :: Logic -> State
-reset logic = do
-  let res0 = [("res",False)]
-  let res1 = [("res",True)]
+sim :: Logic -> Sim
+sim logic = do
   let s0 = initState logic
-  let s1 = stabilizeLIB logic (posClk ++ res0 ++ fixedInputs) s0
-  let s2 = stabilize logic (negClk ++ res0 ++ fixedInputs) s1
-  let s3 = stabilize logic (posClk ++ res0 ++ fixedInputs) s2
-  let s4 = stabilize logic (negClk ++ res0 ++ fixedInputs) s3
-  let s5 = stabilize logic (negClk ++ res1 ++ fixedInputs) s4
-  s5
+  stabDuringResetPermissive posClk s0 $ \s1 -> do
+  stabDuringReset negClk s1 $ \s2 -> do
+  stabDuringReset posClk s2 $ \s3 -> do
+  stabDuringReset negClk s3 $ \s4 -> do
+  loop s4
+
+  where
+
+    loop :: State -> Sim
+    loop s0 = do
+      let addr = getAB s0
+      let kind = if (getRW s0) then ReadCycle else WriteCycle
+      Decide kind $ do
+      case kind of
+
+        ReadCycle -> do
+          ReadMem addr $ \byte -> do
+          stab (posClk ++ setDB byte) s0 $ \s1 -> do
+          stab negClk s1 $ \s2 -> do
+          loop s2
+
+        WriteCycle -> do
+          stab posClk s0 $ \s1 -> do
+          WriteMem addr (getDB s1) $ do
+          stab negClk s1 $ \s2 -> do
+          loop s2
+
+    stab                      = stabG Strict True
+    stabDuringReset           = stabG Strict False
+    stabDuringResetPermissive = stabG Permissive False
+
+    stabG :: StabMode -> Bool -> Inputs -> State -> (State -> Sim) -> Sim
+    stabG mode res i s k = do
+      let s' = stabilize mode logic (i ++ [("res",res)] ++ fixedInputs) s
+      NewState s' $ do
+      k s'
+
 
 ----------------------------------------------------------------------
 
@@ -185,7 +194,6 @@ initState :: Logic -> State
 initState (Logic{m}) = do
   State (Map.fromList [ (n,False) | (n,_) <- Map.toList m ])
 
-
 updateState :: State -> (NodeId,Bool) -> State
 updateState (State m) (n,v) = State (Map.insert n v m)
 
@@ -247,6 +255,7 @@ instance Show StateSum where
       , "rw=" ++ show (Bit (look (ofName "rw")))
       , "sync=" ++ show (Bit (look (ofName "sync")))
       , "c=" ++ show (Bit (look (ofName "clk0")))
+      , "r=" ++ show (Bit (look (ofName "res")))
       , "IR=" ++ show (bitsToByte (map look (ofNameB "ir")))
       , "PC=" ++ show (bitsToAddr (map look (ofNameB "pch" ++ ofNameB "pcl")))
 --      , "SP=" ++ show (bitsToByte (map look (ofNameB "s")))
@@ -264,8 +273,10 @@ ofNameB :: String -> [NodeId]
 ofNameB prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..7] ]
 
 
-stabilize :: Logic -> Inputs -> State -> State
-stabilize logic inputs s0 = loop max (applyInputs inputs s0)
+data StabMode = Strict | Permissive
+
+stabilize :: StabMode -> Logic -> Inputs -> State -> State
+stabilize mode logic inputs s0 = loop max (applyInputs inputs s0)
   where
     max = 50
     err = error (show ("failed to stabilize in",max))
@@ -273,18 +284,7 @@ stabilize logic inputs s0 = loop max (applyInputs inputs s0)
     loop i s1 = do
       let s2 = oneStep  logic inputs s1
       if s1 == s2 then s1 else
-        if i == 0 then err else
-          loop (i-1) s2
-
-stabilizeLIB :: Logic -> Inputs -> State -> State
-stabilizeLIB logic inputs s0 = loop max (applyInputs inputs s0)
-  where
-    max = 50
-    loop :: Int -> State -> State
-    loop i s1 = do
-      let s2 = oneStep logic inputs s1
-      if s1 == s2 then s1 else
-        if i == 0 then s1 else
+        if i == 0 then (case mode of Strict -> err; Permissive -> s1) else
           loop (i-1) s2
 
 
