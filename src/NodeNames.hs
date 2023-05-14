@@ -198,8 +198,6 @@ pairs =
   ,("s6",1212)
   ,("s7",1435)
 
-  -- These node numbers for "ir" are bogus
-
   ,("ir0",328)
   ,("ir1",1626)
   ,("ir2",1384)

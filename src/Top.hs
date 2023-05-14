@@ -6,7 +6,7 @@ import System.Environment (getArgs)
 import qualified Sim1 (main)
 import qualified Sim2 (main)
 import qualified Dormann (main)
-import Sim2 (Version(Raw,Simp))
+import Sim2 (Version(Raw,Simp,Minimal))
 
 main :: IO ()
 main = do
@@ -23,6 +23,7 @@ parse = loop config0
       "sim2":xs -> loop acc { mode = Sim2 } xs
       "raw":xs -> loop acc { version = Raw } xs
       "simp":xs -> loop acc { version = Simp } xs
+      "min":xs -> loop acc { version = Minimal } xs
       args ->
         error (show ("parse",args))
 
