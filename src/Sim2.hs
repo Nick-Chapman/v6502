@@ -37,7 +37,7 @@ theSim v = do
 data Sim
   = Stabilization (Maybe Int) Sim
   | NewState State Sim
-  | Decide CycleKind Sim
+  | Decide Addr CycleKind Sim
   | ReadMem Addr (Byte -> Sim)
   | WriteMem Addr Byte Sim
 
@@ -50,21 +50,21 @@ run n sim mem = loop 0 sim
     loop i sim = do
       if i == n then print "*stop*" else do
         case sim of
-          Stabilization iopt sim -> do
-            print ("stabilization",iopt)
+          Stabilization stab sim -> do
+            print (i,"stabilization",stab)
             loop i sim
           NewState _state sim -> do
             print (StateSum i _state)
             loop i sim
-          Decide _kind sim -> do
-            print ("Decide:",_kind)
+          Decide addr kind sim -> do
+            print (i,"Decide:",addr,kind)
             loop i sim
           ReadMem a f -> do
             let b = readMem mem a
-            print ("read-mem",a,"-->",b)
+            print (i,"read-mem",a,"-->",b)
             loop (i+1) (f b)
           WriteMem _a _b sim -> do
-            print ("WRITE-MEM",_a,"<--",_b)
+            print (i,"WRITE-MEM",_a,"<--",_b)
             loop (i+1) sim
 
 
@@ -87,19 +87,25 @@ simGivenLogic logic = do
 
     loop :: State -> Sim
     loop s0 = do
+      -- We collect the r/w line and address bus after a neg clock edge
       let addr = getAB s0
       let kind = if (getRW s0) then ReadCycle else WriteCycle
-      Decide kind $ do
+      Decide addr kind $ do
+      -- regardless of whether this is a Read-Cycle or Write-Cycle
+      -- we step through a pos clock edge
+      stab posClk s0 $ \s1 -> do
       case kind of
 
         ReadCycle -> do
+          -- For a Read-Cycle, we present the byte read from memory
+          -- on the following negative clock edge
           ReadMem addr $ \byte -> do
-          stab (posClk ++ setDB byte) s0 $ \s1 -> do
-          stab negClk s1 $ \s2 -> do
+          stab (negClk ++ setDB byte) s1 $ \s2 -> do
           loop s2
 
         WriteCycle -> do
-          stab posClk s0 $ \s1 -> do
+          -- For a Write-Cycle, collect the data to be written to memory
+          -- before the next negative lock edge
           WriteMem addr (getDB s1) $ do
           stab negClk s1 $ \s2 -> do
           loop s2
@@ -412,7 +418,7 @@ instance Show StateSum where
   show (StateSum i s) = do
     let look n = lookState s n
     intercalate " "
-      [ "i=" ++ printf "%3i" i
+      [ printf " %i" i
       , "rw=" ++ show (Bit (look (ofName "rw")))
       , "sync=" ++ show (Bit (look (ofName "sync")))
       , "c=" ++ show (Bit (look (ofName "clk0")))

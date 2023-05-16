@@ -34,7 +34,7 @@ simWithImage = loop 0
         --print (StateSum i _state)
         --print "NEW-STATE"
         loop i image sim
-      Decide _kind sim -> do
+      Decide _addr _kind sim -> do
         --print ("Decide:",i,_kind)
         loop i image sim
       ReadMem a f -> do
