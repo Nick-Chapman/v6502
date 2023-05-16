@@ -3,7 +3,11 @@ module Sim2
   ( main
   , Version(..)
   , Sim(..), theSim
-  , Addr(..), Byte (..),
+  , State, lookState
+  , Addr(..), Byte (..)
+  , bitsToAddr
+  , ofNameB
+  , StateSum(..)
   ) where
 
 import Data.List (intercalate)
@@ -91,21 +95,22 @@ simGivenLogic logic = do
       let addr = getAB s0
       let kind = if (getRW s0) then ReadCycle else WriteCycle
       Decide addr kind $ do
-      -- regardless of whether this is a Read-Cycle or Write-Cycle
-      -- we step through a pos clock edge
-      stab posClk s0 $ \s1 -> do
       case kind of
 
         ReadCycle -> do
           -- For a Read-Cycle, we present the byte read from memory
-          -- on the following negative clock edge
+          -- on the following negative clock edge.
+          -- To get the Dormann trace to look sensible, it seems we also
+          -- need to present it earlier on the pos-edge.
           ReadMem addr $ \byte -> do
+          stab (posClk ++ setDB byte) s0 $ \s1 -> do
           stab (negClk ++ setDB byte) s1 $ \s2 -> do
           loop s2
 
         WriteCycle -> do
           -- For a Write-Cycle, collect the data to be written to memory
           -- before the next negative lock edge
+          stab posClk s0 $ \s1 -> do
           WriteMem addr (getDB s1) $ do
           stab negClk s1 $ \s2 -> do
           loop s2

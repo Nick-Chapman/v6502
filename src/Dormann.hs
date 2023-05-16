@@ -1,13 +1,13 @@
 
 module Dormann (main) where
 
-import Control.Monad (when)
+--import Control.Monad (when)
 import Misc (loadBytes)
 import Data.Map (Map)
 import Data.Word (Word8,Word16)
-import Sim2 (Version,Sim(..),Addr(..),Byte(..))
+import Sim2 hiding (main) --(Version,Sim(..),Addr(..),Byte(..))
 import qualified Data.Map as Map
-import qualified Sim2
+--import qualified Sim2
 
 main :: Version -> IO ()
 main v = do
@@ -30,21 +30,26 @@ simWithImage = loop 0
       Stabilization _iopt sim -> do
         --print ("stabilization",_iopt)
         loop i image sim
-      NewState _state sim -> do
-        --print (StateSum i _state)
-        --print "NEW-STATE"
+      NewState state sim -> do
+        --print (i,"pc=",getPC state)
+        print (StateSum i state)
         loop i image sim
       Decide _addr _kind sim -> do
-        --print ("Decide:",i,_kind)
+        print ("Decide:",i,_kind)
         loop i image sim
       ReadMem a f -> do
         let b = readMem image a
-        when (i `mod` 100 ==0) $ print ("read",i, a,"-->",b)
+        --when (i `mod` 100 ==0) $
+        print ("read",i, a,"-->",b)
         loop (i+1) image (f b)
       WriteMem a b sim -> do
         print ("WRITE",i, a,"<--",b)
         loop (i+1) (writeMem image (a,b)) sim
 
+
+_getPC :: State -> Addr
+_getPC s =
+  bitsToAddr (map (lookState s) (ofNameB "pch" ++ ofNameB "pcl"))
 
 
 data Image = Image { m :: Map Word16 Word8 }
