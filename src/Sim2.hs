@@ -4,13 +4,14 @@ module Sim2
   , Version(..)
   , Sim(..), theSim
   , State, lookState
-  , Addr(..), Byte (..)
+  , Addr(..), Byte(..), Bit(..)
   , bitsToAddr
   , ofNameB
   , StateSum(..)
   ) where
 
 import Data.List (intercalate)
+--import Data.Char (toUpper)
 import Data.Map (Map)
 import Data.Set (Set,size,difference,union)
 import Data.Word (Word8,Word16)
@@ -34,7 +35,7 @@ main v = do
 theSim :: Version -> IO Sim
 theSim v = do
   logic <- getLogic v
-  print (Summary logic)
+  -- print (Summary logic)
   pure (simGivenLogic logic)
 
 
@@ -55,7 +56,8 @@ run n sim mem = loop 0 sim
       if i == n then print "*stop*" else do
         case sim of
           Stabilization stab sim -> do
-            print (i,"stabilization",stab)
+            --print (i,"stabilization",stab)
+            printf "stabilization in %s\n" (show stab)
             loop i sim
           NewState _state sim -> do
             print (StateSum i _state)
@@ -65,10 +67,12 @@ run n sim mem = loop 0 sim
             loop i sim
           ReadMem a f -> do
             let b = readMem mem a
-            print (i,"read-mem",a,"-->",b)
+            --print (i,"read-mem",a,"-->",b)
+            printf "r: %s --> %s\n" (show a) (show b)
             loop (i+1) (f b)
-          WriteMem _a _b sim -> do
-            print (i,"WRITE-MEM",_a,"<--",_b)
+          WriteMem a b sim -> do
+            --print (i,"WRITE-MEM",a,"<--",b)
+            printf "W: %s <-- %s\n" (show a) (show b)
             loop (i+1) sim
 
 
@@ -81,13 +85,18 @@ run n sim mem = loop 0 sim
 simGivenLogic :: Logic -> Sim
 simGivenLogic logic = do
   let s0 = initState logic
-  stabDuringResetPermissive posClk s0 $ \s1 -> do
-  stabDuringReset negClk s1 $ \s2 -> do
-  stabDuringReset posClk s2 $ \s3 -> do
-  stabDuringReset negClk s3 $ \s4 -> do
+  stabDuringResetPermissive (posClk++extra) s0 $ \s1 -> do
+  stabDuringReset (negClk) s1 $ \s2 -> do
+  stabDuringReset (posClk) s2 $ \s3 -> do
+  stabDuringReset (negClk) s3 $ \s4 -> do
   loop s4
 
   where
+    -- hack to match perfect6502
+    extra =
+      []
+      ++ _setSP (Byte 0xC0)
+      ++ _setX (Byte 0xC0)
 
     loop :: State -> Sim
     loop s0 = do
@@ -103,13 +112,14 @@ simGivenLogic logic = do
           -- To get the Dormann trace to look sensible, it seems we also
           -- need to present it earlier on the pos-edge.
           ReadMem addr $ \byte -> do
-          stab (posClk ++ setDB byte) s0 $ \s1 -> do
+          stab (posClk ++ setDB byte) s0 $ \s1 -> do -- WHY
           stab (negClk ++ setDB byte) s1 $ \s2 -> do
           loop s2
 
         WriteCycle -> do
           -- For a Write-Cycle, collect the data to be written to memory
           -- before the next negative lock edge
+          --WriteMem addr (getDB s0) $ do -- NO
           stab posClk s0 $ \s1 -> do
           WriteMem addr (getDB s1) $ do
           stab negClk s1 $ \s2 -> do
@@ -125,6 +135,7 @@ simGivenLogic logic = do
       Stabilization iopt $ do
       NewState s' $ do
       k s'
+
 
 
 ----------------------------------------------------------------------
@@ -180,6 +191,7 @@ simplify assigns = do
                 ++ [ "db"++show @Int n | n <- [0..7] ]
                 ++ [ "ab"++show @Int n | n <- [0..15] ]
                 ++ [ "ir"++show @Int n | n <- [0..7] ]
+                ++ [ "p"++show @Int n | n <- [0..7] ]
 
   let defined2 = Set.fromList [ n | AssignDef n _ <- assigns ]
   let triv2 = Set.fromList (detectTrivNodes assigns)
@@ -239,6 +251,7 @@ minimize xs = do
         ++ [ "pcl"++show @Int n | n <- [0..7] ]
         ++ [ "pch"++show @Int n | n <- [0..7] ]
         ++ [ "s"++show @Int n | n <- [0..7] ]
+        ++ [ "p"++show @Int n | n <- [0..7] ]
 
   {-
         ++ [ "idb"++show @Int n | n <- [0..7] ]
@@ -336,10 +349,16 @@ data Bit = Bit Bool
 instance Show Bit where show (Bit bool) = if bool then "1" else "0"
 
 data Addr = Addr Word16
-instance Show Addr where show (Addr w16) = printf "[%04x]" w16
+--instance Show Addr where show (Addr w16) = printf "[%04x]" w16
+instance Show Addr where
+--  show (Addr w16) = map toUpper (printf "%04x" w16)
+  show (Addr w16) = printf "%04x" w16
 
 data Byte = Byte Word8
-instance Show Byte where show (Byte w8) = printf "[%02x]" w8
+--instance Show Byte where show (Byte w8) = printf "[%02x]" w8
+instance Show Byte where
+--  show (Byte w8) = map toUpper (printf "%02x" w8)
+  show (Byte w8) = printf "%02x" w8
 
 
 bitsToAddr :: [Bool] -> Addr -- msb->lsb
@@ -402,11 +421,30 @@ setDB byte =
   | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
   ]
 
+_setSP :: Byte -> Inputs
+_setSP byte =
+  [ ( ("s"++show i), bool)
+  | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
+  ]
+
+_setX :: Byte -> Inputs
+_setX byte =
+  [ ( ("x"++show i), bool)
+  | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
+  ]
+
+_setP :: Byte -> Inputs
+_setP byte =
+  [ ( ("p"++show i), bool)
+  | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
+  ]
+
+
 fixedInputs :: Inputs
 fixedInputs =
   [ ("vcc",True)
   , ("vss",False)
-  , ("so",False)
+  , ("so",True) -- True prevents the Set-VOverflow behaviour
   , ("rdy",True)
   , ("nmi",True)
   , ("irq",True)

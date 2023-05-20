@@ -6,6 +6,7 @@ import System.Environment (getArgs)
 import qualified Sim1 (main)
 import qualified Sim2 (main)
 import qualified Dormann (main)
+import qualified CBM (main)
 import Sim2 (Version(Raw,Simp,Minimal))
 
 main :: IO ()
@@ -18,6 +19,7 @@ parse = loop config0
   where
     loop acc = \case
       [] ->acc
+      "cbm":n:xs -> loop acc { mode = CBM (read n) } xs
       "dor":xs -> loop acc { mode = Dormann } xs
       "sim1":xs -> loop acc { mode = Sim1 } xs
       "sim2":xs -> loop acc { mode = Sim2 } xs
@@ -31,7 +33,7 @@ parse = loop config0
 
 
 data Config = Config { mode :: Mode, version :: Version }
-data Mode = Sim1 | Sim2 | Dormann
+data Mode = Sim1 | Sim2 | Dormann | CBM Int
 
 run :: Config -> IO ()
 run Config{mode,version} = case mode of
@@ -43,4 +45,7 @@ run Config{mode,version} = case mode of
     pure ()
   Dormann -> do
     Dormann.main version
+    pure ()
+  CBM n ->  do
+    CBM.main n
     pure ()
