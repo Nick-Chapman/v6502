@@ -12,8 +12,8 @@ import Logic (NodeId)
 import NodeNames (ofName)
 --import Data.Bits ((.&.))
 
-main :: Int -> IO ()
-main n = do
+main :: Version -> Int -> IO ()
+main version n = do
   let path = "../perfect6502/rom/cbmbasic.bin"
   let expectedSize = 17591
   image0 <- loadImage 0xA000 path expectedSize
@@ -34,7 +34,7 @@ main n = do
         , (Addr 0xfffd, Byte 0xf0)
         ]
 
-  sim <- Sim2.theSim Raw
+  sim <- Sim2.theSim version
   simWithImage n image sim
   pure ()
 

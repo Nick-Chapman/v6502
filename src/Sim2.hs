@@ -1,16 +1,16 @@
 
 module Sim2
-  ( main
-  , Version(..)
+  (
+    Version(..)
   , Sim(..), theSim
   , State, lookState
   , Addr(..), Byte(..), Bit(..)
   , bitsToAddr
   , ofNameB
-  , StateSum(..)
+--  , StateSum(..)
   ) where
 
-import Data.List (intercalate)
+--import Data.List (intercalate)
 --import Data.Char (toUpper)
 import Data.Map (Map)
 import Data.Set (Set,size,difference,union)
@@ -25,12 +25,13 @@ import qualified Data.Map as Map
 import qualified Data.Set as Set
 import Misc (hist,the,nub)
 
-
-main :: Version -> IO ()
-main v = do
+{-
+_main :: Version -> IO ()
+_main v = do
   sim <- theSim v
   let mem = memHardWiredNop
   run 35 sim mem
+-}
 
 theSim :: Version -> IO Sim
 theSim v = do
@@ -48,6 +49,7 @@ data Sim
 
 data CycleKind = ReadCycle | WriteCycle deriving Show
 
+{-
 run :: Int -> Sim -> Mem -> IO ()
 run n sim mem = loop 0 sim
   where
@@ -74,6 +76,7 @@ run n sim mem = loop 0 sim
             --print (i,"WRITE-MEM",a,"<--",b)
             printf "W: %s <-- %s\n" (show a) (show b)
             loop (i+1) sim
+-}
 
 
 -- When clock is high: Addr & R/W line are changed by 6502
@@ -140,14 +143,15 @@ simGivenLogic logic = do
 
 ----------------------------------------------------------------------
 
-data Mem = MEM
+{-data Mem = MEM
 
 memHardWiredNop :: Mem
-memHardWiredNop = MEM
+memHardWiredNop = MEM-}
 
 --readMem :: Mem -> Addr -> Byte
 --readMem _ _ = Byte 0xEA
 
+{-
 readMem :: Mem -> Addr -> Byte
 readMem _ = Byte . \case
   Addr 0xfffc -> 0x22
@@ -165,6 +169,7 @@ readMem _ = Byte . \case
 
   _ -> 0xEA
 
+-}
 
 ----------------------------------------------------------------------
 data Logic = Logic { name :: String, m :: Map NodeId Exp }
@@ -452,6 +457,7 @@ fixedInputs =
 
 ----------------------------------------------------------------------
 
+{-
 data StateSum = StateSum
   { _stepNum :: Int
   , _nextState :: State
@@ -476,11 +482,13 @@ instance Show StateSum where
       , "db=" ++ show (bitsToByte (map look (ofNameB "db")))
       ]
 
+-}
 ofNameA :: String -> [NodeId]
 ofNameA prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..15] ]
 
 ofNameB :: String -> [NodeId]
 ofNameB prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..7] ]
+
 
 
 data StabMode = Strict | Permissive

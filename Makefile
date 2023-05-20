@@ -1,5 +1,5 @@
 
-top: cbm sim12
+top: cbm
 
 cbm: cbm.gold cbm.trace Makefile
 	git diff --no-index --word-diff=color cbm.gold cbm.trace
@@ -15,15 +15,3 @@ perfectMake:
 
 cbm.trace: src/*.hs Makefile
 	stack run cbm $(n) | tail +26 > $@
-
-sim12: sim1 sim2 Makefile
-	git diff gen
-
-sim1: gen/sim1.trace
-sim2: gen/sim2.trace
-
-gen/sim1.trace: src/*.hs Makefile
-	stack run sim1 > $@
-
-gen/sim2.trace: src/*.hs Makefile
-	stack run sim2 > $@ #min
