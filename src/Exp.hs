@@ -2,7 +2,7 @@
 module Exp (nrefsOfAssigns,nrefsOfExp,eNot,eAnd,eOr,eIte,subWire,subNode) where
 
 import Data.Set (Set)
-import Logic (AssignDef(..),WireId(..),NodeId(..),Exp(..))
+import Assigns (AssignDef(..),WireId(..),NodeId(..),Exp(..))
 import qualified Data.Set as Set
 
 nrefsOfAssigns :: [AssignDef] -> Set NodeId

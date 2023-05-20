@@ -1,7 +1,7 @@
 
 module ParseLogic (parseLogicLines) where
 
-import Logic (Line(..),MuxDef(..),AssignDef(..),WireDef(..),Vec(..),NodeId(..),Exp(..),WireId(..))
+import Assigns (Line(..),MuxDef(..),AssignDef(..),WireDef(..),Vec(..),NodeId(..),Exp(..),WireId(..))
 import Par4 (Par,parse,terminated,separated,nl,alts,key,lit,ws0,int,some,sat,many)
 import qualified Data.Char as Char
 

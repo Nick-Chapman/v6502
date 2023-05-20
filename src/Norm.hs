@@ -4,7 +4,7 @@ module Norm (normalize) where
 import Data.List (sortBy)
 import Data.Ord (comparing)
 import Exp (eNot,eOr,eAnd,eIte,subWire)
-import Logic (Line(..),AssignDef(..),WireDef(..),MuxDef(..),WireId,Exp(..),Vec(..))
+import Assigns (Line(..),AssignDef(..),WireDef(..),MuxDef(..),WireId,Exp(..),Vec(..))
 import Misc (the)
 
 ----------------------------------------------------------------------

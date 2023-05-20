@@ -2,7 +2,7 @@
 module NodeNames (isNamed,toName,toNumName,ofName) where
 
 import qualified Data.Map as Map
-import Logic (NodeId(..))
+import Assigns (NodeId(..))
 
 isNamed :: NodeId -> Bool
 isNamed i@(NodeId{}) =

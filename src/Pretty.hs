@@ -2,7 +2,7 @@
 module Pretty (ppLine,ppAssignDef) where
 
 import Data.List (intercalate)
-import Logic (Line(..),MuxDef(..),AssignDef(..),WireDef(..),Vec(..),NodeId(..),Exp(..),WireId(..))
+import Assigns (Line(..),MuxDef(..),AssignDef(..),WireDef(..),Vec(..),NodeId(..),Exp(..),WireId(..))
 
 ppLine :: Line -> String
 ppLine = \case

@@ -1,5 +1,5 @@
 
-module Logic
+module Assigns
   ( Line(..)
   , MuxDef(..)
   , AssignDef(..)
@@ -9,8 +9,6 @@ module Logic
   , Exp(..)
   , WireId(..)
   ) where
-
---data Logic = Logic { name :: String, assigns :: [AssignDef] }
 
 data Line = LineA AssignDef | LineW WireDef | LineM MuxDef
 

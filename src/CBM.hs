@@ -8,7 +8,7 @@ import Sim2 (Version(..),Sim(..),State,Addr(..),Byte(..),Bit(..))
 import qualified Data.Map as Map
 import qualified Sim2 (theSim,lookState)
 import Text.Printf (printf)
-import Logic (NodeId)
+import Assigns (NodeId)
 import NodeNames (ofName)
 --import Data.Bits ((.&.))
 
