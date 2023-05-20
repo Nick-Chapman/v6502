@@ -1,27 +1,17 @@
 
 module Sim2
-  (
-    Version(..)
-  , Sim(..), theSim
+  ( Sim(..), simGivenLogic
   , State, lookState
   , Addr(..), Byte(..), Bit(..)
-  , bitsToAddr
-  , ofNameB
   ) where
 
+import Assigns (Exp(..),NodeId(..))
 import Data.Map (Map)
 import Data.Word (Word8,Word16)
-import Assigns (Exp(..),NodeId(..))
+import GetLogic (Logic(..))
 import NodeNames (ofName,toName)
 import Text.Printf (printf)
 import qualified Data.Map as Map
-import GetLogic (Version(..),Logic(..),getLogic)
-
-theSim :: Version -> IO Sim
-theSim v = do
-  logic <- getLogic v
-  --print (Summary logic)
-  pure (simGivenLogic logic)
 
 
 data Sim

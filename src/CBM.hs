@@ -1,16 +1,15 @@
 
 module CBM (main) where
 
+import Assigns (NodeId)
 import Data.Map (Map)
 import Data.Word (Word8,Word16)
+import GetLogic (Version(..),getLogic)
 import Misc (loadBytes)
-import Sim2 (Version(..),Sim(..),State,Addr(..),Byte(..),Bit(..))
-import qualified Data.Map as Map
-import qualified Sim2 (theSim,lookState)
-import Text.Printf (printf)
-import Assigns (NodeId)
 import NodeNames (ofName)
---import Data.Bits ((.&.))
+import Sim2 (Sim(..),State,Addr(..),Byte(..),Bit(..),simGivenLogic,lookState)
+import Text.Printf (printf)
+import qualified Data.Map as Map
 
 main :: Version -> Int -> IO ()
 main version n = do
@@ -34,9 +33,18 @@ main version n = do
         , (Addr 0xfffd, Byte 0xf0)
         ]
 
-  sim <- Sim2.theSim version
+  sim <- theSim version
   simWithImage n image sim
   pure ()
+
+
+theSim :: Version -> IO Sim
+theSim v = do
+  logic <- getLogic v
+  --print (Summary logic)
+  pure (simGivenLogic logic)
+
+
 
 simWithImage :: Int -> Image -> Sim -> IO ()
 simWithImage max = loop (-4) -- what's happenning in these steps
@@ -78,12 +86,7 @@ writeMem Image{m} (Addr a, Byte b) = Image (Map.insert a b m)
 
 
 ppState :: Int -> State -> IO ()
-ppState i s = do
-  putStrLn (showState i s)
-  --if not _clk then pure () else putStrLn (showState i s)
-  where
-    _clk = look (ofName "clk0")
-    look n = Sim2.lookState s n
+ppState i s = do putStrLn (showState i s)
 
 showState :: Int -> State -> String
 showState i s = do
@@ -107,7 +110,7 @@ showState i s = do
     showBit x = show (Bit (look (ofName x)))
     showB x = show (bitsToByte (map look (ofNameB x)))
     showA x = show (bitsToAddr (map look (ofNameA x)))
-    look n = Sim2.lookState s n
+    look n = lookState s n
 
 
 ofNameA :: String -> [NodeId]
