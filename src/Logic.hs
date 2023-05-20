@@ -1,7 +1,16 @@
 
-module Logic where
+module Logic
+  ( Line(..)
+  , MuxDef(..)
+  , AssignDef(..)
+  , WireDef(..)
+  , Vec(..)
+  , NodeId(..)
+  , Exp(..)
+  , WireId(..)
+  ) where
 
-data Logic = Logic { name :: String, assigns :: [AssignDef] }
+--data Logic = Logic { name :: String, assigns :: [AssignDef] }
 
 data Line = LineA AssignDef | LineW WireDef | LineM MuxDef
 
