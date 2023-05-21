@@ -1,5 +1,10 @@
 # v6502
 
-Explore 6502 simulation using netlist extracted from the Visual 6502 project.
+- 6502 simulation based on netlist extracted by Andrew Holme from the Visual 6502 project.
+- Matching against trace from perfect6502/cbmbasic.
 
-Netlist extracted by [Andrew Holme](http://www.aholme.co.uk/6502/Main.htm)
+Links:
+
+- [Visual 6502 project](http://www.visual6502.org/)
+- [Andrew Holme's Verilog 6502 project](http://www.aholme.co.uk/6502/Main.htm)
+- [perfect6502](https://github.com/mist64/perfect6502)
