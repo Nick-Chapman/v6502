@@ -63,10 +63,10 @@ simWithImage max = loop 0
         loop i image sim
       ReadMem a f -> do
         let b = readMem image a
-        printf "r: %s --> %s\n" (show a) (show b)
+        --printf "r: %s --> %s\n" (show a) (show b)
         loop i image (f b)
       WriteMem a b sim -> do
-        printf "W: %s <-- %s\n" (show a) (show b)
+        --printf "W: %s <-- %s\n" (show a) (show b)
         loop i (writeMem image (a,b)) sim
 
 data Image = Image { m :: Map Word16 Word8 }
@@ -94,12 +94,11 @@ showState i s = do
   let db = showB "db"
   let ab = showA "ab"
   printf
-    "halfcycle:%s phi0:%s res:%s AB:%s D:%s RnW:%s PC:%s A:%s X:%s Y:%s SP:%s P:%s IR:%s sync:%s%s"
+    "halfcycle:%s phi0:%s res:%s AB:%s RnW:%s PC:%s A:%s X:%s Y:%s SP:%s P:%s IR:%s sync:%s%s"
     (show i)
     (showBit "clk0")
     (showBit "res")
     ab
-    (if (lowClock) then "??" else db) -- dont look at dbus when clock is low
     (show (Bit rw))
     (showB "pch" ++ showB "pcl")
     (showB "a")
