@@ -2,11 +2,10 @@
 module CBM (main) where
 
 import Data.Map (Map)
-import Data.Word (Word8,Word16)
 import EmuState (showState)
 import GetLogic (Version(..),getLogic)
-import Misc (loadBytes)
-import Sim2 (Sim(..),Addr(..),Byte(..),simGivenLogic)
+import Sim2 (Sim(..),simGivenLogic)
+import Values (Addr,Byte,loadBytes)
 import qualified Data.Map as Map
 
 main :: Version -> Int -> IO ()
@@ -23,12 +22,12 @@ main version n = do
    * a JSR to the actual start of cbmbasic
    -}
   let image = foldl writeMem image0
-        [ (Addr 0xf000, Byte 0x20)
-        , (Addr 0xf001, Byte 0x94)
-        , (Addr 0xf002, Byte 0xE3)
+        [ (0xf000, 0x20)
+        , (0xf001, 0x94)
+        , (0xf002, 0xE3)
 
-        , (Addr 0xfffc, Byte 0x00)
-        , (Addr 0xfffd, Byte 0xf0)
+        , (0xfffc, 0x00)
+        , (0xfffd, 0xf0)
         ]
 
   logic <- getLogic version
@@ -61,17 +60,16 @@ simWithImage max = loop 0
         --printf "W: %s <-- %s\n" (show a) (show b)
         loop i (writeMem image (a,b)) sim
 
-data Image = Image { m :: Map Word16 Word8 }
+data Image = Image { m :: Map Addr Byte }
 
-loadImage :: Word16 -> FilePath -> Int  -> IO Image
+loadImage :: Addr -> FilePath -> Int  -> IO Image
 loadImage offset path expectedSize  = do
   bytes <- loadBytes path
   if length bytes /= expectedSize then error (show ("loadImage",expectedSize,length bytes)) else
-    pure Image { m = Map.fromList [ (offset+a,b) | (a,b) <- zip [0..] bytes ] }
+    pure Image { m = Map.fromList [ (offset+a,b) | (a,b) <- zip [0::Addr ..] bytes ] }
 
 readMem :: Image -> Addr -> Byte
-readMem Image{m} _a@(Addr w16) = maybe def Byte $ (Map.lookup w16 m)
-  where def = Byte 0
+readMem Image{m} a = maybe 0 id $ (Map.lookup a m)
 
 writeMem :: Image -> (Addr,Byte) -> Image
-writeMem Image{m} (Addr a, Byte b) = Image (Map.insert a b m)
+writeMem Image{m} (a,b) = Image (Map.insert a b m)

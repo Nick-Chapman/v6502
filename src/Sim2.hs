@@ -1,14 +1,12 @@
 
 module Sim2
   ( Sim(..), simGivenLogic
-  , State, lookState
-  , Addr(..), Byte(..), Bit(..)
   ) where
 
 import Assigns (Exp(..))
 import EmuState (State,makeState,lookState,getRW,getAB,getDB,Inputs,fixedInputs,resetLO,resetHI,posClk,negClk,setInputByte,applyInputs)
 import GetLogic (Logic(..))
-import Values (Bit(..),Addr(..),Byte(..))
+import Values (Addr,Byte)
 import qualified Data.Map as Map
 
 data Sim
@@ -39,8 +37,8 @@ simGivenLogic logic = do
     -- hack to match perfect6502
     extra =
       []
-      ++ setInputByte "s" (Byte 0xC0)
-      ++ setInputByte "x" (Byte 0xC0)
+      ++ setInputByte "s" 0xC0
+      ++ setInputByte "x" 0xC0
 
     loop :: State -> Sim
     loop s0 = do
