@@ -90,14 +90,17 @@ ppState i s = do putStrLn (showState i s)
 
 showState :: Int -> State -> String
 showState i s = do
+  let rw = look (ofName "rw")
+  let db = showB "db"
+  let ab = showA "ab"
   printf
-    "halfcycle:%s phi0:%s res:%s AB:%s D:%s RnW:%s PC:%s A:%s X:%s Y:%s SP:%s P:%s IR:%s sync:%s"
+    "halfcycle:%s phi0:%s res:%s AB:%s D:%s RnW:%s PC:%s A:%s X:%s Y:%s SP:%s P:%s IR:%s sync:%s%s"
     (show i)
     (showBit "clk0")
     (showBit "res")
-    (showA "ab")
-    (if (lowClock) then "??" else showB "db") -- dont look at dbus when clock is low
-    (showBit "rw")
+    ab
+    (if (lowClock) then "??" else db) -- dont look at dbus when clock is low
+    (show (Bit rw))
     (showB "pch" ++ showB "pcl")
     (showB "a")
     (showB "x")
@@ -106,6 +109,7 @@ showState i s = do
     (showB "p")
     (showB "ir")
     (showBit "sync")
+    (if lowClock then "" else (if rw then " r:" else " W:") ++ printf "%s=%s" ab db)
   where
     showBit x = show (Bit (look (ofName x)))
     showB x = show (bitsToByte (map look (ofNameB x)))
