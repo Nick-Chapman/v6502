@@ -5,14 +5,11 @@ module Sim2
   , Addr(..), Byte(..), Bit(..)
   ) where
 
-import Assigns (Exp(..),NodeId(..))
-import Data.Map (Map)
-import Data.Word (Word8,Word16)
+import Assigns (Exp(..))
+import EmuState (State,makeState,lookState,getRW,getAB,getDB,Inputs,fixedInputs,resetLO,resetHI,posClk,negClk,setInputByte,applyInputs)
 import GetLogic (Logic(..))
-import NodeNames (ofName,toName)
-import Text.Printf (printf)
+import Values (Bit(..),Addr(..),Byte(..))
 import qualified Data.Map as Map
-
 
 data Sim
   = Stabilization (Maybe Int) Sim
@@ -22,7 +19,6 @@ data Sim
   | WriteMem Addr Byte Sim
 
 data CycleKind = ReadCycle | WriteCycle deriving Show
-
 
 -- When clock is high: Addr & R/W line are changed by 6502
 -- When clock is low: Data(Byte) is changed, by 6502 (Write), by Mem (Read)
@@ -43,8 +39,8 @@ simGivenLogic logic = do
     -- hack to match perfect6502
     extra =
       []
-      ++ _setSP (Byte 0xC0)
-      ++ _setX (Byte 0xC0)
+      ++ setInputByte "s" (Byte 0xC0)
+      ++ setInputByte "x" (Byte 0xC0)
 
     loop :: State -> Sim
     loop s0 = do
@@ -57,7 +53,7 @@ simGivenLogic logic = do
         ReadCycle -> do
           -- Present the byte read from memory when clock is High.
           ReadMem addr $ \byte -> do
-          stab (posClk ++ setDB byte) s0 $ \s1 -> do
+          stab (posClk ++ setInputByte "db" byte) s0 $ \s1 -> do
           NewState s1 $ do
           stab (negClk) s1 $ \s2 -> do
           NewState s2 $ do
@@ -72,126 +68,18 @@ simGivenLogic logic = do
           NewState s2 $ do
           loop s2
 
-    stab                      = stabG Strict True
-    stabDuringReset           = stabG Strict False
-    stabDuringResetPermissive = stabG Permissive False
+    stab                      = stabG Strict resetHI
+    stabDuringReset           = stabG Strict resetLO
+    stabDuringResetPermissive = stabG Permissive resetLO
 
-    stabG :: StabMode -> Bool -> Inputs -> State -> (State -> Sim) -> Sim
-    stabG mode res i s k = do
-      let (iopt,s') = stabilize mode logic (i ++ [("res",res)] ++ fixedInputs) s
+    stabG :: StabMode -> Inputs -> Inputs -> State -> (State -> Sim) -> Sim
+    stabG mode reset i s k = do
+      let (iopt,s') = stabilize mode logic (fixedInputs ++ reset ++ i) s
       Stabilization iopt $ do
       k s'
 
-
-----------------------------------------------------------------------
--- Bit, Addr, Byte
-
-data Bit = Bit Bool
-instance Show Bit where show (Bit bool) = if bool then "1" else "0"
-
-data Addr = Addr Word16
-instance Show Addr where show (Addr w16) = printf "%04x" w16
-
-data Byte = Byte Word8
-instance Show Byte where show (Byte w8) = printf "%02x" w8
-
-bitsToAddr :: [Bool] -> Addr -- msb->lsb
-bitsToAddr bs =
-  if length bs /= 16 then error "bitsToAddr" else
-    Addr (foldl (\acc b -> 2*acc+(if b then 1 else 0)) (0::Word16) bs)
-
-bitsToByte :: [Bool] -> Byte -- msb->lsb
-bitsToByte bs =
-  if length bs /= 8 then error "bitsToByte" else
-    Byte (foldl (\acc b -> 2*acc+(if b then 1 else 0)) (0::Word8) bs)
-
-splitB :: Byte -> [Bool]
-splitB (Byte w8) =
-  reverse (take 8 (bitsOf w8))
-  where
-    bitsOf :: Word8 -> [Bool]
-    bitsOf n = ((n `mod` 2) == 1) : bitsOf (n `div` 2)
-
-
-
-data State = State (Map NodeId Bool) deriving (Eq)
-
 initState :: Logic -> State
-initState (Logic{m}) = do
-  State (Map.fromList [ (n,False) | (n,_) <- Map.toList m ])
-
-updateState :: State -> (NodeId,Bool) -> State
-updateState (State m) (n,v) = State (Map.insert n v m)
-
-getAB :: State -> Addr
-getAB s = bitsToAddr (map (lookState s) (ofNameA "ab"))
-
-getDB :: State -> Byte
-getDB s = bitsToByte (map (lookState s) (ofNameB "db"))
-
-getRW :: State -> Bool -- 1:read, 0:wrrite
-getRW s = lookState s (ofName "rw")
-
-lookState :: State -> NodeId -> Bool
-lookState (State m) n = maybe err id $ Map.lookup n m
-  where err = error (show ("lookState",n,toName n))
-
-
-type Inputs = [(String,Bool)]
-
-applyInputs :: Inputs -> State -> State
-applyInputs pairs s =
-  foldl updateState s [ (ofName name, b) | (name,b) <- pairs ]
-
-posClk :: Inputs
-posClk = [("clk0",True)]
-
-negClk :: Inputs
-negClk = [("clk0",False)]
-
-setDB :: Byte -> Inputs
-setDB byte =
-  [ ( ("db"++show i), bool)
-  | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
-  ]
-
-_setSP :: Byte -> Inputs
-_setSP byte =
-  [ ( ("s"++show i), bool)
-  | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
-  ]
-
-_setX :: Byte -> Inputs
-_setX byte =
-  [ ( ("x"++show i), bool)
-  | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
-  ]
-
-_setP :: Byte -> Inputs
-_setP byte =
-  [ ( ("p"++show i), bool)
-  | (i,bool) <-zip (reverse [0::Int .. 7]) (splitB byte)
-  ]
-
-
-fixedInputs :: Inputs
-fixedInputs =
-  [ ("vcc",True)
-  , ("vss",False)
-  , ("so",True) -- True prevents the Set-VOverflow behaviour
-  , ("rdy",True)
-  , ("nmi",True)
-  , ("irq",True)
-  ]
-
-
-ofNameA :: String -> [NodeId]
-ofNameA prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..15] ]
-
-ofNameB :: String -> [NodeId]
-ofNameB prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..7] ]
-
-
+initState (Logic{m}) = makeState [ (n,False) | (n,_) <- Map.toList m ]
 
 data StabMode = Strict | Permissive
 
@@ -207,11 +95,10 @@ stabilize mode logic inputs s0 = loop 0 (applyInputs inputs s0)
         if i == max then (case mode of Strict -> err; Permissive -> (Nothing,s1)) else
           loop (i+1) s2
 
-
 oneStep :: Logic -> Inputs -> State -> State
 oneStep Logic{m} inputs s0 = applyInputs inputs s'
   where
-    s' = State (Map.fromList [ (n,eval e) | (n,e) <- Map.toList m ])
+    s' = makeState [ (n,eval e) | (n,e) <- Map.toList m ]
 
     eval :: Exp -> Bool
     eval = \case
