@@ -15,21 +15,18 @@ parse = loop config0
   where
     loop acc = \case
       [] ->acc
-      "cbm":n:xs -> loop acc { mode = CBM (read n) } xs
       "raw":xs -> loop acc { version = Raw } xs
       "simp":xs -> loop acc { version = Simp } xs
       "min":xs -> loop acc { version = Minimal } xs
+      "-steps":n:xs -> loop acc { steps = read n } xs
       args ->
         error (show ("parse",args))
 
-    config0 = Config { mode = CBM 100, version = Raw }
+    config0 = Config { version = Raw, steps = 100 }
 
 
-data Config = Config { mode :: Mode, version :: Version }
-data Mode = CBM Int
+data Config = Config { version :: Version, steps :: Int }
 
 run :: Config -> IO ()
-run Config{mode,version} = case mode of
-  CBM n ->  do
-    CBM.main version n
-    pure ()
+run Config{version,steps=n} = do
+  CBM.main version n
