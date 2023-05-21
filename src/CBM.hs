@@ -47,7 +47,7 @@ theSim v = do
 
 
 simWithImage :: Int -> Image -> Sim -> IO ()
-simWithImage max = loop (-4) -- what's happenning in these steps
+simWithImage max = loop 0
   where
     loop :: Int -> Image -> Sim -> IO ()
     loop i image sim = do
@@ -91,12 +91,12 @@ ppState i s = do putStrLn (showState i s)
 showState :: Int -> State -> String
 showState i s = do
   printf
-    "halfcycle:%s phi0:%s res:%s AB:%s D:?? RnW:%s PC:%s A:%s X:%s Y:%s SP:%s P:%s IR:%s sync:%s"
+    "halfcycle:%s phi0:%s res:%s AB:%s D:%s RnW:%s PC:%s A:%s X:%s Y:%s SP:%s P:%s IR:%s sync:%s"
     (show i)
     (showBit "clk0")
     (showBit "res")
     (showA "ab")
-    --(showB "db") -- halfcycle equivalence fails for this. dont know why
+    (if (lowClock) then "??" else showB "db") -- dont look at dbus when clock is low
     (showBit "rw")
     (showB "pch" ++ showB "pcl")
     (showB "a")
@@ -112,6 +112,7 @@ showState i s = do
     showA x = show (bitsToAddr (map look (ofNameA x)))
     look n = lookState s n
 
+    lowClock = not (look (ofName "clk0"))
 
 ofNameA :: String -> [NodeId]
 ofNameA prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..15] ]

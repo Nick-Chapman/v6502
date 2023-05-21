@@ -55,22 +55,21 @@ simGivenLogic logic = do
       case kind of
 
         ReadCycle -> do
-          -- For a Read-Cycle, we present the byte read from memory
-          -- on the following negative clock edge.
-          -- To get the Dormann trace to look sensible, it seems we also
-          -- need to present it earlier on the pos-edge.
+          -- Present the byte read from memory when clock is High.
           ReadMem addr $ \byte -> do
-          stab (posClk ++ setDB byte) s0 $ \s1 -> do -- WHY
-          stab (negClk ++ setDB byte) s1 $ \s2 -> do
+          stab (posClk ++ setDB byte) s0 $ \s1 -> do
+          NewState s1 $ do
+          stab (negClk) s1 $ \s2 -> do
+          NewState s2 $ do
           loop s2
 
         WriteCycle -> do
-          -- For a Write-Cycle, collect the data to be written to memory
-          -- before the next negative lock edge
-          --WriteMem addr (getDB s0) $ do -- NO
+          -- Collect the byte to be written to memory when clock is High.
           stab posClk s0 $ \s1 -> do
+          NewState s1 $ do
           WriteMem addr (getDB s1) $ do
           stab negClk s1 $ \s2 -> do
+          NewState s2 $ do
           loop s2
 
     stab                      = stabG Strict True
@@ -81,7 +80,6 @@ simGivenLogic logic = do
     stabG mode res i s k = do
       let (iopt,s') = stabilize mode logic (i ++ [("res",res)] ++ fixedInputs) s
       Stabilization iopt $ do
-      NewState s' $ do
       k s'
 
 
