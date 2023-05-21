@@ -1,13 +1,14 @@
 
 module Values
   ( Bit(..)
-  , Byte
+  , Byte(..)
   , Addr
   , loadBytes
   , bitsToByte, splitB
   , bitsToAddr
   ) where
 
+import Data.Bits (Bits)
 import Data.Word (Word8,Word16)
 import Text.Printf (printf)
 import qualified Data.ByteString as BS (readFile,unpack)
@@ -15,7 +16,7 @@ import qualified Data.ByteString as BS (readFile,unpack)
 data Bit = Bit Bool
 instance Show Bit where show (Bit bool) = if bool then "1" else "0"
 
-newtype Byte = Byte Word8 deriving (Num)
+newtype Byte = Byte Word8 deriving (Eq,Bits,Num)
 newtype Addr = Addr Word16 deriving (Eq,Ord,Num,Enum)
 
 instance Show Byte where show (Byte w8) = printf "%02x" w8

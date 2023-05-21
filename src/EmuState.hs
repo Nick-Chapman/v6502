@@ -4,7 +4,7 @@ module EmuState
   , makeState
   , lookState
   -- , updateState
-  , getRW, getAB, getDB
+  , getClock, getRW, getAB, getDB, getPC, getP, getA, getX, getY
   , Inputs
   , fixedInputs
   , resetLO, resetHI
@@ -35,8 +35,26 @@ getAB s = bitsToAddr (map (lookState s) (ofNameA "ab"))
 getDB :: State -> Byte
 getDB s = bitsToByte (map (lookState s) (ofNameB "db"))
 
+getPC :: State -> Addr
+getPC s = bitsToAddr (map (lookState s) (ofNameB "pch" ++ ofNameB "pcl"))
+
+getP :: State -> Byte
+getP s = bitsToByte (map (lookState s) (ofNameB "p"))
+
+getA :: State -> Byte
+getA s = bitsToByte (map (lookState s) (ofNameB "a"))
+
+getX :: State -> Byte
+getX s = bitsToByte (map (lookState s) (ofNameB "x"))
+
+getY :: State -> Byte
+getY s = bitsToByte (map (lookState s) (ofNameB "y"))
+
 getRW :: State -> Bool -- 1:read, 0:wrrite
 getRW s = lookState s (ofName "rw")
+
+getClock :: State -> Bool
+getClock s = lookState s (ofName "clk0")
 
 lookState :: State -> NodeId -> Bool
 lookState (State m) n = maybe err id $ Map.lookup n m

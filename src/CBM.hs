@@ -1,11 +1,13 @@
 
 module CBM (main) where
 
+import Data.Bits
+import Data.ByteString.Internal (w2c)
 import Data.Map (Map)
-import EmuState (showState)
+import EmuState (State,showState,getClock,getPC,getP,getA,getX,getY)
 import GetLogic (Version(..),getLogic)
 import Sim2 (Sim(..),simGivenLogic)
-import Values (Addr,Byte,loadBytes)
+import Values (Bit(..),Addr,Byte(..),loadBytes)
 import qualified Data.Map as Map
 
 main :: Version -> Int -> IO ()
@@ -13,23 +15,7 @@ main version n = do
   let path = "../perfect6502/rom/cbmbasic.bin"
   let expectedSize = 17591
   image0 <- loadImage 0xA000 path expectedSize
-
-  -- comment copied from perfect6502
-  {-
-   * cbmbasic scribbles over 0x01FE/0x1FF, so we can't start
-   * with a stackpointer of 0 (which seems to be the state
-   * after a RESET), so RESET jumps to 0xF000, which contains
-   * a JSR to the actual start of cbmbasic
-   -}
-  let image = foldl writeMem image0
-        [ (0xf000, 0x20)
-        , (0xf001, 0x94)
-        , (0xf002, 0xE3)
-
-        , (0xfffc, 0x00)
-        , (0xfffd, 0xf0)
-        ]
-
+  let image = setupMonitor image0
   logic <- getLogic version
   --print (Summary logic)
   let sim = simGivenLogic logic
@@ -48,7 +34,8 @@ simWithImage max = loop 0
         loop i image sim
       NewState state sim -> do
         putStrLn (showState i state)
-        if (i==max) then pure () else loop (i+1) image sim
+        image' <- handleMonitor state image
+        if (i==max) then pure () else loop (i+1) image' sim
       Decide _addr _kind sim -> do
         --print ("Decide:",i,_kind)
         loop i image sim
@@ -73,3 +60,136 @@ readMem Image{m} a = maybe 0 id $ (Map.lookup a m)
 
 writeMem :: Image -> (Addr,Byte) -> Image
 writeMem Image{m} (a,b) = Image (Map.insert a b m)
+
+
+-- comment copied from perfect6502
+{-
+ * cbmbasic scribbles over 0x01FE/0x1FF, so we can't start
+ * with a stackpointer of 0 (which seems to be the state
+ * after a RESET), so RESET jumps to 0xF000, which contains
+ * a JSR to the actual start of cbmbasic
+ -}
+setupMonitor :: Image -> Image
+setupMonitor image0 =
+  foldl writeMem image0 $
+  [
+  -- reset vector
+    (0xfffc, 0x00)
+  , (0xfffd, 0xf0)
+
+  -- shim to jump to real entry point
+  , (0xf000, 0x20) -- JMP 0xE394
+  , (0xf001, 0x94)
+  , (0xf002, 0xE3)
+
+  -- stub which kernel functions indirect to
+  , (0xf800, 0xA9) -- LDA #P
+--, (0xf801, P)
+  , (0xf802, 0x48) -- PHA
+  , (0xf803, 0xA9) -- LHA #A
+--, (0xf804, A)
+  , (0xf805, 0xA2) -- LDX #X
+--, (0xf806, X)
+  , (0xf807, 0xA0) -- LDY #Y
+--, (0xf808, Y)
+  , (0xf809, 0x28) -- PLP
+  , (0xf80a, 0x60) -- RTS
+  ] ++
+  concat [ [ (k,   0x4C) -- JMP 0xF800
+           , (k+1, 0x00)
+           , (k+2, 0xF8)
+           ]
+         | (k,_) <- kernalTable]
+
+handleMonitor :: State -> Image -> IO Image
+handleMonitor s i = if not (getClock s) then pure i else do
+  let pc = getPC s
+  case Map.lookup pc m of
+    Just f -> do
+      regs' <- f regs
+      pure $ setRegsInImage regs' i
+    Nothing ->
+      case pc of
+        0x0001 -> do
+          putStrLn "\n\CRASH--PC=1\n"
+          pure i -- error "handleMonitor/PC=1"
+        _ ->
+          pure i
+  where
+    m = Map.fromList kernalTable
+    regs = regsOfState s
+
+data Regs = Regs
+  { p :: Byte
+  , a :: Byte
+  , x :: Byte
+  , y :: Byte
+  , flags :: Flags
+  }
+
+data Flags = Flags
+  { n :: Bit
+  , z :: Bit
+  , c :: Bit
+  }
+
+getStatusFlags :: Byte -> Flags
+getStatusFlags p = Flags
+  { n = Bit (p `testBit` 7)
+  , z = Bit (p `testBit` 1)
+  , c = Bit (p `testBit` 0)
+  }
+
+setStatusFlags :: Byte -> Flags -> Byte
+setStatusFlags p Flags{n=Bit n,z=Bit z,c=Bit c} =
+  ((flip (if n then setBit else clearBit) 7)
+  . (flip (if z then setBit else clearBit) 1)
+  . (flip (if c then setBit else clearBit) 0)
+  ) p
+
+regsOfState :: State -> Regs
+regsOfState s = do
+  let p = getP s
+  let a = getA s
+  let x = getX s
+  let y = getY s
+  let flags = getStatusFlags  p
+  Regs {p, a, x, y, flags}
+
+setRegsInImage :: Regs -> Image -> Image
+setRegsInImage Regs{p,a,x,y,flags} i =
+  foldl writeMem i
+  [ (0xf801, setStatusFlags p flags)
+  , (0xf804, a)
+  , (0xf806, x)
+  , (0xf808, y)
+  ]
+
+kernalTable :: [(Addr, Regs -> IO Regs)]
+kernalTable =
+  [ (0xff99, memtop)
+  , (0xff9c, membot)
+  , (0xffcf, chrin)
+  , (0xffd2, chrout)
+  , (0xffe7, pure) -- clall
+  , (0xFF90, \r -> pure $ r { a = 0x00 }) -- setmsg
+  ]
+  where
+    membot = \r -> pure $ r { y = 0x08, x = 0x00 } -- membot
+    memtop = \r -> pure $ r { y = 0xA0, x = 0x00 } -- memtop
+
+
+chrout :: Regs -> IO Regs
+chrout r@Regs{a,flags} = do
+  putStr (charOfByte a)
+  pure $ r { flags = flags { c = Bit False } }
+
+charOfByte :: Byte -> String
+charOfByte (Byte w8) = case w8 of
+  147 -> "" -- ignore clear screen
+  10 -> ""
+  13 -> [w2c 13, '\n']
+  _ -> [w2c w8]
+
+chrin :: Regs -> IO Regs
+chrin = pure  -- TODO

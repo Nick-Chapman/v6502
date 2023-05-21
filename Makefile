@@ -4,11 +4,11 @@ top: cbm
 cbm: cbm.gold cbm.trace Makefile
 	git diff --no-index --word-diff=color cbm.gold cbm.trace
 
-# At 1320 we get a diff because we reach the first kernal call
-n = 1318 # even!
+n = 33156 # first chrin
 
 cbm.gold: perfectMake Makefile
-	(cd ../perfect6502; ./cbmbasic.exe -print_trace -stop_at_fixedN $(n)) | tail +30 > $@
+	#(cd ../perfect6502; ./cbmbasic.exe -print_trace -stop_at_fixedN $(n)) | tail +30 > $@
+	(cd ../perfect6502; ./cbmbasic.exe -print_trace -stop_at_chrin) | tail +30 > $@
 
 perfectMake:
 	(cd ~/code/perfect6502; make exe)
