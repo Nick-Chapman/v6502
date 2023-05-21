@@ -14,4 +14,7 @@ perfectMake:
 	(cd ~/code/perfect6502; make exe)
 
 cbm.trace: src/*.hs Makefile
-	stack run -- min -steps $(n) | tail +15 > $@
+	stack run -- -max $(n) -trace | tail +15 > $@
+
+run: src/*.hs Makefile
+	stack run -- -max $(n)

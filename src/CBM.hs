@@ -7,11 +7,13 @@ import Data.Map (Map)
 import EmuState (State,showState,getClock,getPC,getP,getA,getX,getY)
 import GetLogic (Version(..),getLogic)
 import Sim2 (Sim(..),simGivenLogic)
+import System.IO (hFlush,stdout)
+import Text.Printf (printf)
 import Values (Bit(..),Addr,Byte(..),loadBytes)
 import qualified Data.Map as Map
 
-main :: Version -> Int -> IO ()
-main version n = do
+main :: Version -> Int -> Bool -> IO ()
+main version max trace = do
   let path = "../perfect6502/rom/cbmbasic.bin"
   let expectedSize = 17591
   image0 <- loadImage 0xA000 path expectedSize
@@ -19,12 +21,12 @@ main version n = do
   logic <- getLogic version
   --print (Summary logic)
   let sim = simGivenLogic logic
-  simWithImage n image sim
+  simWithImage max trace image sim
   pure ()
 
 
-simWithImage :: Int -> Image -> Sim -> IO ()
-simWithImage max = loop 0
+simWithImage :: Int -> Bool -> Image -> Sim -> IO ()
+simWithImage max trace = loop 0
   where
     loop :: Int -> Image -> Sim -> IO ()
     loop i image sim = do
@@ -33,7 +35,8 @@ simWithImage max = loop 0
         --printf "stabilization in %s\n" (show _iopt)
         loop i image sim
       NewState state sim -> do
-        putStrLn (showState i state)
+        let _ = if (i `mod` 100 == 0) then do printf " [%d]" i; hFlush stdout else pure ()
+        if (trace) then putStrLn (showState i state) else pure ()
         image' <- handleMonitor state image
         if (i==max) then pure () else loop (i+1) image' sim
       Decide _addr _kind sim -> do
@@ -181,7 +184,7 @@ kernalTable =
 
 chrout :: Regs -> IO Regs
 chrout r@Regs{a,flags} = do
-  putStr (charOfByte a)
+  putStr (charOfByte a); hFlush stdout
   pure $ r { flags = flags { c = Bit False } }
 
 charOfByte :: Byte -> String

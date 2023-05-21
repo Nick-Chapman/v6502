@@ -15,18 +15,19 @@ parse = loop config0
   where
     loop acc = \case
       [] ->acc
-      "raw":xs -> loop acc { version = Raw } xs
+      "raw":xs -> loop acc { version = Raw } xs -- even slower!
       "simp":xs -> loop acc { version = Simp } xs
       "min":xs -> loop acc { version = Minimal } xs
-      "-steps":n:xs -> loop acc { steps = read n } xs
+      "-max":max:xs -> loop acc { max = read max } xs
+      "-trace":xs -> loop acc { trace = True } xs
       args ->
         error (show ("parse",args))
 
-    config0 = Config { version = Raw, steps = 100 }
+    config0 = Config { version = Minimal, max = 100, trace = False }
 
 
-data Config = Config { version :: Version, steps :: Int }
+data Config = Config { version :: Version, max :: Int, trace :: Bool }
 
 run :: Config -> IO ()
-run Config{version,steps=n} = do
-  CBM.main version n
+run Config{version,max,trace} = do
+  CBM.main version max trace
