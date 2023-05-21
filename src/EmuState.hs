@@ -11,13 +11,15 @@ module EmuState
   , posClk, negClk
   , setInputByte
   , applyInputs
+  , showState
   ) where
 
 import Assigns (NodeId(..))
 import Data.Map (Map)
 import NodeNames (ofName,toName)
-import Values (Byte,Addr,bitsToByte,bitsToAddr,splitB)
+import Values (Bit(..),Byte,Addr,bitsToByte,bitsToAddr,splitB)
 import qualified Data.Map as Map
+import Text.Printf (printf)
 
 data State = State (Map NodeId Bool) deriving (Eq)
 
@@ -73,6 +75,35 @@ fixedInputs =
   , ("nmi",True)
   , ("irq",True)
   ]
+
+showState :: Int -> State -> String
+showState i s = do
+  let rw = look (ofName "rw")
+  let db = showB "db"
+  let ab = showA "ab"
+  printf
+    "halfcycle:%s phi0:%s res:%s AB:%s RnW:%s PC:%s A:%s X:%s Y:%s SP:%s P:%s IR:%s sync:%s%s"
+    (show i)
+    (showBit "clk0")
+    (showBit "res")
+    ab
+    (show (Bit rw))
+    (showB "pch" ++ showB "pcl")
+    (showB "a")
+    (showB "x")
+    (showB "y")
+    (showB "s")
+    (showB "p")
+    (showB "ir")
+    (showBit "sync")
+    (if lowClock then "" else (if rw then " r:" else " W:") ++ printf "%s=%s" ab db)
+  where
+    showBit x = show (Bit (look (ofName x)))
+    showB x = show (bitsToByte (map look (ofNameB x)))
+    showA x = show (bitsToAddr (map look (ofNameA x)))
+    look n = lookState s n
+    lowClock = not (look (ofName "clk0"))
+
 
 ofNameA :: String -> [NodeId]
 ofNameA prefix = [ ofName (prefix ++ show i) | i <- reverse [0::Int ..15] ]
