@@ -1,5 +1,8 @@
 
-top: cbm
+top: dev.out #cbm
+
+dev.out: src/*.hs Makefile
+	stack run dev raw > $@
 
 cbm: cbm.gold cbm.trace Makefile
 	git diff --no-index --word-diff=color cbm.gold cbm.trace

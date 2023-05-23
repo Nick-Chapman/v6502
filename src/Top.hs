@@ -4,6 +4,7 @@ module Top (main) where
 import GetLogic (Version(Raw,Simp,Minimal))
 import System.Environment (getArgs)
 import qualified CBM (main)
+import qualified Compile (main)
 
 main :: IO ()
 main = do
@@ -15,7 +16,8 @@ parse = loop config0
   where
     loop acc = \case
       [] ->acc
-      "raw":xs -> loop acc { version = Raw } xs -- even slower!
+      "dev":xs -> loop acc { mode = Dev } xs
+      "raw":xs -> loop acc { version = Raw } xs
       "simp":xs -> loop acc { version = Simp } xs
       "min":xs -> loop acc { version = Minimal } xs
       "-max":max:xs -> loop acc { max = read max } xs
@@ -23,11 +25,15 @@ parse = loop config0
       args ->
         error (show ("parse",args))
 
-    config0 = Config { version = Minimal, max = 100, trace = False }
+    config0 = Config { mode = CBM, version = Minimal, max = 100, trace = False }
 
 
-data Config = Config { version :: Version, max :: Int, trace :: Bool }
+data Config = Config { mode :: Mode, version :: Version, max :: Int, trace :: Bool }
+
+data Mode = CBM | Dev
 
 run :: Config -> IO ()
-run Config{version,max,trace} = do
-  CBM.main version max trace
+run Config{mode,version,max,trace} = do
+  case mode of
+    CBM -> CBM.main version max trace
+    Dev -> Compile.main version

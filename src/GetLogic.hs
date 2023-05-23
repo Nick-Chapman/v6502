@@ -30,7 +30,9 @@ getLogic v = do
   assigns0 <- normalize <$> parseLogicLines <$> readFile "data/logic_unopt.inc"
   assigns <- conv assigns0
   let m = Map.fromList [ (n,e) | AssignDef n e <- assigns ]
-  pure Logic{ name = show v, m }
+  let res = Logic{ name = show v, m }
+  let _ = print (Summary res)
+  pure res
 
 simplify :: [AssignDef] -> [AssignDef]
 simplify assigns = do
