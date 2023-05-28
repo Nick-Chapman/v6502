@@ -16,24 +16,59 @@ parse = loop config0
   where
     loop acc = \case
       [] ->acc
-      "dev":xs -> loop acc { mode = Dev } xs
+
+      -- what system? CBM or just compiling
+      "cbm":xs -> loop acc { sys = CBM } xs
+      "seecompile":xs -> loop acc { sys = SeeCompile } xs
+
+      -- logic version
       "raw":xs -> loop acc { version = Raw } xs
       "simp":xs -> loop acc { version = Simp } xs
-      "min":xs -> loop acc { version = Minimal } xs
+      "minimal":xs -> loop acc { version = Minimal } xs
+
+      -- which emulation mode
+      "sim2":xs -> loop acc { mode = Sim2 } xs
+      "dev":xs -> loop acc { mode = DevCompiledSim } xs
+
+      -- controlling the emulation
       "-max":max:xs -> loop acc { max = read max } xs
       "-trace":xs -> loop acc { trace = True } xs
+
       args ->
         error (show ("parse",args))
 
-    config0 = Config { mode = CBM, version = Minimal, max = 100, trace = False }
+    config0 = Config
+      { sys = CBM
+      , mode = DevCompiledSim
+      , version = Minimal
+      , max = 10
+      , trace = False
+      }
 
 
-data Config = Config { mode :: Mode, version :: Version, max :: Int, trace :: Bool }
+data Config = Config
+  { sys :: Sys
+  , mode :: Mode
+  , version :: Version
+  , max :: Int
+  , trace :: Bool
+  }
 
-data Mode = CBM | Dev
+data Mode
+  = Sim2 -- original simulation of set of mutually-dep assigns
+  | DevCompiledSim -- simulation of linearlzed bindings
+
+data Sys = CBM | SeeCompile
 
 run :: Config -> IO ()
-run Config{mode,version,max,trace} = do
-  case mode of
-    CBM -> CBM.main version max trace
-    Dev -> Compile.main version
+run Config{sys,mode,version,max,trace} = do
+  case sys of
+    SeeCompile -> Compile.main version
+    CBM -> do
+      checkMode mode
+      CBM.main version max trace
+
+checkMode :: Mode -> IO ()
+checkMode = \case
+  Sim2 -> pure ()
+  DevCompiledSim -> undefined -- TODO
