@@ -1,6 +1,7 @@
 
 module EmuState
-  ( State
+  ( Sim(..), CycleKind(..)
+  , State
   , makeState
   , lookState
   -- , updateState
@@ -17,9 +18,18 @@ module EmuState
 import Assigns (NodeId(..))
 import Data.Map (Map)
 import NodeNames (ofName,toName)
+import Text.Printf (printf)
 import Values (Bit(..),Byte,Addr,bitsToByte,bitsToAddr,splitB)
 import qualified Data.Map as Map
-import Text.Printf (printf)
+
+data Sim
+  = Stabilization (Maybe Int) Sim
+  | NewState State Sim
+  | Decide Addr CycleKind Sim
+  | ReadMem Addr (Byte -> Sim)
+  | WriteMem Addr Byte Sim
+
+data CycleKind = ReadCycle | WriteCycle deriving Show
 
 data State = State (Map NodeId Bool) deriving (Eq)
 

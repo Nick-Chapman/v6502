@@ -1,22 +1,10 @@
 
-module Sim2
-  ( Sim(..), simGivenLogic
-  ) where
+module Sim2 ( simGivenLogic ) where
 
 import Assigns (Exp(..))
-import EmuState (State,makeState,lookState,getRW,getAB,getDB,Inputs,fixedInputs,resetLO,resetHI,posClk,negClk,setInputByte,applyInputs)
+import EmuState (Sim(..),CycleKind(..),State,makeState,lookState,getRW,getAB,getDB,Inputs,fixedInputs,resetLO,resetHI,posClk,negClk,setInputByte,applyInputs)
 import GetLogic (Logic(..))
-import Values (Addr,Byte)
 import qualified Data.Map as Map
-
-data Sim
-  = Stabilization (Maybe Int) Sim
-  | NewState State Sim
-  | Decide Addr CycleKind Sim
-  | ReadMem Addr (Byte -> Sim)
-  | WriteMem Addr Byte Sim
-
-data CycleKind = ReadCycle | WriteCycle deriving Show
 
 -- When clock is high: Addr & R/W line are changed by 6502
 -- When clock is low: Data(Byte) is changed, by 6502 (Write), by Mem (Read)

@@ -4,26 +4,20 @@ module CBM (main) where
 import Data.Bits
 import Data.ByteString.Internal (w2c)
 import Data.Map (Map)
-import EmuState (State,showState,getClock,getPC,getP,getA,getX,getY)
-import GetLogic (Version(..),getLogic)
-import Sim2 (Sim(..),simGivenLogic)
+import EmuState (Sim(..),State,showState,getClock,getPC,getP,getA,getX,getY)
 import System.IO (hFlush,stdout)
 import Text.Printf (printf)
 import Values (Bit(..),Addr,Byte(..),loadBytes)
 import qualified Data.Map as Map
 
-main :: Version -> Int -> Bool -> IO ()
-main version max trace = do
+main :: Sim -> Int -> Bool -> IO ()
+main sim max trace = do
   let path = "../perfect6502/rom/cbmbasic.bin"
   let expectedSize = 17591
   image0 <- loadImage 0xA000 path expectedSize
   let image = setupMonitor image0
-  logic <- getLogic version
-  --print (Summary logic)
-  let sim = simGivenLogic logic
   simWithImage max trace image sim
   pure ()
-
 
 simWithImage :: Int -> Bool -> Image -> Sim -> IO ()
 simWithImage max trace = loop 0
