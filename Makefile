@@ -1,7 +1,7 @@
 
 top: reg #dev.out #cbm
 
-n = 1000 #33154 # just before first chrin
+n = 100 #33154 # just before first chrin
 
 
 # haskell executable

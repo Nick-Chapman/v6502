@@ -26,7 +26,7 @@ simWithImage max trace = loop 0
     loop :: Int -> Image -> Sim -> IO ()
     loop i image sim = do
      case sim of
-      Stabilization _iopt sim -> do
+      Stabilization _iopt sim -> do -- TODO: track max stabilization
         --when trace $ printf "stabilization in %s\n" (show _iopt)
         loop i image sim
       NewState state sim -> do
@@ -34,7 +34,7 @@ simWithImage max trace = loop 0
         when trace $ putStrLn (showState i state)
         image' <- handleMonitor state image
         if (i==max) then pure () else loop (i+1) image' sim
-      Decide _addr _kind sim -> do
+      Decide _addr _kind sim -> do -- TODO: kill this
         --print ("Decide:",i,_kind)
         loop i image sim
       ReadMem a f -> do

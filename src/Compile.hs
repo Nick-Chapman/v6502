@@ -27,21 +27,24 @@ compile logic = runGen (genFromLogic logic)
 genFromLogic :: Logic -> Gen ()
 genFromLogic Logic{m} = do
 
-  sequence_ [ GShare (ofName x) (fInput x) | x <- varyingInputs ]
   sequence_ [ GShare (ofName x) (fConst b) | (x,b) <- fixedInputs ]
-  sequence_ [ output (ofName x)            | x <- need ]
+  sequence_ [ GShare (ofName x) (fInput x) | x <- varyingInputs ++ inouts]
+  sequence_ [ output (ofName x)            | x <- outputs ]
+  sequence_ [ GUnShare (ofName x)          | x <- inouts ]
+  sequence_ [ output (ofName x)            | x <- inouts ++ probed ++ varyingInputs ]
 
   where
-    varyingInputs = [ "clk0", "res"] ++ ["db"++show i | i <- [0::Int .. 7]]
+    inouts = ["db"++show i | i <- [0::Int .. 7]]
 
-    need :: [String]
-    need = []
+    varyingInputs = [ "clk0", "res"]
+
+    outputs = []
       ++ ["sync","rw"]
       ++ ["ab"++show i | i <- [0::Int .. 15]]
+
+    probed = []
       ++ ["p"++show i | i <- [0::Int .. 7]]
       ++ ["ir"++show i | i <- [0::Int .. 7]]
-      -- ++ ["db"++show i | i <- [0::Int .. 7]]
-      ++ varyingInputs
 
     output :: NodeId -> Gen ()
     output n = do
@@ -109,6 +112,7 @@ data Gen a where
   GBind :: Gen a -> (a -> Gen b) -> Gen b
   GIte :: Func -> Func -> Func -> Gen Func
 
+  GUnShare :: NodeId -> Gen ()
   GShare :: NodeId -> Func -> Gen ()
   GLookup :: NodeId -> Gen (Maybe Func)
 
@@ -141,6 +145,9 @@ runGen g0 = finalize <$> loop doing0 s0 g0 k0
       GIte i t e -> do
         let v = Var u
         PLet v (CombIte i t e) <$> (k s { u = u+1 } (fVar v))
+
+      GUnShare n -> do
+        k s { env = Map.delete n env } ()
 
       GShare n f -> do
         --print ("GShare",n)

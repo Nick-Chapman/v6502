@@ -1,12 +1,13 @@
 
 module Sim3 ( simGivenLogic ) where  -- compile & sim
 
-import EmuState --(Sim)
-import GetLogic (Logic(..))
-import Compile --(compile,Prog(..),Func(..))
-import qualified Data.Map as Map
+import Compile (Prog(..),Comb(..),Func(..),Atom(..),Var,compile)
 import Data.Map (Map)
+import EmuState (Sim(..),CycleKind(..),State,Inputs,makeState,updateState,applyInputs,lookState,posClk,negClk,resetHI,resetLO,setInputByte,getAB,getRW,getDB)
+import GetLogic (Logic(..))
 import Text.Printf (printf)
+import qualified Data.Map as Map
+
 
 simGivenLogic :: Logic -> IO Sim
 simGivenLogic logic = do
@@ -19,19 +20,15 @@ simGivenProg :: Prog -> Sim
 simGivenProg prog = do
 
   let s0 = initState prog
-  stabDuringResetPermissive (dbx++posClk++extra) s0 $ \s1 -> do
-  stabDuringReset (dbx++negClk) s1 $ \s2 -> do
-  stabDuringReset (dbx++posClk) s2 $ \s3 -> do
-  stabDuringReset (dbx++negClk) s3 $ \s4 -> do
+  stabDuringResetPermissive (dbz ++ posClk) s0 $ \s1 -> do
+  stabDuringReset (negClk) s1 $ \s2 -> do
+  stabDuringReset (dbz ++ posClk) s2 $ \s3 -> do
+  stabDuringReset (negClk) s3 $ \s4 -> do
   loop s4
 
   where
-    extra =
-      []
---      ++ setInputByte "s" 0xC0
---      ++ setInputByte "x" 0xC0
 
-    dbx = setInputByte "db" 0
+    dbz = setInputByte "db" 0 -- needed on posClk during reset & writeCycle
 
     loop :: State -> Sim
     loop s0 = do
@@ -44,19 +41,20 @@ simGivenProg prog = do
         ReadCycle -> do
           -- Present the byte read from memory when clock is High.
           ReadMem addr $ \byte -> do
-          stab (posClk ++ setInputByte "db" byte) s0 $ \s1 -> do
-          NewState s1 $ do
-          stab (dbx++negClk) s1 $ \s2 -> do
+          let dbi = setInputByte "db" byte
+          stab (dbi ++ posClk) s0 $ \s1 -> do
+          NewState (applyInputs dbi s1) $ do -- feels a bit hacky
+          stab (negClk) s1 $ \s2 -> do
           NewState s2 $ do
           loop s2
 
         WriteCycle -> do
           -- Collect the byte to be written to memory when clock is High.
-          stab (dbx ++ posClk) s0 $ \s1 -> do
+          stab (dbz ++ posClk) s0 $ \s1 -> do
           NewState s1 $ do
           let byte = getDB s1
           WriteMem addr byte $ do
-          stab (dbx ++ negClk) s1 $ \s2 -> do
+          stab (negClk) s1 $ \s2 -> do
           NewState s2 $ do
           loop s2
 
@@ -69,14 +67,13 @@ simGivenProg prog = do
       let (iopt,s') = stabilize mode prog (-- fixedInputs ++
                                            reset ++ i) s
       Stabilization iopt $ do
-      --let s'' = applyInputs (reset ++ i) s'
       k s'
 
 
 data StabMode = Strict | Permissive
 
 stabilize :: StabMode -> Prog -> Inputs -> State -> (Maybe Int,State)
-stabilize mode prog inputs s0 = loop 0 s0 --(applyInputs inputs s0)
+stabilize mode prog inputs s0 = loop 0 s0
   where
     max = 50
     err = error (show ("failed to stabilize in",max))
@@ -88,10 +85,7 @@ stabilize mode prog inputs s0 = loop 0 s0 --(applyInputs inputs s0)
           loop (i+1) s2
 
 oneStep :: Prog -> Inputs -> State -> State
-oneStep prog inputs s =
-  --applyInputs inputs (runProg prog inputs s)
-  --runProg prog inputs (applyInputs inputs s)
-  runProg prog inputs s
+oneStep prog inputs s = runProg prog inputs s
 
 
 initState :: Prog -> State
