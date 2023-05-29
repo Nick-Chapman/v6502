@@ -25,8 +25,8 @@ simGivenLogic logic = do
     -- hack to match perfect6502
     extra =
       []
-      ++ setInputByte "s" 0xC0
-      ++ setInputByte "x" 0xC0
+--      ++ setInputByte "s" 0xC0
+--      ++ setInputByte "x" 0xC0
 
     loop :: State -> Sim
     loop s0 = do
