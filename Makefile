@@ -41,7 +41,10 @@ cbm.trace: $(exe) Makefile
 # run the CBM emulations. At about 1/2000 speed!
 
 run: $(exe) Makefile
-	$(exe) cbm sim2 minimal -max 33154
+	$(exe) cbm -max 33154 sim2 minimal # fastest so far. 1/40 of perfect6502
+#	$(exe) cbm -max 33154 sim2 raw # slower, but still works
+#	$(exe) cbm -max 33154 dev  minimal  # BIG (u5472); less state (392 regs); works (VERY SLOW)
+#	$(exe) cbm -max 33154 dev  raw      # SMALLER (u2752); more state (452 regs); broken!
 
 
 # compile dev...

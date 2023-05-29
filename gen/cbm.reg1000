@@ -1,4 +1,4 @@
-halfcycle:0 phi0:1 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0 r:0000=00
+ [0]halfcycle:0 phi0:1 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0 r:0000=00
 halfcycle:1 phi0:0 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0
 halfcycle:2 phi0:1 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0 r:0000=00
 halfcycle:3 phi0:0 res:1 AB:00ff RnW:1 PC:00ff A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:1
@@ -998,4 +998,4 @@ halfcycle:996 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95
 halfcycle:997 phi0:0 res:1 AB:007c RnW:0 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:0
 halfcycle:998 phi0:1 res:1 AB:007c RnW:0 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:0 W:007c=c9
 halfcycle:999 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:1
-halfcycle:1000 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+ [1000]halfcycle:1000 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
