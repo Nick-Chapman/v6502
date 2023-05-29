@@ -1,7 +1,7 @@
 
 top: reg #dev.out #cbm
 
-n = 100 #33154 # just before first chrin
+n = 1700 #33154 # just before first chrin
 
 
 # haskell executable
@@ -67,4 +67,4 @@ cbm1.out: $(exe) Makefile
 	$(exe) sim2 raw -max $(n) -trace > $@
 
 cbm2.out: $(exe) Makefile
-	$(exe) dev raw -max $(n) -trace > $@
+	$(exe) dev minimal -max $(n) -trace > $@
