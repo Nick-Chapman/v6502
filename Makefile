@@ -1,6 +1,8 @@
 
 top: reg #dev.out #cbm
 
+n = 1000 #33154 # just before first chrin
+
 
 # haskell executable
 
@@ -24,8 +26,6 @@ gen/cbm.reg1000: $(exe) Makefile
 
 cbm.comp: cbm.gold cbm.trace Makefile
 	git diff --no-index --word-diff=color cbm.gold cbm.trace
-
-n = 100 #33154 # just before first chrin
 
 cbm.gold: perfectMake Makefile
 	(cd ../perfect6502; ./cbmbasic.exe -print_trace -stop_at_fixedN $(n)) | tail +30 > $@
@@ -52,14 +52,19 @@ compile.out: $(exe) Makefile
 
 # dev: compiled simulation
 
+
+
 dev: $(exe) Makefile
-	$(exe) dev -max 10 -trace
+	$(exe) dev raw -max $(n) -trace
+
+other: $(exe) Makefile
+	$(exe) sim2 raw -max $(n) -trace
 
 dev.comp: cbm1.out cbm2.out Makefile
 	git diff --no-index --word-diff=color cbm1.out cbm2.out
 
 cbm1.out: $(exe) Makefile
-	$(exe) raw sim2 -max 10 -trace > $@
+	$(exe) sim2 raw -max $(n) -trace > $@
 
 cbm2.out: $(exe) Makefile
-	$(exe) dev -max 10 -trace > $@
+	$(exe) dev raw -max $(n) -trace > $@

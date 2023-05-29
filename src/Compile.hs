@@ -1,5 +1,5 @@
 
-module Compile (main) where
+module Compile (main,compile,Prog(..),Comb(..),Func(..),Atom(..),Var) where
 
 import Assigns (NodeId,Exp(..))
 import Control.Monad (ap,liftM)
@@ -17,7 +17,7 @@ main version = do
   logic <- getLogic version
   --let _ = simGivenLogic logic
   prog <- compile logic
-  mapM_ putStrLn (ppProg prog)
+  print prog
 
 ----------------------------------------------------------------------
 
@@ -27,19 +27,26 @@ compile logic = runGen (genFromLogic logic)
 genFromLogic :: Logic -> Gen ()
 genFromLogic Logic{m} = do
 
-  --GShare (ofName "clk0") (fConst False)
-  GShare (ofName "clk0") (_fInput "clock")
-  GShare (ofName "res") (fConst True)
-  sequence_ [ GShare (ofName n) (fConst b) | (n,b) <- fixedInputs ]
-  sequence_ [ genN_ n | n <- start ]
+  sequence_ [ GShare (ofName x) (fInput x) | x <- varyingInputs ]
+  sequence_ [ GShare (ofName x) (fConst b) | (x,b) <- fixedInputs ]
+  sequence_ [ output (ofName x)            | x <- need ]
 
   where
+    varyingInputs = [ "clk0", "res"] ++ ["db"++show i | i <- [0::Int .. 7]]
 
-    genN_ :: NodeId -> Gen ()
-    genN_ n = do _ <- genN n; pure ()
+    need :: [String]
+    need = []
+      ++ ["sync","rw"]
+      ++ ["ab"++show i | i <- [0::Int .. 15]]
+      ++ ["p"++show i | i <- [0::Int .. 7]]
+      ++ ["ir"++show i | i <- [0::Int .. 7]]
+      -- ++ ["db"++show i | i <- [0::Int .. 7]]
+      ++ varyingInputs
 
-    start :: [NodeId]
-    start = [ofName "sync"] -- TODO: all address bus
+    output :: NodeId -> Gen ()
+    output n = do
+      f <- genN n
+      GSetOutput n f
 
     look :: NodeId -> Exp
     look n = maybe err id $ Map.lookup n m
@@ -111,6 +118,7 @@ data Gen a where
   GNeedState :: NodeId -> Gen Bool
   GUseLastState :: NodeId -> Gen Func
   GSetNextState :: NodeId -> Func -> Gen ()
+  GSetOutput :: NodeId -> Func -> Gen ()
 
 
 data State = State { u :: Int, env :: Map NodeId Func, regs :: Set NodeId }
@@ -151,6 +159,9 @@ runGen g0 = finalize <$> loop doing0 s0 g0 k0
       GSetNextState n f -> do -- can/should we collect at end?
         PSetNext n f <$> k s ()
 
+      GSetOutput n f -> do -- can/should we collect at end?
+        PSetOutput n f <$> k s ()
+
 ----------------------------------------------------------------------
 
 fAnd,fOr,fXor :: Func -> Func -> Gen Func
@@ -158,7 +169,7 @@ fIte :: Func -> Func -> Func -> Gen Func
 fConst :: Bool -> Func
 
 fOne,fZero :: Func
-_fInput :: String -> Func
+fInput :: String -> Func
 fVar :: Var -> Func
 fReg :: NodeId -> Func
 fNot :: Func -> Func
@@ -182,7 +193,7 @@ fIte i t e =
 
 fOne = Pos AOne
 fZero = Neg AOne
-_fInput x = Pos (AInput x)
+fInput x = Pos (AInput x)
 fReg n = Pos (AReg n)
 fVar v = Pos (AVar v)
 
@@ -200,6 +211,7 @@ finalize prog = PWithState regs prog
       PDone -> acc
       PLet _ _ p -> collect acc p
       PSetNext n _ p -> collect (n:acc) p
+      PSetOutput _ _ p -> collect acc p
       PWithState{} -> error "finalize"
 
 ----------------------------------------------------------------------
@@ -208,6 +220,7 @@ data Prog
   = PDone
   | PLet Var Comb Prog
   | PSetNext NodeId Func Prog
+  | PSetOutput NodeId Func Prog
   | PWithState [NodeId] Prog -- just one line at top of prog
 
 data Comb = CombIte Func Func Func
@@ -219,9 +232,11 @@ data Atom = AOne | AVar Var | AInput String | AReg NodeId
   deriving Eq
 
 newtype Var = Var Int
-  deriving Eq
+  deriving (Eq,Ord)
 
 ----------------------------------------------------------------------
+
+instance Show Prog where show prog = unlines (ppProg prog)
 
 ppProg :: Prog -> [String]
 ppProg = \case
@@ -229,6 +244,7 @@ ppProg = \case
   PDone -> []
   PLet v c p -> printf "let %s = %s" (show v) (show c) : ppProg p
   PSetNext n a p -> printf "set %s = %s" (show n) (show a) : ppProg p
+  PSetOutput n a p -> printf "output %s = %s" (show n) (show a) : ppProg p
   --PSetNext _ _ p -> ppProg p -- TEMP, hide
 
 instance Show Comb where

@@ -4,7 +4,7 @@ module EmuState
   , State
   , makeState
   , lookState
-  -- , updateState
+  , updateState
   , getClock, getRW, getAB, getDB, getPC, getP, getA, getX, getY
   , Inputs
   , fixedInputs
@@ -60,15 +60,18 @@ getX s = bitsToByte (map (lookState s) (ofNameB "x"))
 getY :: State -> Byte
 getY s = bitsToByte (map (lookState s) (ofNameB "y"))
 
-getRW :: State -> Bool -- 1:read, 0:wrrite
-getRW s = lookState s (ofName "rw")
+getRW :: String -> State -> Bool -- 1:read, 0:wrrite
+getRW who s = lookState' who s (ofName "rw")
 
 getClock :: State -> Bool
 getClock s = lookState s (ofName "clk0")
 
 lookState :: State -> NodeId -> Bool
-lookState (State m) n = maybe err id $ Map.lookup n m
-  where err = error (show ("lookState",n,toName n))
+lookState = lookState' "normal"
+
+lookState' :: String -> State -> NodeId -> Bool
+lookState' who (State m) n = maybe err id $ Map.lookup n m
+  where err = error (show ("lookState",who,n,toName n))
 
 applyInputs :: Inputs -> State -> State
 applyInputs pairs s =

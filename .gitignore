@@ -6,4 +6,4 @@ stack.yaml.lock
 .built
 cbm.gold
 cbm.trace
-*.out
+cbm[12].out

@@ -4,6 +4,7 @@ module Top (main) where
 import EmuState (Sim)
 import GetLogic (Version(Raw,Simp,Minimal),Logic,getLogic)
 import Sim2 (simGivenLogic)
+import Sim3 (simGivenLogic)
 import System.Environment (getArgs)
 import qualified CBM (main)
 import qualified Compile (main)
@@ -67,10 +68,10 @@ run Config{sys,mode,version,max,trace} = do
     SeeCompile -> Compile.main version
     CBM -> do
       logic <- getLogic version
-      let sim = getSim logic mode
+      sim <- getSim logic mode
       CBM.main sim max trace
 
-getSim :: Logic -> Mode -> Sim
+getSim :: Logic -> Mode -> IO Sim
 getSim logic = \case
-  Sim2 -> Sim2.simGivenLogic logic
-  DevCompiledSim -> undefined
+  Sim2 -> pure $ Sim2.simGivenLogic logic
+  DevCompiledSim -> Sim3.simGivenLogic logic

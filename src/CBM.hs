@@ -1,6 +1,7 @@
 
 module CBM (main) where
 
+import Control.Monad (when)
 import Data.Bits
 import Data.ByteString.Internal (w2c)
 import Data.Map (Map)
@@ -26,11 +27,11 @@ simWithImage max trace = loop 0
     loop i image sim = do
      case sim of
       Stabilization _iopt sim -> do
-        --printf "stabilization in %s\n" (show _iopt)
+        --when trace $ printf "stabilization in %s\n" (show _iopt)
         loop i image sim
       NewState state sim -> do
-        let _ = if (i `mod` 100 == 0) then do printf " [%d]" i; hFlush stdout else pure ()
-        if (trace) then putStrLn (showState i state) else pure ()
+        let _ = if (i `mod` 1000 == 0) then do printf " [%d]" i; hFlush stdout else pure ()
+        when trace $ putStrLn (showState i state)
         image' <- handleMonitor state image
         if (i==max) then pure () else loop (i+1) image' sim
       Decide _addr _kind sim -> do
@@ -38,10 +39,10 @@ simWithImage max trace = loop 0
         loop i image sim
       ReadMem a f -> do
         let b = readMem image a
-        --printf "r: %s --> %s\n" (show a) (show b)
+        --when trace $ printf "r: %s --> %s\n" (show a) (show b)
         loop i image (f b)
       WriteMem a b sim -> do
-        --printf "W: %s <-- %s\n" (show a) (show b)
+        --when trace $ printf "W: %s <-- %s\n" (show a) (show b)
         loop i (writeMem image (a,b)) sim
 
 data Image = Image { m :: Map Addr Byte }

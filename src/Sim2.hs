@@ -32,7 +32,7 @@ simGivenLogic logic = do
     loop s0 = do
       -- We collect the r/w line and address bus after a neg clock edge
       let addr = getAB s0
-      let kind = if (getRW s0) then ReadCycle else WriteCycle
+      let kind = if (getRW "sim2/simGivenLogic" s0) then ReadCycle else WriteCycle
       Decide addr kind $ do
       case kind of
 
