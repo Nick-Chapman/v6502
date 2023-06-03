@@ -28,7 +28,7 @@ simGivenProg prog = do
 
   where
 
-    dbz = setInputByte "db" 0 -- needed on posClk during reset & writeCycle
+    dbz = [] --setInputByte "db" 0 -- needed on posClk during reset & writeCycle
 
     loop :: State -> Sim
     loop s0 = do
@@ -99,11 +99,11 @@ generateFile tag a = do
   --putStrLn $ "Writing file: " <> fp
   writeFile fp (show a)
 
-
 runProg :: Prog -> Inputs -> State -> State
 runProg prog inputs s0 = do
   let b0 :: Binds = Map.empty
-  loop b0 s0 prog
+  --applyInputs inputs
+  (loop b0 s0 prog)
   where
 
     iMap :: Map String Bool
@@ -139,7 +139,7 @@ runProg prog inputs s0 = do
         where err = error (printf "evalA/Var: %s" (show v))
       AInput i  ->
         maybe err id $ Map.lookup i iMap
-        where err = error (printf "evalA/AInput: %s" (show i))
+        where err = False --error (printf "evalA/AInput: %s" (show i))
       AReg n ->
         lookState s n
 

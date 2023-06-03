@@ -1,7 +1,7 @@
 
 top: reg #dev.out #cbm
 
-n = 1700 #33154 # just before first chrin
+n = 1700 #0 #33154 # just before first chrin
 
 
 # haskell executable
@@ -67,7 +67,7 @@ dev.comp: cbm1.out cbm2.out Makefile
 	git diff --no-index --word-diff=color cbm1.out cbm2.out
 
 cbm1.out: $(exe) Makefile
-	$(exe) sim2 raw -max $(n) -trace > $@
+	$(exe) sim2 minimal -max $(n) -trace > $@ #sim2: raw is slower
 
 cbm2.out: $(exe) Makefile
-	$(exe) dev minimal -max $(n) -trace > $@
+	$(exe) dev raw -max $(n) -trace > $@ #dev: minimal is slower (but works!)

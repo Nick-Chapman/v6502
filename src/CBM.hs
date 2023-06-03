@@ -30,7 +30,7 @@ simWithImage max trace = loop 0
         --when trace $ printf "stabilization in %s\n" (show _iopt)
         loop i image sim
       NewState state sim -> do
-        if (i `mod` 1000 == 0) then do printf " [%d]" i; hFlush stdout else pure ()
+        let _ = if (i `mod` 1000 == 0) then do printf " [%d]" i; hFlush stdout else pure ()
         when trace $ putStrLn (showState i state)
         image' <- handleMonitor state image
         if (i==max) then pure () else loop (i+1) image' sim
