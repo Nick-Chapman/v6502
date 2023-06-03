@@ -1,11 +1,19 @@
 
 module Sim3 ( simGivenProg ) where
 
-import Compile (Prog(..),Comb(..),Func(..),Atom(..),Var)
+import Compile (Prog(..),Comb(..),Func(..),Atom(..),Var(..))
+import Control.Monad.ST (ST,runST)
+import Data.Array.MArray (newArray_,readArray,writeArray)
+import Data.Array.ST (STUArray)
 import Data.Map (Map)
 import EmuState (Sim(..),CycleKind(..),State,Inputs,makeState,updateState,applyInputs,lookState,posClk,negClk,resetHI,resetLO,setInputByte,getAB,getRW,getDB)
-import Text.Printf (printf)
 import qualified Data.Map as Map
+
+
+oneStep :: Prog -> Inputs -> State -> State
+oneStep = if fast then runProg else slow_runProg
+  where fast = True
+
 
 simGivenProg :: Prog -> Sim
 simGivenProg prog = do
@@ -60,6 +68,12 @@ simGivenProg prog = do
       Stabilization iopt $ do
       k s'
 
+initState :: Prog -> State
+initState = \case
+  PWithState _regs _ -> makeState [ (n,False) | n <- _regs ]
+  _ -> undefined
+
+
 
 data StabMode = Strict | Permissive
 
@@ -75,20 +89,9 @@ stabilize mode prog inputs s0 = loop 0 s0
         if i == max then (case mode of Strict -> err; Permissive -> (Nothing,s1)) else
           loop (i+1) s2
 
-oneStep :: Prog -> Inputs -> State -> State
-oneStep prog inputs s = runProg prog inputs s
 
-
-initState :: Prog -> State
-initState = \case
-  PWithState _regs _ -> makeState [ (n,False) | n <- _regs ]
-  _ -> undefined
-
-runProg :: Prog -> Inputs -> State -> State
-runProg prog inputs s0 = do
-  let b0 :: Binds = Map.empty
-  --applyInputs inputs
-  (loop b0 s0 prog)
+slow_runProg :: Prog -> Inputs -> State -> State
+slow_runProg prog inputs s0 = loop Map.empty s0 prog
   where
 
     iMap :: Map String Bool
@@ -121,12 +124,61 @@ runProg prog inputs s0 = do
       AOne -> True
       AVar v ->
         maybe err id $ Map.lookup v b
-        where err = error (printf "evalA/Var: %s" (show v))
+        where err = error (show ("evalA/Var: %s",v))
       AInput i  ->
         maybe err id $ Map.lookup i iMap
         where err = False --error (printf "evalA/AInput: %s" (show i))
       AReg n ->
         lookState s n
 
-
 type Binds = Map Var Bool
+
+----------------------------------------------------------------------
+
+runProg :: Prog -> Inputs -> State -> State
+runProg prog inputs s0 = runST (newArray_ (0,6000) >>= go)
+  where
+
+    iMap :: Map String Bool
+    iMap = Map.fromList inputs
+
+    go :: forall s. STUArray s Int Bool -> ST s State
+    go binds = loop s0 prog
+      where
+        loop :: State -> Prog -> ST s State
+        loop s = \case
+          PWithState _ prog -> loop s prog
+          PDone -> pure s
+          PLet (Var x) comb prog -> do
+            v <- evalC s comb
+            writeArray binds x v
+            loop s prog
+
+          PSetNext n f prog -> do
+            v <- evalF s f
+            loop (updateState s (n, v)) prog
+
+          PSetOutput n f prog -> do
+            v <- evalF s f
+            loop (updateState s (n, v)) prog
+
+        evalC :: State -> Comb -> ST s Bool
+        evalC s = \case
+          CombIte i t e ->
+            evalF s i >>= \b -> if b then (evalF s t) else (evalF s e)
+
+        evalF :: State -> Func -> ST s Bool
+        evalF s = \case
+          Pos a -> evalA s a
+          Neg a -> not <$> evalA s a
+
+        evalA :: State -> Atom -> ST s Bool
+        evalA s = \case
+          AOne -> pure True
+          AVar (Var x) -> do
+            readArray binds x
+          AInput i  ->
+            pure $ maybe err id $ Map.lookup i iMap
+            where err = False --error (printf "evalA/AInput: %s" (show i))
+          AReg n ->
+            pure $ lookState s n

@@ -25,6 +25,7 @@ dependencies:
 - text
 - time
 - transformers
+- vector
 - word8
 - EarleyM
 

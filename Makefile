@@ -14,7 +14,8 @@ $(exe): src/*.hs
 # run the CBM emulation
 
 run: $(exe) Makefile
-	$(exe) -max $(nn) sim2 min # fastest so far. 1/40 of perfect6502
+#	$(exe) -beat -max $(nn) sim2 min # fastest so far. 1/40 of perfect6502
+	$(exe) -beat -max $(nn) sim3 min # about same speed
 
 
 # show the bug in sim3/raw (also have bug in sim3/simp)
@@ -63,3 +64,10 @@ gen/cbm-sim3-simp.trace: $(exe)
 #
 # cbm.trace: $(exe) Makefile
 # 	$(exe) cbm sim2 -max $(n) -trace | tail +15 > $@
+
+
+speed: $(exe) Makefile
+	bash -c 'time $(exe) sim3 min -trace -max 100'
+
+reg0: gen/cbm-sim3-min.trace
+	git diff gen

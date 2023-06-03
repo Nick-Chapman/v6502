@@ -1,7 +1,7 @@
 
 module EmuState
   ( Sim(..), CycleKind(..)
-  , State
+  , State(..)
   , makeState
   , lookState
   , updateState

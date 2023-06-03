@@ -1,5 +1,5 @@
 
-module Compile (compile,Prog(..),Comb(..),Func(..),Atom(..),Var) where
+module Compile (compile,Prog(..),Comb(..),Func(..),Atom(..),Var(..)) where
 
 import Assigns (NodeId,Exp(..))
 import Control.Monad (ap,liftM)

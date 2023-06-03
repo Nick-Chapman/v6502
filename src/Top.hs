@@ -35,6 +35,7 @@ parse = loop config0
       -- controlling the emulation
       "-max":max:xs -> loop acc { max = read max } xs
       "-trace":xs -> loop acc { trace = True } xs
+      "-beat":xs -> loop acc { heartbeat = True } xs
 
       args ->
         error (show ("parse",args))
@@ -43,6 +44,7 @@ parse = loop config0
       { sys = CBM
       , mode = Sim2
       , version = Min
+      , heartbeat = False
       , max = 10
       , trace = False
       }
@@ -51,6 +53,7 @@ data Config = Config
   { sys :: Sys
   , mode :: Mode
   , version :: Version
+  , heartbeat :: Bool
   , max :: Int
   , trace :: Bool
   }
@@ -62,17 +65,17 @@ data Mode
 data Sys = CBM
 
 run :: Config -> IO ()
-run Config{sys,mode,version,max,trace} = do
+run Config{sys,mode,version,heartbeat,max,trace} = do
   case sys of
     CBM ->
       case mode of
         Sim2 -> do
           logic <- getLogic version
           sim <- pure $ Sim2.simGivenLogic logic
-          CBM.main sim max trace
+          CBM.main sim heartbeat max trace
         Sim3 -> do
           logic <- getLogic version
           prog <- compile logic
           generateFile ("prog-"++show version) prog
           sim <- pure $ Sim3.simGivenProg prog
-          CBM.main sim max trace
+          CBM.main sim heartbeat max trace

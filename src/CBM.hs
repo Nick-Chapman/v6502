@@ -11,17 +11,17 @@ import Text.Printf (printf)
 import Values (Bit(..),Addr,Byte(..),loadBytes)
 import qualified Data.Map as Map
 
-main :: Sim -> Int -> Bool -> IO ()
-main sim max trace = do
+main :: Sim -> Bool -> Int -> Bool -> IO ()
+main sim heartbeat max trace = do
   let path = "../perfect6502/rom/cbmbasic.bin"
   let expectedSize = 17591
   image0 <- loadImage 0xA000 path expectedSize
   let image = setupMonitor image0
-  simWithImage max trace image sim
+  simWithImage heartbeat max trace image sim
   pure ()
 
-simWithImage :: Int -> Bool -> Image -> Sim -> IO ()
-simWithImage max trace = loop 0
+simWithImage :: Bool -> Int -> Bool -> Image -> Sim -> IO ()
+simWithImage heartbeat max trace = loop 0
   where
     loop :: Int -> Image -> Sim -> IO ()
     loop i image sim = do
@@ -30,7 +30,7 @@ simWithImage max trace = loop 0
         --when trace $ printf "stabilization in %s\n" (show _iopt)
         loop i image sim
       NewState state sim -> do
-        let _ = if (i `mod` 1000 == 0) then do printf " [%d]" i; hFlush stdout else pure ()
+        when (heartbeat && i `mod` 1000 == 0) $ do printf " [%d]" i; hFlush stdout
         when trace $ putStrLn (showState i state)
         image' <- handleMonitor state image
         if (i==max) then pure () else loop (i+1) image' sim
