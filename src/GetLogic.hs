@@ -9,30 +9,34 @@ import Assigns (AssignDef(..),Exp(..),NodeId(..))
 import Data.Map (Map)
 import Data.Set (Set,size,difference,union)
 import Exp (nrefsOfExp,subNode)
-import Misc (hist,the,nub)
+import Misc (hist,the,nub,generateFile)
 import NodeNames (ofName,toName,isNamed)
 import Norm (normalize)
 import ParseLogic (parseLogicLines)
+import Pretty (ppAssignDef)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 
-data Version = Raw | Simp | Minimal
-
-instance Show Version where
-  show = \case Raw -> "unoptimized"; Simp -> "simplified"; Minimal -> "minimal"
-
+data Version = Raw | Simp | Min deriving Show
 
 data Logic = Logic { name :: String, m :: Map NodeId Exp }
 
+instance Show Logic where
+  show logic@Logic{m} =
+    show (Summary logic)
+    ++ "\n" ++
+    unlines [ ppAssignDef (AssignDef n e) | (n,e) <- Map.toList m ]
+
 getLogic :: Version -> IO Logic
-getLogic v = do
-  let conv = case v of Raw -> pure; Simp -> pure . simplify; Minimal -> minimize
+getLogic version = do
+  let conv = case version of Raw -> pure; Simp -> pure . simplify; Min -> minimize
   assigns0 <- normalize <$> parseLogicLines <$> readFile "data/logic_unopt.inc"
   assigns <- conv assigns0
   let m = Map.fromList [ (n,e) | AssignDef n e <- assigns ]
-  let res = Logic{ name = show v, m }
-  let _ = print (Summary res)
-  pure res
+  let logic = Logic{ name = show version, m }
+  generateFile ("logic-"++show version) logic
+  pure logic
+
 
 simplify :: [AssignDef] -> [AssignDef]
 simplify assigns = do

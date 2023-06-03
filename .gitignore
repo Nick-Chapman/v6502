@@ -3,7 +3,3 @@
 *~
 stack.yaml.lock
 .markdown-preview.html
-.built
-cbm.gold
-cbm.trace
-cbm[12].out

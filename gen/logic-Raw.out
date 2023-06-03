@@ -1,3 +1,11 @@
+Raw
+- #all     = 1198
+- #defs    = 1190
+- #refs    = 1193
+- rNd      = ["rdy","irq","res","vss","vcc","clk0","nmi","so"]
+- dNr      = ["NODE-43","NODE-353","sync","rw","NODE-1247"]
+- #OPS     = 3957
+
 assign o[0] = ~(i[1576]|i[895]|i[909]|i[1112]|i[1394]|i[1328]|i[1384]|i[996]);
 assign o[1] = i[1186] ? i[1287] : i[1];
 assign o[3] = ~i[1603];

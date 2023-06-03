@@ -1,4 +1,4 @@
- [0]halfcycle:0 phi0:1 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0 r:0000=00
+halfcycle:0 phi0:1 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0 r:0000=00
 halfcycle:1 phi0:0 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0
 halfcycle:2 phi0:1 res:1 AB:0000 RnW:1 PC:0000 A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:0 r:0000=00
 halfcycle:3 phi0:0 res:1 AB:00ff RnW:1 PC:00ff A:00 X:00 Y:00 SP:00 P:06 IR:00 sync:1
@@ -998,4 +998,704 @@ halfcycle:996 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95
 halfcycle:997 phi0:0 res:1 AB:007c RnW:0 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:0
 halfcycle:998 phi0:1 res:1 AB:007c RnW:0 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:0 W:007c=c9
 halfcycle:999 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:1
- [1000]halfcycle:1000 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+halfcycle:1000 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:c9 X:09 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+halfcycle:1001 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:c9 X:09 Y:b1 SP:f9 P:94 IR:ca sync:0
+halfcycle:1002 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:c9 X:09 Y:b1 SP:f9 P:94 IR:ca sync:0 r:e3e8=10
+halfcycle:1003 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:c9 X:09 Y:b1 SP:f9 P:94 IR:ca sync:1
+halfcycle:1004 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:c9 X:09 Y:b1 SP:f9 P:94 IR:ca sync:1 r:e3e8=10
+halfcycle:1005 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:c9 X:08 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1006 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:c9 X:08 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1007 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:c9 X:08 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1008 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:c9 X:08 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1009 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:c9 X:08 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1010 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:c9 X:08 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1011 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:c9 X:08 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1012 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:c9 X:08 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1013 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:c9 X:08 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1014 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:c9 X:08 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1015 phi0:0 res:1 AB:e3aa RnW:1 PC:e3e5 A:c9 X:08 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1016 phi0:1 res:1 AB:e3aa RnW:1 PC:e3e5 A:c9 X:08 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3aa=ea
+halfcycle:1017 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:ea X:08 Y:b1 SP:f9 P:94 IR:bd sync:1
+halfcycle:1018 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:ea X:08 Y:b1 SP:f9 P:94 IR:bd sync:1 r:e3e5=95
+halfcycle:1019 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1020 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:0 r:e3e6=73
+halfcycle:1021 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1022 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:0 r:0073=00
+halfcycle:1023 phi0:0 res:1 AB:007b RnW:0 PC:e3e7 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1024 phi0:1 res:1 AB:007b RnW:0 PC:e3e7 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:0 W:007b=ea
+halfcycle:1025 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:1
+halfcycle:1026 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:ea X:08 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+halfcycle:1027 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ea X:08 Y:b1 SP:f9 P:94 IR:ca sync:0
+halfcycle:1028 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ea X:08 Y:b1 SP:f9 P:94 IR:ca sync:0 r:e3e8=10
+halfcycle:1029 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ea X:08 Y:b1 SP:f9 P:94 IR:ca sync:1
+halfcycle:1030 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ea X:08 Y:b1 SP:f9 P:94 IR:ca sync:1 r:e3e8=10
+halfcycle:1031 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:ea X:07 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1032 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:ea X:07 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1033 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:ea X:07 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1034 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:ea X:07 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1035 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:ea X:07 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1036 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:ea X:07 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1037 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:ea X:07 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1038 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:ea X:07 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1039 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:ea X:07 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1040 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:ea X:07 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1041 phi0:0 res:1 AB:e3a9 RnW:1 PC:e3e5 A:ea X:07 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1042 phi0:1 res:1 AB:e3a9 RnW:1 PC:e3e5 A:ea X:07 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3a9=60
+halfcycle:1043 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:60 X:07 Y:b1 SP:f9 P:14 IR:bd sync:1
+halfcycle:1044 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:60 X:07 Y:b1 SP:f9 P:14 IR:bd sync:1 r:e3e5=95
+halfcycle:1045 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1046 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:0 r:e3e6=73
+halfcycle:1047 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1048 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:0 r:0073=00
+halfcycle:1049 phi0:0 res:1 AB:007a RnW:0 PC:e3e7 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1050 phi0:1 res:1 AB:007a RnW:0 PC:e3e7 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:0 W:007a=60
+halfcycle:1051 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:1
+halfcycle:1052 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:60 X:07 Y:b1 SP:f9 P:14 IR:95 sync:1 r:e3e7=ca
+halfcycle:1053 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:60 X:07 Y:b1 SP:f9 P:14 IR:ca sync:0
+halfcycle:1054 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:60 X:07 Y:b1 SP:f9 P:14 IR:ca sync:0 r:e3e8=10
+halfcycle:1055 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:60 X:07 Y:b1 SP:f9 P:14 IR:ca sync:1
+halfcycle:1056 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:60 X:07 Y:b1 SP:f9 P:14 IR:ca sync:1 r:e3e8=10
+halfcycle:1057 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:60 X:06 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1058 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:60 X:06 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1059 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:60 X:06 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1060 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:60 X:06 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1061 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:60 X:06 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1062 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:60 X:06 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1063 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:60 X:06 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1064 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:60 X:06 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1065 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:60 X:06 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1066 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:60 X:06 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1067 phi0:0 res:1 AB:e3a8 RnW:1 PC:e3e5 A:60 X:06 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1068 phi0:1 res:1 AB:e3a8 RnW:1 PC:e3e5 A:60 X:06 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3a8=ad
+halfcycle:1069 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:ad X:06 Y:b1 SP:f9 P:94 IR:bd sync:1
+halfcycle:1070 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:ad X:06 Y:b1 SP:f9 P:94 IR:bd sync:1 r:e3e5=95
+halfcycle:1071 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1072 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:0 r:e3e6=73
+halfcycle:1073 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1074 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:0 r:0073=00
+halfcycle:1075 phi0:0 res:1 AB:0079 RnW:0 PC:e3e7 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1076 phi0:1 res:1 AB:0079 RnW:0 PC:e3e7 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:0 W:0079=ad
+halfcycle:1077 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:1
+halfcycle:1078 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:ad X:06 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+halfcycle:1079 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ad X:06 Y:b1 SP:f9 P:94 IR:ca sync:0
+halfcycle:1080 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ad X:06 Y:b1 SP:f9 P:94 IR:ca sync:0 r:e3e8=10
+halfcycle:1081 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ad X:06 Y:b1 SP:f9 P:94 IR:ca sync:1
+halfcycle:1082 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:ad X:06 Y:b1 SP:f9 P:94 IR:ca sync:1 r:e3e8=10
+halfcycle:1083 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:ad X:05 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1084 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:ad X:05 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1085 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:ad X:05 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1086 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:ad X:05 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1087 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:ad X:05 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1088 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:ad X:05 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1089 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:ad X:05 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1090 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:ad X:05 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1091 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:ad X:05 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1092 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:ad X:05 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1093 phi0:0 res:1 AB:e3a7 RnW:1 PC:e3e5 A:ad X:05 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1094 phi0:1 res:1 AB:e3a7 RnW:1 PC:e3e5 A:ad X:05 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3a7=7b
+halfcycle:1095 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:7b X:05 Y:b1 SP:f9 P:14 IR:bd sync:1
+halfcycle:1096 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:7b X:05 Y:b1 SP:f9 P:14 IR:bd sync:1 r:e3e5=95
+halfcycle:1097 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1098 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:0 r:e3e6=73
+halfcycle:1099 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1100 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:0 r:0073=00
+halfcycle:1101 phi0:0 res:1 AB:0078 RnW:0 PC:e3e7 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1102 phi0:1 res:1 AB:0078 RnW:0 PC:e3e7 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:0 W:0078=7b
+halfcycle:1103 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:1
+halfcycle:1104 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:7b X:05 Y:b1 SP:f9 P:14 IR:95 sync:1 r:e3e7=ca
+halfcycle:1105 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7b X:05 Y:b1 SP:f9 P:14 IR:ca sync:0
+halfcycle:1106 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7b X:05 Y:b1 SP:f9 P:14 IR:ca sync:0 r:e3e8=10
+halfcycle:1107 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7b X:05 Y:b1 SP:f9 P:14 IR:ca sync:1
+halfcycle:1108 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7b X:05 Y:b1 SP:f9 P:14 IR:ca sync:1 r:e3e8=10
+halfcycle:1109 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:7b X:04 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1110 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:7b X:04 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1111 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:7b X:04 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1112 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:7b X:04 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1113 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:7b X:04 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1114 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:7b X:04 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1115 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:7b X:04 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1116 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:7b X:04 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1117 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:7b X:04 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1118 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:7b X:04 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1119 phi0:0 res:1 AB:e3a6 RnW:1 PC:e3e5 A:7b X:04 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1120 phi0:1 res:1 AB:e3a6 RnW:1 PC:e3e5 A:7b X:04 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3a6=e6
+halfcycle:1121 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:e6 X:04 Y:b1 SP:f9 P:94 IR:bd sync:1
+halfcycle:1122 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:e6 X:04 Y:b1 SP:f9 P:94 IR:bd sync:1 r:e3e5=95
+halfcycle:1123 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1124 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:0 r:e3e6=73
+halfcycle:1125 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1126 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:0 r:0073=00
+halfcycle:1127 phi0:0 res:1 AB:0077 RnW:0 PC:e3e7 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1128 phi0:1 res:1 AB:0077 RnW:0 PC:e3e7 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:0 W:0077=e6
+halfcycle:1129 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:1
+halfcycle:1130 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:e6 X:04 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+halfcycle:1131 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:04 Y:b1 SP:f9 P:94 IR:ca sync:0
+halfcycle:1132 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:04 Y:b1 SP:f9 P:94 IR:ca sync:0 r:e3e8=10
+halfcycle:1133 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:04 Y:b1 SP:f9 P:94 IR:ca sync:1
+halfcycle:1134 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:04 Y:b1 SP:f9 P:94 IR:ca sync:1 r:e3e8=10
+halfcycle:1135 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:e6 X:03 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1136 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:e6 X:03 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1137 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:e6 X:03 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1138 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:e6 X:03 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1139 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:e6 X:03 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1140 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:e6 X:03 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1141 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:e6 X:03 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1142 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:e6 X:03 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1143 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:e6 X:03 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1144 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:e6 X:03 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1145 phi0:0 res:1 AB:e3a5 RnW:1 PC:e3e5 A:e6 X:03 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1146 phi0:1 res:1 AB:e3a5 RnW:1 PC:e3e5 A:e6 X:03 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3a5=02
+halfcycle:1147 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:02 X:03 Y:b1 SP:f9 P:14 IR:bd sync:1
+halfcycle:1148 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:02 X:03 Y:b1 SP:f9 P:14 IR:bd sync:1 r:e3e5=95
+halfcycle:1149 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1150 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:0 r:e3e6=73
+halfcycle:1151 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1152 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:0 r:0073=00
+halfcycle:1153 phi0:0 res:1 AB:0076 RnW:0 PC:e3e7 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1154 phi0:1 res:1 AB:0076 RnW:0 PC:e3e7 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:0 W:0076=02
+halfcycle:1155 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:1
+halfcycle:1156 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:02 X:03 Y:b1 SP:f9 P:14 IR:95 sync:1 r:e3e7=ca
+halfcycle:1157 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:02 X:03 Y:b1 SP:f9 P:14 IR:ca sync:0
+halfcycle:1158 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:02 X:03 Y:b1 SP:f9 P:14 IR:ca sync:0 r:e3e8=10
+halfcycle:1159 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:02 X:03 Y:b1 SP:f9 P:14 IR:ca sync:1
+halfcycle:1160 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:02 X:03 Y:b1 SP:f9 P:14 IR:ca sync:1 r:e3e8=10
+halfcycle:1161 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:02 X:02 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1162 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:02 X:02 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1163 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:02 X:02 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1164 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:02 X:02 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1165 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:02 X:02 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1166 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:02 X:02 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1167 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:02 X:02 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1168 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:02 X:02 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1169 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:02 X:02 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1170 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:02 X:02 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1171 phi0:0 res:1 AB:e3a4 RnW:1 PC:e3e5 A:02 X:02 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1172 phi0:1 res:1 AB:e3a4 RnW:1 PC:e3e5 A:02 X:02 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3a4=d0
+halfcycle:1173 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:d0 X:02 Y:b1 SP:f9 P:94 IR:bd sync:1
+halfcycle:1174 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:d0 X:02 Y:b1 SP:f9 P:94 IR:bd sync:1 r:e3e5=95
+halfcycle:1175 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1176 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:0 r:e3e6=73
+halfcycle:1177 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1178 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:0 r:0073=00
+halfcycle:1179 phi0:0 res:1 AB:0075 RnW:0 PC:e3e7 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1180 phi0:1 res:1 AB:0075 RnW:0 PC:e3e7 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:0 W:0075=d0
+halfcycle:1181 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:1
+halfcycle:1182 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:d0 X:02 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+halfcycle:1183 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:d0 X:02 Y:b1 SP:f9 P:94 IR:ca sync:0
+halfcycle:1184 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:d0 X:02 Y:b1 SP:f9 P:94 IR:ca sync:0 r:e3e8=10
+halfcycle:1185 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:d0 X:02 Y:b1 SP:f9 P:94 IR:ca sync:1
+halfcycle:1186 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:d0 X:02 Y:b1 SP:f9 P:94 IR:ca sync:1 r:e3e8=10
+halfcycle:1187 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:d0 X:01 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1188 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:d0 X:01 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3e9=f8
+halfcycle:1189 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:d0 X:01 Y:b1 SP:f9 P:14 IR:10 sync:0
+halfcycle:1190 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:d0 X:01 Y:b1 SP:f9 P:14 IR:10 sync:0 r:e3ea=a9
+halfcycle:1191 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:d0 X:01 Y:b1 SP:f9 P:14 IR:10 sync:1
+halfcycle:1192 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:d0 X:01 Y:b1 SP:f9 P:14 IR:10 sync:1 r:e3e2=bd
+halfcycle:1193 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:d0 X:01 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1194 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:d0 X:01 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e3=a2
+halfcycle:1195 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:d0 X:01 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1196 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:d0 X:01 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3e4=e3
+halfcycle:1197 phi0:0 res:1 AB:e3a3 RnW:1 PC:e3e5 A:d0 X:01 Y:b1 SP:f9 P:14 IR:bd sync:0
+halfcycle:1198 phi0:1 res:1 AB:e3a3 RnW:1 PC:e3e5 A:d0 X:01 Y:b1 SP:f9 P:14 IR:bd sync:0 r:e3a3=7a
+halfcycle:1199 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:7a X:01 Y:b1 SP:f9 P:14 IR:bd sync:1
+halfcycle:1200 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:7a X:01 Y:b1 SP:f9 P:14 IR:bd sync:1 r:e3e5=95
+halfcycle:1201 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1202 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:0 r:e3e6=73
+halfcycle:1203 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1204 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:0 r:0073=00
+halfcycle:1205 phi0:0 res:1 AB:0074 RnW:0 PC:e3e7 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:0
+halfcycle:1206 phi0:1 res:1 AB:0074 RnW:0 PC:e3e7 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:0 W:0074=7a
+halfcycle:1207 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:1
+halfcycle:1208 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:7a X:01 Y:b1 SP:f9 P:14 IR:95 sync:1 r:e3e7=ca
+halfcycle:1209 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7a X:01 Y:b1 SP:f9 P:14 IR:ca sync:0
+halfcycle:1210 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7a X:01 Y:b1 SP:f9 P:14 IR:ca sync:0 r:e3e8=10
+halfcycle:1211 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7a X:01 Y:b1 SP:f9 P:14 IR:ca sync:1
+halfcycle:1212 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:7a X:01 Y:b1 SP:f9 P:14 IR:ca sync:1 r:e3e8=10
+halfcycle:1213 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:7a X:00 Y:b1 SP:f9 P:16 IR:10 sync:0
+halfcycle:1214 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:7a X:00 Y:b1 SP:f9 P:16 IR:10 sync:0 r:e3e9=f8
+halfcycle:1215 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:7a X:00 Y:b1 SP:f9 P:16 IR:10 sync:0
+halfcycle:1216 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:7a X:00 Y:b1 SP:f9 P:16 IR:10 sync:0 r:e3ea=a9
+halfcycle:1217 phi0:0 res:1 AB:e3e2 RnW:1 PC:e3e2 A:7a X:00 Y:b1 SP:f9 P:16 IR:10 sync:1
+halfcycle:1218 phi0:1 res:1 AB:e3e2 RnW:1 PC:e3e2 A:7a X:00 Y:b1 SP:f9 P:16 IR:10 sync:1 r:e3e2=bd
+halfcycle:1219 phi0:0 res:1 AB:e3e3 RnW:1 PC:e3e3 A:7a X:00 Y:b1 SP:f9 P:16 IR:bd sync:0
+halfcycle:1220 phi0:1 res:1 AB:e3e3 RnW:1 PC:e3e3 A:7a X:00 Y:b1 SP:f9 P:16 IR:bd sync:0 r:e3e3=a2
+halfcycle:1221 phi0:0 res:1 AB:e3e4 RnW:1 PC:e3e4 A:7a X:00 Y:b1 SP:f9 P:16 IR:bd sync:0
+halfcycle:1222 phi0:1 res:1 AB:e3e4 RnW:1 PC:e3e4 A:7a X:00 Y:b1 SP:f9 P:16 IR:bd sync:0 r:e3e4=e3
+halfcycle:1223 phi0:0 res:1 AB:e3a2 RnW:1 PC:e3e5 A:7a X:00 Y:b1 SP:f9 P:16 IR:bd sync:0
+halfcycle:1224 phi0:1 res:1 AB:e3a2 RnW:1 PC:e3e5 A:7a X:00 Y:b1 SP:f9 P:16 IR:bd sync:0 r:e3a2=e6
+halfcycle:1225 phi0:0 res:1 AB:e3e5 RnW:1 PC:e3e5 A:e6 X:00 Y:b1 SP:f9 P:94 IR:bd sync:1
+halfcycle:1226 phi0:1 res:1 AB:e3e5 RnW:1 PC:e3e5 A:e6 X:00 Y:b1 SP:f9 P:94 IR:bd sync:1 r:e3e5=95
+halfcycle:1227 phi0:0 res:1 AB:e3e6 RnW:1 PC:e3e6 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1228 phi0:1 res:1 AB:e3e6 RnW:1 PC:e3e6 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:0 r:e3e6=73
+halfcycle:1229 phi0:0 res:1 AB:0073 RnW:1 PC:e3e7 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1230 phi0:1 res:1 AB:0073 RnW:1 PC:e3e7 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:0 r:0073=00
+halfcycle:1231 phi0:0 res:1 AB:0073 RnW:0 PC:e3e7 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:0
+halfcycle:1232 phi0:1 res:1 AB:0073 RnW:0 PC:e3e7 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:0 W:0073=e6
+halfcycle:1233 phi0:0 res:1 AB:e3e7 RnW:1 PC:e3e7 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:1
+halfcycle:1234 phi0:1 res:1 AB:e3e7 RnW:1 PC:e3e7 A:e6 X:00 Y:b1 SP:f9 P:94 IR:95 sync:1 r:e3e7=ca
+halfcycle:1235 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:00 Y:b1 SP:f9 P:94 IR:ca sync:0
+halfcycle:1236 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:00 Y:b1 SP:f9 P:94 IR:ca sync:0 r:e3e8=10
+halfcycle:1237 phi0:0 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:00 Y:b1 SP:f9 P:94 IR:ca sync:1
+halfcycle:1238 phi0:1 res:1 AB:e3e8 RnW:1 PC:e3e8 A:e6 X:00 Y:b1 SP:f9 P:94 IR:ca sync:1 r:e3e8=10
+halfcycle:1239 phi0:0 res:1 AB:e3e9 RnW:1 PC:e3e9 A:e6 X:ff Y:b1 SP:f9 P:94 IR:10 sync:0
+halfcycle:1240 phi0:1 res:1 AB:e3e9 RnW:1 PC:e3e9 A:e6 X:ff Y:b1 SP:f9 P:94 IR:10 sync:0 r:e3e9=f8
+halfcycle:1241 phi0:0 res:1 AB:e3ea RnW:1 PC:e3ea A:e6 X:ff Y:b1 SP:f9 P:94 IR:10 sync:1
+halfcycle:1242 phi0:1 res:1 AB:e3ea RnW:1 PC:e3ea A:e6 X:ff Y:b1 SP:f9 P:94 IR:10 sync:1 r:e3ea=a9
+halfcycle:1243 phi0:0 res:1 AB:e3eb RnW:1 PC:e3eb A:e6 X:ff Y:b1 SP:f9 P:94 IR:a9 sync:0
+halfcycle:1244 phi0:1 res:1 AB:e3eb RnW:1 PC:e3eb A:e6 X:ff Y:b1 SP:f9 P:94 IR:a9 sync:0 r:e3eb=03
+halfcycle:1245 phi0:0 res:1 AB:e3ec RnW:1 PC:e3ec A:03 X:ff Y:b1 SP:f9 P:14 IR:a9 sync:1
+halfcycle:1246 phi0:1 res:1 AB:e3ec RnW:1 PC:e3ec A:03 X:ff Y:b1 SP:f9 P:14 IR:a9 sync:1 r:e3ec=85
+halfcycle:1247 phi0:0 res:1 AB:e3ed RnW:1 PC:e3ed A:03 X:ff Y:b1 SP:f9 P:14 IR:85 sync:0
+halfcycle:1248 phi0:1 res:1 AB:e3ed RnW:1 PC:e3ed A:03 X:ff Y:b1 SP:f9 P:14 IR:85 sync:0 r:e3ed=53
+halfcycle:1249 phi0:0 res:1 AB:0053 RnW:0 PC:e3ee A:03 X:ff Y:b1 SP:f9 P:14 IR:85 sync:0
+halfcycle:1250 phi0:1 res:1 AB:0053 RnW:0 PC:e3ee A:03 X:ff Y:b1 SP:f9 P:14 IR:85 sync:0 W:0053=03
+halfcycle:1251 phi0:0 res:1 AB:e3ee RnW:1 PC:e3ee A:03 X:ff Y:b1 SP:f9 P:14 IR:85 sync:1
+halfcycle:1252 phi0:1 res:1 AB:e3ee RnW:1 PC:e3ee A:03 X:ff Y:b1 SP:f9 P:14 IR:85 sync:1 r:e3ee=a9
+halfcycle:1253 phi0:0 res:1 AB:e3ef RnW:1 PC:e3ef A:03 X:ff Y:b1 SP:f9 P:14 IR:a9 sync:0
+halfcycle:1254 phi0:1 res:1 AB:e3ef RnW:1 PC:e3ef A:03 X:ff Y:b1 SP:f9 P:14 IR:a9 sync:0 r:e3ef=00
+halfcycle:1255 phi0:0 res:1 AB:e3f0 RnW:1 PC:e3f0 A:00 X:ff Y:b1 SP:f9 P:16 IR:a9 sync:1
+halfcycle:1256 phi0:1 res:1 AB:e3f0 RnW:1 PC:e3f0 A:00 X:ff Y:b1 SP:f9 P:16 IR:a9 sync:1 r:e3f0=85
+halfcycle:1257 phi0:0 res:1 AB:e3f1 RnW:1 PC:e3f1 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0
+halfcycle:1258 phi0:1 res:1 AB:e3f1 RnW:1 PC:e3f1 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0 r:e3f1=68
+halfcycle:1259 phi0:0 res:1 AB:0068 RnW:0 PC:e3f2 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0
+halfcycle:1260 phi0:1 res:1 AB:0068 RnW:0 PC:e3f2 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0 W:0068=00
+halfcycle:1261 phi0:0 res:1 AB:e3f2 RnW:1 PC:e3f2 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:1
+halfcycle:1262 phi0:1 res:1 AB:e3f2 RnW:1 PC:e3f2 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:1 r:e3f2=85
+halfcycle:1263 phi0:0 res:1 AB:e3f3 RnW:1 PC:e3f3 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0
+halfcycle:1264 phi0:1 res:1 AB:e3f3 RnW:1 PC:e3f3 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0 r:e3f3=13
+halfcycle:1265 phi0:0 res:1 AB:0013 RnW:0 PC:e3f4 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0
+halfcycle:1266 phi0:1 res:1 AB:0013 RnW:0 PC:e3f4 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0 W:0013=00
+halfcycle:1267 phi0:0 res:1 AB:e3f4 RnW:1 PC:e3f4 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:1
+halfcycle:1268 phi0:1 res:1 AB:e3f4 RnW:1 PC:e3f4 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:1 r:e3f4=85
+halfcycle:1269 phi0:0 res:1 AB:e3f5 RnW:1 PC:e3f5 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0
+halfcycle:1270 phi0:1 res:1 AB:e3f5 RnW:1 PC:e3f5 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0 r:e3f5=18
+halfcycle:1271 phi0:0 res:1 AB:0018 RnW:0 PC:e3f6 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0
+halfcycle:1272 phi0:1 res:1 AB:0018 RnW:0 PC:e3f6 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:0 W:0018=00
+halfcycle:1273 phi0:0 res:1 AB:e3f6 RnW:1 PC:e3f6 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:1
+halfcycle:1274 phi0:1 res:1 AB:e3f6 RnW:1 PC:e3f6 A:00 X:ff Y:b1 SP:f9 P:16 IR:85 sync:1 r:e3f6=a2
+halfcycle:1275 phi0:0 res:1 AB:e3f7 RnW:1 PC:e3f7 A:00 X:ff Y:b1 SP:f9 P:16 IR:a2 sync:0
+halfcycle:1276 phi0:1 res:1 AB:e3f7 RnW:1 PC:e3f7 A:00 X:ff Y:b1 SP:f9 P:16 IR:a2 sync:0 r:e3f7=01
+halfcycle:1277 phi0:0 res:1 AB:e3f8 RnW:1 PC:e3f8 A:00 X:01 Y:b1 SP:f9 P:14 IR:a2 sync:1
+halfcycle:1278 phi0:1 res:1 AB:e3f8 RnW:1 PC:e3f8 A:00 X:01 Y:b1 SP:f9 P:14 IR:a2 sync:1 r:e3f8=8e
+halfcycle:1279 phi0:0 res:1 AB:e3f9 RnW:1 PC:e3f9 A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0
+halfcycle:1280 phi0:1 res:1 AB:e3f9 RnW:1 PC:e3f9 A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0 r:e3f9=fd
+halfcycle:1281 phi0:0 res:1 AB:e3fa RnW:1 PC:e3fa A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0
+halfcycle:1282 phi0:1 res:1 AB:e3fa RnW:1 PC:e3fa A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0 r:e3fa=01
+halfcycle:1283 phi0:0 res:1 AB:01fd RnW:0 PC:e3fb A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0
+halfcycle:1284 phi0:1 res:1 AB:01fd RnW:0 PC:e3fb A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0 W:01fd=01
+halfcycle:1285 phi0:0 res:1 AB:e3fb RnW:1 PC:e3fb A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:1
+halfcycle:1286 phi0:1 res:1 AB:e3fb RnW:1 PC:e3fb A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:1 r:e3fb=8e
+halfcycle:1287 phi0:0 res:1 AB:e3fc RnW:1 PC:e3fc A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0
+halfcycle:1288 phi0:1 res:1 AB:e3fc RnW:1 PC:e3fc A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0 r:e3fc=fc
+halfcycle:1289 phi0:0 res:1 AB:e3fd RnW:1 PC:e3fd A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0
+halfcycle:1290 phi0:1 res:1 AB:e3fd RnW:1 PC:e3fd A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0 r:e3fd=01
+halfcycle:1291 phi0:0 res:1 AB:01fc RnW:0 PC:e3fe A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0
+halfcycle:1292 phi0:1 res:1 AB:01fc RnW:0 PC:e3fe A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:0 W:01fc=01
+halfcycle:1293 phi0:0 res:1 AB:e3fe RnW:1 PC:e3fe A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:1
+halfcycle:1294 phi0:1 res:1 AB:e3fe RnW:1 PC:e3fe A:00 X:01 Y:b1 SP:f9 P:14 IR:8e sync:1 r:e3fe=a2
+halfcycle:1295 phi0:0 res:1 AB:e3ff RnW:1 PC:e3ff A:00 X:01 Y:b1 SP:f9 P:14 IR:a2 sync:0
+halfcycle:1296 phi0:1 res:1 AB:e3ff RnW:1 PC:e3ff A:00 X:01 Y:b1 SP:f9 P:14 IR:a2 sync:0 r:e3ff=19
+halfcycle:1297 phi0:0 res:1 AB:e400 RnW:1 PC:e400 A:00 X:19 Y:b1 SP:f9 P:14 IR:a2 sync:1
+halfcycle:1298 phi0:1 res:1 AB:e400 RnW:1 PC:e400 A:00 X:19 Y:b1 SP:f9 P:14 IR:a2 sync:1 r:e400=86
+halfcycle:1299 phi0:0 res:1 AB:e401 RnW:1 PC:e401 A:00 X:19 Y:b1 SP:f9 P:14 IR:86 sync:0
+halfcycle:1300 phi0:1 res:1 AB:e401 RnW:1 PC:e401 A:00 X:19 Y:b1 SP:f9 P:14 IR:86 sync:0 r:e401=16
+halfcycle:1301 phi0:0 res:1 AB:0016 RnW:0 PC:e402 A:00 X:19 Y:b1 SP:f9 P:14 IR:86 sync:0
+halfcycle:1302 phi0:1 res:1 AB:0016 RnW:0 PC:e402 A:00 X:19 Y:b1 SP:f9 P:14 IR:86 sync:0 W:0016=19
+halfcycle:1303 phi0:0 res:1 AB:e402 RnW:1 PC:e402 A:00 X:19 Y:b1 SP:f9 P:14 IR:86 sync:1
+halfcycle:1304 phi0:1 res:1 AB:e402 RnW:1 PC:e402 A:00 X:19 Y:b1 SP:f9 P:14 IR:86 sync:1 r:e402=38
+halfcycle:1305 phi0:0 res:1 AB:e403 RnW:1 PC:e403 A:00 X:19 Y:b1 SP:f9 P:14 IR:38 sync:0
+halfcycle:1306 phi0:1 res:1 AB:e403 RnW:1 PC:e403 A:00 X:19 Y:b1 SP:f9 P:14 IR:38 sync:0 r:e403=20
+halfcycle:1307 phi0:0 res:1 AB:e403 RnW:1 PC:e403 A:00 X:19 Y:b1 SP:f9 P:15 IR:38 sync:1
+halfcycle:1308 phi0:1 res:1 AB:e403 RnW:1 PC:e403 A:00 X:19 Y:b1 SP:f9 P:15 IR:38 sync:1 r:e403=20
+halfcycle:1309 phi0:0 res:1 AB:e404 RnW:1 PC:e404 A:00 X:19 Y:b1 SP:f9 P:15 IR:20 sync:0
+halfcycle:1310 phi0:1 res:1 AB:e404 RnW:1 PC:e404 A:00 X:19 Y:b1 SP:f9 P:15 IR:20 sync:0 r:e404=9c
+halfcycle:1311 phi0:0 res:1 AB:01f9 RnW:1 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0
+halfcycle:1312 phi0:1 res:1 AB:01f9 RnW:1 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0 r:01f9=00
+halfcycle:1313 phi0:0 res:1 AB:01f9 RnW:0 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0
+halfcycle:1314 phi0:1 res:1 AB:01f9 RnW:0 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0 W:01f9=e4
+halfcycle:1315 phi0:0 res:1 AB:01f8 RnW:0 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0
+halfcycle:1316 phi0:1 res:1 AB:01f8 RnW:0 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0 W:01f8=05
+halfcycle:1317 phi0:0 res:1 AB:e405 RnW:1 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0
+halfcycle:1318 phi0:1 res:1 AB:e405 RnW:1 PC:e405 A:00 X:19 Y:b1 SP:9c P:15 IR:20 sync:0 r:e405=ff
+halfcycle:1319 phi0:0 res:1 AB:ff9c RnW:1 PC:ff9c A:00 X:19 Y:b1 SP:f7 P:15 IR:20 sync:1
+halfcycle:1320 phi0:1 res:1 AB:ff9c RnW:1 PC:ff9c A:00 X:19 Y:b1 SP:f7 P:15 IR:20 sync:1 r:ff9c=4c
+halfcycle:1321 phi0:0 res:1 AB:ff9d RnW:1 PC:ff9d A:00 X:19 Y:b1 SP:f7 P:15 IR:4c sync:0
+halfcycle:1322 phi0:1 res:1 AB:ff9d RnW:1 PC:ff9d A:00 X:19 Y:b1 SP:f7 P:15 IR:4c sync:0 r:ff9d=00
+halfcycle:1323 phi0:0 res:1 AB:ff9e RnW:1 PC:ff9e A:00 X:19 Y:b1 SP:f7 P:15 IR:4c sync:0
+halfcycle:1324 phi0:1 res:1 AB:ff9e RnW:1 PC:ff9e A:00 X:19 Y:b1 SP:f7 P:15 IR:4c sync:0 r:ff9e=f8
+halfcycle:1325 phi0:0 res:1 AB:f800 RnW:1 PC:f800 A:00 X:19 Y:b1 SP:f7 P:15 IR:4c sync:1
+halfcycle:1326 phi0:1 res:1 AB:f800 RnW:1 PC:f800 A:00 X:19 Y:b1 SP:f7 P:15 IR:4c sync:1 r:f800=a9
+halfcycle:1327 phi0:0 res:1 AB:f801 RnW:1 PC:f801 A:00 X:19 Y:b1 SP:f7 P:15 IR:a9 sync:0
+halfcycle:1328 phi0:1 res:1 AB:f801 RnW:1 PC:f801 A:00 X:19 Y:b1 SP:f7 P:15 IR:a9 sync:0 r:f801=15
+halfcycle:1329 phi0:0 res:1 AB:f802 RnW:1 PC:f802 A:15 X:19 Y:b1 SP:f7 P:15 IR:a9 sync:1
+halfcycle:1330 phi0:1 res:1 AB:f802 RnW:1 PC:f802 A:15 X:19 Y:b1 SP:f7 P:15 IR:a9 sync:1 r:f802=48
+halfcycle:1331 phi0:0 res:1 AB:f803 RnW:1 PC:f803 A:15 X:19 Y:b1 SP:f7 P:15 IR:48 sync:0
+halfcycle:1332 phi0:1 res:1 AB:f803 RnW:1 PC:f803 A:15 X:19 Y:b1 SP:f7 P:15 IR:48 sync:0 r:f803=a9
+halfcycle:1333 phi0:0 res:1 AB:01f7 RnW:0 PC:f803 A:15 X:19 Y:b1 SP:f7 P:15 IR:48 sync:0
+halfcycle:1334 phi0:1 res:1 AB:01f7 RnW:0 PC:f803 A:15 X:19 Y:b1 SP:f7 P:15 IR:48 sync:0 W:01f7=15
+halfcycle:1335 phi0:0 res:1 AB:f803 RnW:1 PC:f803 A:15 X:19 Y:b1 SP:f6 P:15 IR:48 sync:1
+halfcycle:1336 phi0:1 res:1 AB:f803 RnW:1 PC:f803 A:15 X:19 Y:b1 SP:f6 P:15 IR:48 sync:1 r:f803=a9
+halfcycle:1337 phi0:0 res:1 AB:f804 RnW:1 PC:f804 A:15 X:19 Y:b1 SP:f6 P:15 IR:a9 sync:0
+halfcycle:1338 phi0:1 res:1 AB:f804 RnW:1 PC:f804 A:15 X:19 Y:b1 SP:f6 P:15 IR:a9 sync:0 r:f804=00
+halfcycle:1339 phi0:0 res:1 AB:f805 RnW:1 PC:f805 A:00 X:19 Y:b1 SP:f6 P:17 IR:a9 sync:1
+halfcycle:1340 phi0:1 res:1 AB:f805 RnW:1 PC:f805 A:00 X:19 Y:b1 SP:f6 P:17 IR:a9 sync:1 r:f805=a2
+halfcycle:1341 phi0:0 res:1 AB:f806 RnW:1 PC:f806 A:00 X:19 Y:b1 SP:f6 P:17 IR:a2 sync:0
+halfcycle:1342 phi0:1 res:1 AB:f806 RnW:1 PC:f806 A:00 X:19 Y:b1 SP:f6 P:17 IR:a2 sync:0 r:f806=00
+halfcycle:1343 phi0:0 res:1 AB:f807 RnW:1 PC:f807 A:00 X:00 Y:b1 SP:f6 P:17 IR:a2 sync:1
+halfcycle:1344 phi0:1 res:1 AB:f807 RnW:1 PC:f807 A:00 X:00 Y:b1 SP:f6 P:17 IR:a2 sync:1 r:f807=a0
+halfcycle:1345 phi0:0 res:1 AB:f808 RnW:1 PC:f808 A:00 X:00 Y:b1 SP:f6 P:17 IR:a0 sync:0
+halfcycle:1346 phi0:1 res:1 AB:f808 RnW:1 PC:f808 A:00 X:00 Y:b1 SP:f6 P:17 IR:a0 sync:0 r:f808=08
+halfcycle:1347 phi0:0 res:1 AB:f809 RnW:1 PC:f809 A:00 X:00 Y:08 SP:f6 P:15 IR:a0 sync:1
+halfcycle:1348 phi0:1 res:1 AB:f809 RnW:1 PC:f809 A:00 X:00 Y:08 SP:f6 P:15 IR:a0 sync:1 r:f809=28
+halfcycle:1349 phi0:0 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:08 SP:f6 P:15 IR:28 sync:0
+halfcycle:1350 phi0:1 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:08 SP:f6 P:15 IR:28 sync:0 r:f80a=60
+halfcycle:1351 phi0:0 res:1 AB:01f6 RnW:1 PC:f80a A:00 X:00 Y:08 SP:f6 P:15 IR:28 sync:0
+halfcycle:1352 phi0:1 res:1 AB:01f6 RnW:1 PC:f80a A:00 X:00 Y:08 SP:f6 P:15 IR:28 sync:0 r:01f6=00
+halfcycle:1353 phi0:0 res:1 AB:01f7 RnW:1 PC:f80a A:00 X:00 Y:08 SP:f7 P:15 IR:28 sync:0
+halfcycle:1354 phi0:1 res:1 AB:01f7 RnW:1 PC:f80a A:00 X:00 Y:08 SP:f7 P:15 IR:28 sync:0 r:01f7=15
+halfcycle:1355 phi0:0 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:08 SP:f7 P:15 IR:28 sync:1
+halfcycle:1356 phi0:1 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:08 SP:f7 P:15 IR:28 sync:1 r:f80a=60
+halfcycle:1357 phi0:0 res:1 AB:f80b RnW:1 PC:f80b A:00 X:00 Y:08 SP:f7 P:15 IR:60 sync:0
+halfcycle:1358 phi0:1 res:1 AB:f80b RnW:1 PC:f80b A:00 X:00 Y:08 SP:f7 P:15 IR:60 sync:0 r:f80b=00
+halfcycle:1359 phi0:0 res:1 AB:01f7 RnW:1 PC:f80c A:00 X:00 Y:08 SP:f7 P:15 IR:60 sync:0
+halfcycle:1360 phi0:1 res:1 AB:01f7 RnW:1 PC:f80c A:00 X:00 Y:08 SP:f7 P:15 IR:60 sync:0 r:01f7=15
+halfcycle:1361 phi0:0 res:1 AB:01f8 RnW:1 PC:f80c A:00 X:00 Y:08 SP:f7 P:15 IR:60 sync:0
+halfcycle:1362 phi0:1 res:1 AB:01f8 RnW:1 PC:f80c A:00 X:00 Y:08 SP:f7 P:15 IR:60 sync:0 r:01f8=05
+halfcycle:1363 phi0:0 res:1 AB:01f9 RnW:1 PC:f80c A:00 X:00 Y:08 SP:f9 P:35 IR:60 sync:0
+halfcycle:1364 phi0:1 res:1 AB:01f9 RnW:1 PC:f80c A:00 X:00 Y:08 SP:f9 P:35 IR:60 sync:0 r:01f9=e4
+halfcycle:1365 phi0:0 res:1 AB:e405 RnW:1 PC:e405 A:00 X:00 Y:08 SP:f9 P:15 IR:60 sync:0
+halfcycle:1366 phi0:1 res:1 AB:e405 RnW:1 PC:e405 A:00 X:00 Y:08 SP:f9 P:15 IR:60 sync:0 r:e405=ff
+halfcycle:1367 phi0:0 res:1 AB:e406 RnW:1 PC:e406 A:00 X:00 Y:08 SP:f9 P:15 IR:60 sync:1
+halfcycle:1368 phi0:1 res:1 AB:e406 RnW:1 PC:e406 A:00 X:00 Y:08 SP:f9 P:15 IR:60 sync:1 r:e406=86
+halfcycle:1369 phi0:0 res:1 AB:e407 RnW:1 PC:e407 A:00 X:00 Y:08 SP:f9 P:15 IR:86 sync:0
+halfcycle:1370 phi0:1 res:1 AB:e407 RnW:1 PC:e407 A:00 X:00 Y:08 SP:f9 P:15 IR:86 sync:0 r:e407=2b
+halfcycle:1371 phi0:0 res:1 AB:002b RnW:0 PC:e408 A:00 X:00 Y:08 SP:f9 P:15 IR:86 sync:0
+halfcycle:1372 phi0:1 res:1 AB:002b RnW:0 PC:e408 A:00 X:00 Y:08 SP:f9 P:15 IR:86 sync:0 W:002b=00
+halfcycle:1373 phi0:0 res:1 AB:e408 RnW:1 PC:e408 A:00 X:00 Y:08 SP:f9 P:15 IR:86 sync:1
+halfcycle:1374 phi0:1 res:1 AB:e408 RnW:1 PC:e408 A:00 X:00 Y:08 SP:f9 P:15 IR:86 sync:1 r:e408=84
+halfcycle:1375 phi0:0 res:1 AB:e409 RnW:1 PC:e409 A:00 X:00 Y:08 SP:f9 P:15 IR:84 sync:0
+halfcycle:1376 phi0:1 res:1 AB:e409 RnW:1 PC:e409 A:00 X:00 Y:08 SP:f9 P:15 IR:84 sync:0 r:e409=2c
+halfcycle:1377 phi0:0 res:1 AB:002c RnW:0 PC:e40a A:00 X:00 Y:08 SP:f9 P:15 IR:84 sync:0
+halfcycle:1378 phi0:1 res:1 AB:002c RnW:0 PC:e40a A:00 X:00 Y:08 SP:f9 P:15 IR:84 sync:0 W:002c=08
+halfcycle:1379 phi0:0 res:1 AB:e40a RnW:1 PC:e40a A:00 X:00 Y:08 SP:f9 P:15 IR:84 sync:1
+halfcycle:1380 phi0:1 res:1 AB:e40a RnW:1 PC:e40a A:00 X:00 Y:08 SP:f9 P:15 IR:84 sync:1 r:e40a=38
+halfcycle:1381 phi0:0 res:1 AB:e40b RnW:1 PC:e40b A:00 X:00 Y:08 SP:f9 P:15 IR:38 sync:0
+halfcycle:1382 phi0:1 res:1 AB:e40b RnW:1 PC:e40b A:00 X:00 Y:08 SP:f9 P:15 IR:38 sync:0 r:e40b=20
+halfcycle:1383 phi0:0 res:1 AB:e40b RnW:1 PC:e40b A:00 X:00 Y:08 SP:f9 P:15 IR:38 sync:1
+halfcycle:1384 phi0:1 res:1 AB:e40b RnW:1 PC:e40b A:00 X:00 Y:08 SP:f9 P:15 IR:38 sync:1 r:e40b=20
+halfcycle:1385 phi0:0 res:1 AB:e40c RnW:1 PC:e40c A:00 X:00 Y:08 SP:f9 P:15 IR:20 sync:0
+halfcycle:1386 phi0:1 res:1 AB:e40c RnW:1 PC:e40c A:00 X:00 Y:08 SP:f9 P:15 IR:20 sync:0 r:e40c=99
+halfcycle:1387 phi0:0 res:1 AB:01f9 RnW:1 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0
+halfcycle:1388 phi0:1 res:1 AB:01f9 RnW:1 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0 r:01f9=e4
+halfcycle:1389 phi0:0 res:1 AB:01f9 RnW:0 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0
+halfcycle:1390 phi0:1 res:1 AB:01f9 RnW:0 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0 W:01f9=e4
+halfcycle:1391 phi0:0 res:1 AB:01f8 RnW:0 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0
+halfcycle:1392 phi0:1 res:1 AB:01f8 RnW:0 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0 W:01f8=0d
+halfcycle:1393 phi0:0 res:1 AB:e40d RnW:1 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0
+halfcycle:1394 phi0:1 res:1 AB:e40d RnW:1 PC:e40d A:00 X:00 Y:08 SP:99 P:15 IR:20 sync:0 r:e40d=ff
+halfcycle:1395 phi0:0 res:1 AB:ff99 RnW:1 PC:ff99 A:00 X:00 Y:08 SP:f7 P:15 IR:20 sync:1
+halfcycle:1396 phi0:1 res:1 AB:ff99 RnW:1 PC:ff99 A:00 X:00 Y:08 SP:f7 P:15 IR:20 sync:1 r:ff99=4c
+halfcycle:1397 phi0:0 res:1 AB:ff9a RnW:1 PC:ff9a A:00 X:00 Y:08 SP:f7 P:15 IR:4c sync:0
+halfcycle:1398 phi0:1 res:1 AB:ff9a RnW:1 PC:ff9a A:00 X:00 Y:08 SP:f7 P:15 IR:4c sync:0 r:ff9a=00
+halfcycle:1399 phi0:0 res:1 AB:ff9b RnW:1 PC:ff9b A:00 X:00 Y:08 SP:f7 P:15 IR:4c sync:0
+halfcycle:1400 phi0:1 res:1 AB:ff9b RnW:1 PC:ff9b A:00 X:00 Y:08 SP:f7 P:15 IR:4c sync:0 r:ff9b=f8
+halfcycle:1401 phi0:0 res:1 AB:f800 RnW:1 PC:f800 A:00 X:00 Y:08 SP:f7 P:15 IR:4c sync:1
+halfcycle:1402 phi0:1 res:1 AB:f800 RnW:1 PC:f800 A:00 X:00 Y:08 SP:f7 P:15 IR:4c sync:1 r:f800=a9
+halfcycle:1403 phi0:0 res:1 AB:f801 RnW:1 PC:f801 A:00 X:00 Y:08 SP:f7 P:15 IR:a9 sync:0
+halfcycle:1404 phi0:1 res:1 AB:f801 RnW:1 PC:f801 A:00 X:00 Y:08 SP:f7 P:15 IR:a9 sync:0 r:f801=15
+halfcycle:1405 phi0:0 res:1 AB:f802 RnW:1 PC:f802 A:15 X:00 Y:08 SP:f7 P:15 IR:a9 sync:1
+halfcycle:1406 phi0:1 res:1 AB:f802 RnW:1 PC:f802 A:15 X:00 Y:08 SP:f7 P:15 IR:a9 sync:1 r:f802=48
+halfcycle:1407 phi0:0 res:1 AB:f803 RnW:1 PC:f803 A:15 X:00 Y:08 SP:f7 P:15 IR:48 sync:0
+halfcycle:1408 phi0:1 res:1 AB:f803 RnW:1 PC:f803 A:15 X:00 Y:08 SP:f7 P:15 IR:48 sync:0 r:f803=a9
+halfcycle:1409 phi0:0 res:1 AB:01f7 RnW:0 PC:f803 A:15 X:00 Y:08 SP:f7 P:15 IR:48 sync:0
+halfcycle:1410 phi0:1 res:1 AB:01f7 RnW:0 PC:f803 A:15 X:00 Y:08 SP:f7 P:15 IR:48 sync:0 W:01f7=15
+halfcycle:1411 phi0:0 res:1 AB:f803 RnW:1 PC:f803 A:15 X:00 Y:08 SP:f6 P:15 IR:48 sync:1
+halfcycle:1412 phi0:1 res:1 AB:f803 RnW:1 PC:f803 A:15 X:00 Y:08 SP:f6 P:15 IR:48 sync:1 r:f803=a9
+halfcycle:1413 phi0:0 res:1 AB:f804 RnW:1 PC:f804 A:15 X:00 Y:08 SP:f6 P:15 IR:a9 sync:0
+halfcycle:1414 phi0:1 res:1 AB:f804 RnW:1 PC:f804 A:15 X:00 Y:08 SP:f6 P:15 IR:a9 sync:0 r:f804=00
+halfcycle:1415 phi0:0 res:1 AB:f805 RnW:1 PC:f805 A:00 X:00 Y:08 SP:f6 P:17 IR:a9 sync:1
+halfcycle:1416 phi0:1 res:1 AB:f805 RnW:1 PC:f805 A:00 X:00 Y:08 SP:f6 P:17 IR:a9 sync:1 r:f805=a2
+halfcycle:1417 phi0:0 res:1 AB:f806 RnW:1 PC:f806 A:00 X:00 Y:08 SP:f6 P:17 IR:a2 sync:0
+halfcycle:1418 phi0:1 res:1 AB:f806 RnW:1 PC:f806 A:00 X:00 Y:08 SP:f6 P:17 IR:a2 sync:0 r:f806=00
+halfcycle:1419 phi0:0 res:1 AB:f807 RnW:1 PC:f807 A:00 X:00 Y:08 SP:f6 P:17 IR:a2 sync:1
+halfcycle:1420 phi0:1 res:1 AB:f807 RnW:1 PC:f807 A:00 X:00 Y:08 SP:f6 P:17 IR:a2 sync:1 r:f807=a0
+halfcycle:1421 phi0:0 res:1 AB:f808 RnW:1 PC:f808 A:00 X:00 Y:08 SP:f6 P:17 IR:a0 sync:0
+halfcycle:1422 phi0:1 res:1 AB:f808 RnW:1 PC:f808 A:00 X:00 Y:08 SP:f6 P:17 IR:a0 sync:0 r:f808=a0
+halfcycle:1423 phi0:0 res:1 AB:f809 RnW:1 PC:f809 A:00 X:00 Y:a0 SP:f6 P:95 IR:a0 sync:1
+halfcycle:1424 phi0:1 res:1 AB:f809 RnW:1 PC:f809 A:00 X:00 Y:a0 SP:f6 P:95 IR:a0 sync:1 r:f809=28
+halfcycle:1425 phi0:0 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f6 P:95 IR:28 sync:0
+halfcycle:1426 phi0:1 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f6 P:95 IR:28 sync:0 r:f80a=60
+halfcycle:1427 phi0:0 res:1 AB:01f6 RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f6 P:95 IR:28 sync:0
+halfcycle:1428 phi0:1 res:1 AB:01f6 RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f6 P:95 IR:28 sync:0 r:01f6=00
+halfcycle:1429 phi0:0 res:1 AB:01f7 RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f7 P:95 IR:28 sync:0
+halfcycle:1430 phi0:1 res:1 AB:01f7 RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f7 P:95 IR:28 sync:0 r:01f7=15
+halfcycle:1431 phi0:0 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f7 P:15 IR:28 sync:1
+halfcycle:1432 phi0:1 res:1 AB:f80a RnW:1 PC:f80a A:00 X:00 Y:a0 SP:f7 P:15 IR:28 sync:1 r:f80a=60
+halfcycle:1433 phi0:0 res:1 AB:f80b RnW:1 PC:f80b A:00 X:00 Y:a0 SP:f7 P:15 IR:60 sync:0
+halfcycle:1434 phi0:1 res:1 AB:f80b RnW:1 PC:f80b A:00 X:00 Y:a0 SP:f7 P:15 IR:60 sync:0 r:f80b=00
+halfcycle:1435 phi0:0 res:1 AB:01f7 RnW:1 PC:f80c A:00 X:00 Y:a0 SP:f7 P:15 IR:60 sync:0
+halfcycle:1436 phi0:1 res:1 AB:01f7 RnW:1 PC:f80c A:00 X:00 Y:a0 SP:f7 P:15 IR:60 sync:0 r:01f7=15
+halfcycle:1437 phi0:0 res:1 AB:01f8 RnW:1 PC:f80c A:00 X:00 Y:a0 SP:f7 P:15 IR:60 sync:0
+halfcycle:1438 phi0:1 res:1 AB:01f8 RnW:1 PC:f80c A:00 X:00 Y:a0 SP:f7 P:15 IR:60 sync:0 r:01f8=0d
+halfcycle:1439 phi0:0 res:1 AB:01f9 RnW:1 PC:f80c A:00 X:00 Y:a0 SP:f9 P:35 IR:60 sync:0
+halfcycle:1440 phi0:1 res:1 AB:01f9 RnW:1 PC:f80c A:00 X:00 Y:a0 SP:f9 P:35 IR:60 sync:0 r:01f9=e4
+halfcycle:1441 phi0:0 res:1 AB:e40d RnW:1 PC:e40d A:00 X:00 Y:a0 SP:f9 P:15 IR:60 sync:0
+halfcycle:1442 phi0:1 res:1 AB:e40d RnW:1 PC:e40d A:00 X:00 Y:a0 SP:f9 P:15 IR:60 sync:0 r:e40d=ff
+halfcycle:1443 phi0:0 res:1 AB:e40e RnW:1 PC:e40e A:00 X:00 Y:a0 SP:f9 P:15 IR:60 sync:1
+halfcycle:1444 phi0:1 res:1 AB:e40e RnW:1 PC:e40e A:00 X:00 Y:a0 SP:f9 P:15 IR:60 sync:1 r:e40e=86
+halfcycle:1445 phi0:0 res:1 AB:e40f RnW:1 PC:e40f A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0
+halfcycle:1446 phi0:1 res:1 AB:e40f RnW:1 PC:e40f A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0 r:e40f=37
+halfcycle:1447 phi0:0 res:1 AB:0037 RnW:0 PC:e410 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0
+halfcycle:1448 phi0:1 res:1 AB:0037 RnW:0 PC:e410 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0 W:0037=00
+halfcycle:1449 phi0:0 res:1 AB:e410 RnW:1 PC:e410 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:1
+halfcycle:1450 phi0:1 res:1 AB:e410 RnW:1 PC:e410 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:1 r:e410=84
+halfcycle:1451 phi0:0 res:1 AB:e411 RnW:1 PC:e411 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0
+halfcycle:1452 phi0:1 res:1 AB:e411 RnW:1 PC:e411 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0 r:e411=38
+halfcycle:1453 phi0:0 res:1 AB:0038 RnW:0 PC:e412 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0
+halfcycle:1454 phi0:1 res:1 AB:0038 RnW:0 PC:e412 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0 W:0038=a0
+halfcycle:1455 phi0:0 res:1 AB:e412 RnW:1 PC:e412 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:1
+halfcycle:1456 phi0:1 res:1 AB:e412 RnW:1 PC:e412 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:1 r:e412=86
+halfcycle:1457 phi0:0 res:1 AB:e413 RnW:1 PC:e413 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0
+halfcycle:1458 phi0:1 res:1 AB:e413 RnW:1 PC:e413 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0 r:e413=33
+halfcycle:1459 phi0:0 res:1 AB:0033 RnW:0 PC:e414 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0
+halfcycle:1460 phi0:1 res:1 AB:0033 RnW:0 PC:e414 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:0 W:0033=00
+halfcycle:1461 phi0:0 res:1 AB:e414 RnW:1 PC:e414 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:1
+halfcycle:1462 phi0:1 res:1 AB:e414 RnW:1 PC:e414 A:00 X:00 Y:a0 SP:f9 P:15 IR:86 sync:1 r:e414=84
+halfcycle:1463 phi0:0 res:1 AB:e415 RnW:1 PC:e415 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0
+halfcycle:1464 phi0:1 res:1 AB:e415 RnW:1 PC:e415 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0 r:e415=34
+halfcycle:1465 phi0:0 res:1 AB:0034 RnW:0 PC:e416 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0
+halfcycle:1466 phi0:1 res:1 AB:0034 RnW:0 PC:e416 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:0 W:0034=a0
+halfcycle:1467 phi0:0 res:1 AB:e416 RnW:1 PC:e416 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:1
+halfcycle:1468 phi0:1 res:1 AB:e416 RnW:1 PC:e416 A:00 X:00 Y:a0 SP:f9 P:15 IR:84 sync:1 r:e416=a0
+halfcycle:1469 phi0:0 res:1 AB:e417 RnW:1 PC:e417 A:00 X:00 Y:a0 SP:f9 P:15 IR:a0 sync:0
+halfcycle:1470 phi0:1 res:1 AB:e417 RnW:1 PC:e417 A:00 X:00 Y:a0 SP:f9 P:15 IR:a0 sync:0 r:e417=00
+halfcycle:1471 phi0:0 res:1 AB:e418 RnW:1 PC:e418 A:00 X:00 Y:00 SP:f9 P:17 IR:a0 sync:1
+halfcycle:1472 phi0:1 res:1 AB:e418 RnW:1 PC:e418 A:00 X:00 Y:00 SP:f9 P:17 IR:a0 sync:1 r:e418=98
+halfcycle:1473 phi0:0 res:1 AB:e419 RnW:1 PC:e419 A:00 X:00 Y:00 SP:f9 P:17 IR:98 sync:0
+halfcycle:1474 phi0:1 res:1 AB:e419 RnW:1 PC:e419 A:00 X:00 Y:00 SP:f9 P:17 IR:98 sync:0 r:e419=91
+halfcycle:1475 phi0:0 res:1 AB:e419 RnW:1 PC:e419 A:00 X:00 Y:00 SP:f9 P:17 IR:98 sync:1
+halfcycle:1476 phi0:1 res:1 AB:e419 RnW:1 PC:e419 A:00 X:00 Y:00 SP:f9 P:17 IR:98 sync:1 r:e419=91
+halfcycle:1477 phi0:0 res:1 AB:e41a RnW:1 PC:e41a A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0
+halfcycle:1478 phi0:1 res:1 AB:e41a RnW:1 PC:e41a A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0 r:e41a=2b
+halfcycle:1479 phi0:0 res:1 AB:002b RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0
+halfcycle:1480 phi0:1 res:1 AB:002b RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0 r:002b=00
+halfcycle:1481 phi0:0 res:1 AB:002c RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0
+halfcycle:1482 phi0:1 res:1 AB:002c RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0 r:002c=08
+halfcycle:1483 phi0:0 res:1 AB:0800 RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0
+halfcycle:1484 phi0:1 res:1 AB:0800 RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0 r:0800=00
+halfcycle:1485 phi0:0 res:1 AB:0800 RnW:0 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0
+halfcycle:1486 phi0:1 res:1 AB:0800 RnW:0 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:0 W:0800=00
+halfcycle:1487 phi0:0 res:1 AB:e41b RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:1
+halfcycle:1488 phi0:1 res:1 AB:e41b RnW:1 PC:e41b A:00 X:00 Y:00 SP:f9 P:17 IR:91 sync:1 r:e41b=e6
+halfcycle:1489 phi0:0 res:1 AB:e41c RnW:1 PC:e41c A:00 X:00 Y:00 SP:f9 P:17 IR:e6 sync:0
+halfcycle:1490 phi0:1 res:1 AB:e41c RnW:1 PC:e41c A:00 X:00 Y:00 SP:f9 P:17 IR:e6 sync:0 r:e41c=2b
+halfcycle:1491 phi0:0 res:1 AB:002b RnW:1 PC:e41d A:00 X:00 Y:00 SP:f9 P:17 IR:e6 sync:0
+halfcycle:1492 phi0:1 res:1 AB:002b RnW:1 PC:e41d A:00 X:00 Y:00 SP:f9 P:17 IR:e6 sync:0 r:002b=00
+halfcycle:1493 phi0:0 res:1 AB:002b RnW:0 PC:e41d A:00 X:00 Y:00 SP:f9 P:17 IR:e6 sync:0
+halfcycle:1494 phi0:1 res:1 AB:002b RnW:0 PC:e41d A:00 X:00 Y:00 SP:f9 P:17 IR:e6 sync:0 W:002b=00
+halfcycle:1495 phi0:0 res:1 AB:002b RnW:0 PC:e41d A:00 X:00 Y:00 SP:f9 P:15 IR:e6 sync:0
+halfcycle:1496 phi0:1 res:1 AB:002b RnW:0 PC:e41d A:00 X:00 Y:00 SP:f9 P:15 IR:e6 sync:0 W:002b=01
+halfcycle:1497 phi0:0 res:1 AB:e41d RnW:1 PC:e41d A:00 X:00 Y:00 SP:f9 P:15 IR:e6 sync:1
+halfcycle:1498 phi0:1 res:1 AB:e41d RnW:1 PC:e41d A:00 X:00 Y:00 SP:f9 P:15 IR:e6 sync:1 r:e41d=d0
+halfcycle:1499 phi0:0 res:1 AB:e41e RnW:1 PC:e41e A:00 X:00 Y:00 SP:f9 P:15 IR:d0 sync:0
+halfcycle:1500 phi0:1 res:1 AB:e41e RnW:1 PC:e41e A:00 X:00 Y:00 SP:f9 P:15 IR:d0 sync:0 r:e41e=02
+halfcycle:1501 phi0:0 res:1 AB:e41f RnW:1 PC:e41f A:00 X:00 Y:00 SP:f9 P:15 IR:d0 sync:0
+halfcycle:1502 phi0:1 res:1 AB:e41f RnW:1 PC:e41f A:00 X:00 Y:00 SP:f9 P:15 IR:d0 sync:0 r:e41f=e6
+halfcycle:1503 phi0:0 res:1 AB:e421 RnW:1 PC:e421 A:00 X:00 Y:00 SP:f9 P:15 IR:d0 sync:1
+halfcycle:1504 phi0:1 res:1 AB:e421 RnW:1 PC:e421 A:00 X:00 Y:00 SP:f9 P:15 IR:d0 sync:1 r:e421=60
+halfcycle:1505 phi0:0 res:1 AB:e422 RnW:1 PC:e422 A:00 X:00 Y:00 SP:f9 P:15 IR:60 sync:0
+halfcycle:1506 phi0:1 res:1 AB:e422 RnW:1 PC:e422 A:00 X:00 Y:00 SP:f9 P:15 IR:60 sync:0 r:e422=a5
+halfcycle:1507 phi0:0 res:1 AB:01f9 RnW:1 PC:e423 A:00 X:00 Y:00 SP:f9 P:15 IR:60 sync:0
+halfcycle:1508 phi0:1 res:1 AB:01f9 RnW:1 PC:e423 A:00 X:00 Y:00 SP:f9 P:15 IR:60 sync:0 r:01f9=e4
+halfcycle:1509 phi0:0 res:1 AB:01fa RnW:1 PC:e423 A:00 X:00 Y:00 SP:f9 P:15 IR:60 sync:0
+halfcycle:1510 phi0:1 res:1 AB:01fa RnW:1 PC:e423 A:00 X:00 Y:00 SP:f9 P:15 IR:60 sync:0 r:01fa=99
+halfcycle:1511 phi0:0 res:1 AB:01fb RnW:1 PC:e423 A:00 X:00 Y:00 SP:fb P:35 IR:60 sync:0
+halfcycle:1512 phi0:1 res:1 AB:01fb RnW:1 PC:e423 A:00 X:00 Y:00 SP:fb P:35 IR:60 sync:0 r:01fb=e3
+halfcycle:1513 phi0:0 res:1 AB:e399 RnW:1 PC:e399 A:00 X:00 Y:00 SP:fb P:15 IR:60 sync:0
+halfcycle:1514 phi0:1 res:1 AB:e399 RnW:1 PC:e399 A:00 X:00 Y:00 SP:fb P:15 IR:60 sync:0 r:e399=e3
+halfcycle:1515 phi0:0 res:1 AB:e39a RnW:1 PC:e39a A:00 X:00 Y:00 SP:fb P:15 IR:60 sync:1
+halfcycle:1516 phi0:1 res:1 AB:e39a RnW:1 PC:e39a A:00 X:00 Y:00 SP:fb P:15 IR:60 sync:1 r:e39a=20
+halfcycle:1517 phi0:0 res:1 AB:e39b RnW:1 PC:e39b A:00 X:00 Y:00 SP:fb P:15 IR:20 sync:0
+halfcycle:1518 phi0:1 res:1 AB:e39b RnW:1 PC:e39b A:00 X:00 Y:00 SP:fb P:15 IR:20 sync:0 r:e39b=22
+halfcycle:1519 phi0:0 res:1 AB:01fb RnW:1 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0
+halfcycle:1520 phi0:1 res:1 AB:01fb RnW:1 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0 r:01fb=e3
+halfcycle:1521 phi0:0 res:1 AB:01fb RnW:0 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0
+halfcycle:1522 phi0:1 res:1 AB:01fb RnW:0 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0 W:01fb=e3
+halfcycle:1523 phi0:0 res:1 AB:01fa RnW:0 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0
+halfcycle:1524 phi0:1 res:1 AB:01fa RnW:0 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0 W:01fa=9c
+halfcycle:1525 phi0:0 res:1 AB:e39c RnW:1 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0
+halfcycle:1526 phi0:1 res:1 AB:e39c RnW:1 PC:e39c A:00 X:00 Y:00 SP:22 P:15 IR:20 sync:0 r:e39c=e4
+halfcycle:1527 phi0:0 res:1 AB:e422 RnW:1 PC:e422 A:00 X:00 Y:00 SP:f9 P:15 IR:20 sync:1
+halfcycle:1528 phi0:1 res:1 AB:e422 RnW:1 PC:e422 A:00 X:00 Y:00 SP:f9 P:15 IR:20 sync:1 r:e422=a5
+halfcycle:1529 phi0:0 res:1 AB:e423 RnW:1 PC:e423 A:00 X:00 Y:00 SP:f9 P:15 IR:a5 sync:0
+halfcycle:1530 phi0:1 res:1 AB:e423 RnW:1 PC:e423 A:00 X:00 Y:00 SP:f9 P:15 IR:a5 sync:0 r:e423=2b
+halfcycle:1531 phi0:0 res:1 AB:002b RnW:1 PC:e424 A:00 X:00 Y:00 SP:f9 P:15 IR:a5 sync:0
+halfcycle:1532 phi0:1 res:1 AB:002b RnW:1 PC:e424 A:00 X:00 Y:00 SP:f9 P:15 IR:a5 sync:0 r:002b=01
+halfcycle:1533 phi0:0 res:1 AB:e424 RnW:1 PC:e424 A:01 X:00 Y:00 SP:f9 P:15 IR:a5 sync:1
+halfcycle:1534 phi0:1 res:1 AB:e424 RnW:1 PC:e424 A:01 X:00 Y:00 SP:f9 P:15 IR:a5 sync:1 r:e424=a4
+halfcycle:1535 phi0:0 res:1 AB:e425 RnW:1 PC:e425 A:01 X:00 Y:00 SP:f9 P:15 IR:a4 sync:0
+halfcycle:1536 phi0:1 res:1 AB:e425 RnW:1 PC:e425 A:01 X:00 Y:00 SP:f9 P:15 IR:a4 sync:0 r:e425=2c
+halfcycle:1537 phi0:0 res:1 AB:002c RnW:1 PC:e426 A:01 X:00 Y:00 SP:f9 P:15 IR:a4 sync:0
+halfcycle:1538 phi0:1 res:1 AB:002c RnW:1 PC:e426 A:01 X:00 Y:00 SP:f9 P:15 IR:a4 sync:0 r:002c=08
+halfcycle:1539 phi0:0 res:1 AB:e426 RnW:1 PC:e426 A:01 X:00 Y:08 SP:f9 P:15 IR:a4 sync:1
+halfcycle:1540 phi0:1 res:1 AB:e426 RnW:1 PC:e426 A:01 X:00 Y:08 SP:f9 P:15 IR:a4 sync:1 r:e426=20
+halfcycle:1541 phi0:0 res:1 AB:e427 RnW:1 PC:e427 A:01 X:00 Y:08 SP:f9 P:15 IR:20 sync:0
+halfcycle:1542 phi0:1 res:1 AB:e427 RnW:1 PC:e427 A:01 X:00 Y:08 SP:f9 P:15 IR:20 sync:0 r:e427=08
+halfcycle:1543 phi0:0 res:1 AB:01f9 RnW:1 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0
+halfcycle:1544 phi0:1 res:1 AB:01f9 RnW:1 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0 r:01f9=e4
+halfcycle:1545 phi0:0 res:1 AB:01f9 RnW:0 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0
+halfcycle:1546 phi0:1 res:1 AB:01f9 RnW:0 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0 W:01f9=e4
+halfcycle:1547 phi0:0 res:1 AB:01f8 RnW:0 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0
+halfcycle:1548 phi0:1 res:1 AB:01f8 RnW:0 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0 W:01f8=28
+halfcycle:1549 phi0:0 res:1 AB:e428 RnW:1 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0
+halfcycle:1550 phi0:1 res:1 AB:e428 RnW:1 PC:e428 A:01 X:00 Y:08 SP:08 P:15 IR:20 sync:0 r:e428=a4
+halfcycle:1551 phi0:0 res:1 AB:a408 RnW:1 PC:a408 A:01 X:00 Y:08 SP:f7 P:15 IR:20 sync:1
+halfcycle:1552 phi0:1 res:1 AB:a408 RnW:1 PC:a408 A:01 X:00 Y:08 SP:f7 P:15 IR:20 sync:1 r:a408=c4
+halfcycle:1553 phi0:0 res:1 AB:a409 RnW:1 PC:a409 A:01 X:00 Y:08 SP:f7 P:15 IR:c4 sync:0
+halfcycle:1554 phi0:1 res:1 AB:a409 RnW:1 PC:a409 A:01 X:00 Y:08 SP:f7 P:15 IR:c4 sync:0 r:a409=34
+halfcycle:1555 phi0:0 res:1 AB:0034 RnW:1 PC:a40a A:01 X:00 Y:08 SP:f7 P:15 IR:c4 sync:0
+halfcycle:1556 phi0:1 res:1 AB:0034 RnW:1 PC:a40a A:01 X:00 Y:08 SP:f7 P:15 IR:c4 sync:0 r:0034=a0
+halfcycle:1557 phi0:0 res:1 AB:a40a RnW:1 PC:a40a A:01 X:00 Y:08 SP:f7 P:15 IR:c4 sync:1
+halfcycle:1558 phi0:1 res:1 AB:a40a RnW:1 PC:a40a A:01 X:00 Y:08 SP:f7 P:15 IR:c4 sync:1 r:a40a=90
+halfcycle:1559 phi0:0 res:1 AB:a40b RnW:1 PC:a40b A:01 X:00 Y:08 SP:f7 P:14 IR:90 sync:0
+halfcycle:1560 phi0:1 res:1 AB:a40b RnW:1 PC:a40b A:01 X:00 Y:08 SP:f7 P:14 IR:90 sync:0 r:a40b=28
+halfcycle:1561 phi0:0 res:1 AB:a40c RnW:1 PC:a40c A:01 X:00 Y:08 SP:f7 P:14 IR:90 sync:0
+halfcycle:1562 phi0:1 res:1 AB:a40c RnW:1 PC:a40c A:01 X:00 Y:08 SP:f7 P:14 IR:90 sync:0 r:a40c=d0
+halfcycle:1563 phi0:0 res:1 AB:a434 RnW:1 PC:a434 A:01 X:00 Y:08 SP:f7 P:14 IR:90 sync:1
+halfcycle:1564 phi0:1 res:1 AB:a434 RnW:1 PC:a434 A:01 X:00 Y:08 SP:f7 P:14 IR:90 sync:1 r:a434=60
+halfcycle:1565 phi0:0 res:1 AB:a435 RnW:1 PC:a435 A:01 X:00 Y:08 SP:f7 P:14 IR:60 sync:0
+halfcycle:1566 phi0:1 res:1 AB:a435 RnW:1 PC:a435 A:01 X:00 Y:08 SP:f7 P:14 IR:60 sync:0 r:a435=a2
+halfcycle:1567 phi0:0 res:1 AB:01f7 RnW:1 PC:a436 A:01 X:00 Y:08 SP:f7 P:14 IR:60 sync:0
+halfcycle:1568 phi0:1 res:1 AB:01f7 RnW:1 PC:a436 A:01 X:00 Y:08 SP:f7 P:14 IR:60 sync:0 r:01f7=15
+halfcycle:1569 phi0:0 res:1 AB:01f8 RnW:1 PC:a436 A:01 X:00 Y:08 SP:f7 P:14 IR:60 sync:0
+halfcycle:1570 phi0:1 res:1 AB:01f8 RnW:1 PC:a436 A:01 X:00 Y:08 SP:f7 P:14 IR:60 sync:0 r:01f8=28
+halfcycle:1571 phi0:0 res:1 AB:01f9 RnW:1 PC:a436 A:01 X:00 Y:08 SP:f9 P:34 IR:60 sync:0
+halfcycle:1572 phi0:1 res:1 AB:01f9 RnW:1 PC:a436 A:01 X:00 Y:08 SP:f9 P:34 IR:60 sync:0 r:01f9=e4
+halfcycle:1573 phi0:0 res:1 AB:e428 RnW:1 PC:e428 A:01 X:00 Y:08 SP:f9 P:14 IR:60 sync:0
+halfcycle:1574 phi0:1 res:1 AB:e428 RnW:1 PC:e428 A:01 X:00 Y:08 SP:f9 P:14 IR:60 sync:0 r:e428=a4
+halfcycle:1575 phi0:0 res:1 AB:e429 RnW:1 PC:e429 A:01 X:00 Y:08 SP:f9 P:14 IR:60 sync:1
+halfcycle:1576 phi0:1 res:1 AB:e429 RnW:1 PC:e429 A:01 X:00 Y:08 SP:f9 P:14 IR:60 sync:1 r:e429=a9
+halfcycle:1577 phi0:0 res:1 AB:e42a RnW:1 PC:e42a A:01 X:00 Y:08 SP:f9 P:14 IR:a9 sync:0
+halfcycle:1578 phi0:1 res:1 AB:e42a RnW:1 PC:e42a A:01 X:00 Y:08 SP:f9 P:14 IR:a9 sync:0 r:e42a=73
+halfcycle:1579 phi0:0 res:1 AB:e42b RnW:1 PC:e42b A:73 X:00 Y:08 SP:f9 P:14 IR:a9 sync:1
+halfcycle:1580 phi0:1 res:1 AB:e42b RnW:1 PC:e42b A:73 X:00 Y:08 SP:f9 P:14 IR:a9 sync:1 r:e42b=a0
+halfcycle:1581 phi0:0 res:1 AB:e42c RnW:1 PC:e42c A:73 X:00 Y:08 SP:f9 P:14 IR:a0 sync:0
+halfcycle:1582 phi0:1 res:1 AB:e42c RnW:1 PC:e42c A:73 X:00 Y:08 SP:f9 P:14 IR:a0 sync:0 r:e42c=e4
+halfcycle:1583 phi0:0 res:1 AB:e42d RnW:1 PC:e42d A:73 X:00 Y:e4 SP:f9 P:94 IR:a0 sync:1
+halfcycle:1584 phi0:1 res:1 AB:e42d RnW:1 PC:e42d A:73 X:00 Y:e4 SP:f9 P:94 IR:a0 sync:1 r:e42d=20
+halfcycle:1585 phi0:0 res:1 AB:e42e RnW:1 PC:e42e A:73 X:00 Y:e4 SP:f9 P:94 IR:20 sync:0
+halfcycle:1586 phi0:1 res:1 AB:e42e RnW:1 PC:e42e A:73 X:00 Y:e4 SP:f9 P:94 IR:20 sync:0 r:e42e=1e
+halfcycle:1587 phi0:0 res:1 AB:01f9 RnW:1 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0
+halfcycle:1588 phi0:1 res:1 AB:01f9 RnW:1 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0 r:01f9=e4
+halfcycle:1589 phi0:0 res:1 AB:01f9 RnW:0 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0
+halfcycle:1590 phi0:1 res:1 AB:01f9 RnW:0 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0 W:01f9=e4
+halfcycle:1591 phi0:0 res:1 AB:01f8 RnW:0 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0
+halfcycle:1592 phi0:1 res:1 AB:01f8 RnW:0 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0 W:01f8=2f
+halfcycle:1593 phi0:0 res:1 AB:e42f RnW:1 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0
+halfcycle:1594 phi0:1 res:1 AB:e42f RnW:1 PC:e42f A:73 X:00 Y:e4 SP:1e P:94 IR:20 sync:0 r:e42f=ab
+halfcycle:1595 phi0:0 res:1 AB:ab1e RnW:1 PC:ab1e A:73 X:00 Y:e4 SP:f7 P:94 IR:20 sync:1
+halfcycle:1596 phi0:1 res:1 AB:ab1e RnW:1 PC:ab1e A:73 X:00 Y:e4 SP:f7 P:94 IR:20 sync:1 r:ab1e=20
+halfcycle:1597 phi0:0 res:1 AB:ab1f RnW:1 PC:ab1f A:73 X:00 Y:e4 SP:f7 P:94 IR:20 sync:0
+halfcycle:1598 phi0:1 res:1 AB:ab1f RnW:1 PC:ab1f A:73 X:00 Y:e4 SP:f7 P:94 IR:20 sync:0 r:ab1f=87
+halfcycle:1599 phi0:0 res:1 AB:01f7 RnW:1 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0
+halfcycle:1600 phi0:1 res:1 AB:01f7 RnW:1 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0 r:01f7=15
+halfcycle:1601 phi0:0 res:1 AB:01f7 RnW:0 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0
+halfcycle:1602 phi0:1 res:1 AB:01f7 RnW:0 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0 W:01f7=ab
+halfcycle:1603 phi0:0 res:1 AB:01f6 RnW:0 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0
+halfcycle:1604 phi0:1 res:1 AB:01f6 RnW:0 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0 W:01f6=20
+halfcycle:1605 phi0:0 res:1 AB:ab20 RnW:1 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0
+halfcycle:1606 phi0:1 res:1 AB:ab20 RnW:1 PC:ab20 A:73 X:00 Y:e4 SP:87 P:94 IR:20 sync:0 r:ab20=b4
+halfcycle:1607 phi0:0 res:1 AB:b487 RnW:1 PC:b487 A:73 X:00 Y:e4 SP:f5 P:94 IR:20 sync:1
+halfcycle:1608 phi0:1 res:1 AB:b487 RnW:1 PC:b487 A:73 X:00 Y:e4 SP:f5 P:94 IR:20 sync:1 r:b487=a2
+halfcycle:1609 phi0:0 res:1 AB:b488 RnW:1 PC:b488 A:73 X:00 Y:e4 SP:f5 P:94 IR:a2 sync:0
+halfcycle:1610 phi0:1 res:1 AB:b488 RnW:1 PC:b488 A:73 X:00 Y:e4 SP:f5 P:94 IR:a2 sync:0 r:b488=22
+halfcycle:1611 phi0:0 res:1 AB:b489 RnW:1 PC:b489 A:73 X:22 Y:e4 SP:f5 P:14 IR:a2 sync:1
+halfcycle:1612 phi0:1 res:1 AB:b489 RnW:1 PC:b489 A:73 X:22 Y:e4 SP:f5 P:14 IR:a2 sync:1 r:b489=86
+halfcycle:1613 phi0:0 res:1 AB:b48a RnW:1 PC:b48a A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0
+halfcycle:1614 phi0:1 res:1 AB:b48a RnW:1 PC:b48a A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0 r:b48a=07
+halfcycle:1615 phi0:0 res:1 AB:0007 RnW:0 PC:b48b A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0
+halfcycle:1616 phi0:1 res:1 AB:0007 RnW:0 PC:b48b A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0 W:0007=22
+halfcycle:1617 phi0:0 res:1 AB:b48b RnW:1 PC:b48b A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:1
+halfcycle:1618 phi0:1 res:1 AB:b48b RnW:1 PC:b48b A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:1 r:b48b=86
+halfcycle:1619 phi0:0 res:1 AB:b48c RnW:1 PC:b48c A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0
+halfcycle:1620 phi0:1 res:1 AB:b48c RnW:1 PC:b48c A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0 r:b48c=08
+halfcycle:1621 phi0:0 res:1 AB:0008 RnW:0 PC:b48d A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0
+halfcycle:1622 phi0:1 res:1 AB:0008 RnW:0 PC:b48d A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:0 W:0008=22
+halfcycle:1623 phi0:0 res:1 AB:b48d RnW:1 PC:b48d A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:1
+halfcycle:1624 phi0:1 res:1 AB:b48d RnW:1 PC:b48d A:73 X:22 Y:e4 SP:f5 P:14 IR:86 sync:1 r:b48d=85
+halfcycle:1625 phi0:0 res:1 AB:b48e RnW:1 PC:b48e A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0
+halfcycle:1626 phi0:1 res:1 AB:b48e RnW:1 PC:b48e A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0 r:b48e=6f
+halfcycle:1627 phi0:0 res:1 AB:006f RnW:0 PC:b48f A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0
+halfcycle:1628 phi0:1 res:1 AB:006f RnW:0 PC:b48f A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0 W:006f=73
+halfcycle:1629 phi0:0 res:1 AB:b48f RnW:1 PC:b48f A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:1
+halfcycle:1630 phi0:1 res:1 AB:b48f RnW:1 PC:b48f A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:1 r:b48f=84
+halfcycle:1631 phi0:0 res:1 AB:b490 RnW:1 PC:b490 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0
+halfcycle:1632 phi0:1 res:1 AB:b490 RnW:1 PC:b490 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0 r:b490=70
+halfcycle:1633 phi0:0 res:1 AB:0070 RnW:0 PC:b491 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0
+halfcycle:1634 phi0:1 res:1 AB:0070 RnW:0 PC:b491 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0 W:0070=e4
+halfcycle:1635 phi0:0 res:1 AB:b491 RnW:1 PC:b491 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:1
+halfcycle:1636 phi0:1 res:1 AB:b491 RnW:1 PC:b491 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:1 r:b491=85
+halfcycle:1637 phi0:0 res:1 AB:b492 RnW:1 PC:b492 A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0
+halfcycle:1638 phi0:1 res:1 AB:b492 RnW:1 PC:b492 A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0 r:b492=62
+halfcycle:1639 phi0:0 res:1 AB:0062 RnW:0 PC:b493 A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0
+halfcycle:1640 phi0:1 res:1 AB:0062 RnW:0 PC:b493 A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:0 W:0062=73
+halfcycle:1641 phi0:0 res:1 AB:b493 RnW:1 PC:b493 A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:1
+halfcycle:1642 phi0:1 res:1 AB:b493 RnW:1 PC:b493 A:73 X:22 Y:e4 SP:f5 P:14 IR:85 sync:1 r:b493=84
+halfcycle:1643 phi0:0 res:1 AB:b494 RnW:1 PC:b494 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0
+halfcycle:1644 phi0:1 res:1 AB:b494 RnW:1 PC:b494 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0 r:b494=63
+halfcycle:1645 phi0:0 res:1 AB:0063 RnW:0 PC:b495 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0
+halfcycle:1646 phi0:1 res:1 AB:0063 RnW:0 PC:b495 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:0 W:0063=e4
+halfcycle:1647 phi0:0 res:1 AB:b495 RnW:1 PC:b495 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:1
+halfcycle:1648 phi0:1 res:1 AB:b495 RnW:1 PC:b495 A:73 X:22 Y:e4 SP:f5 P:14 IR:84 sync:1 r:b495=a0
+halfcycle:1649 phi0:0 res:1 AB:b496 RnW:1 PC:b496 A:73 X:22 Y:e4 SP:f5 P:14 IR:a0 sync:0
+halfcycle:1650 phi0:1 res:1 AB:b496 RnW:1 PC:b496 A:73 X:22 Y:e4 SP:f5 P:14 IR:a0 sync:0 r:b496=ff
+halfcycle:1651 phi0:0 res:1 AB:b497 RnW:1 PC:b497 A:73 X:22 Y:ff SP:f5 P:94 IR:a0 sync:1
+halfcycle:1652 phi0:1 res:1 AB:b497 RnW:1 PC:b497 A:73 X:22 Y:ff SP:f5 P:94 IR:a0 sync:1 r:b497=c8
+halfcycle:1653 phi0:0 res:1 AB:b498 RnW:1 PC:b498 A:73 X:22 Y:ff SP:f5 P:94 IR:c8 sync:0
+halfcycle:1654 phi0:1 res:1 AB:b498 RnW:1 PC:b498 A:73 X:22 Y:ff SP:f5 P:94 IR:c8 sync:0 r:b498=b1
+halfcycle:1655 phi0:0 res:1 AB:b498 RnW:1 PC:b498 A:73 X:22 Y:ff SP:f5 P:94 IR:c8 sync:1
+halfcycle:1656 phi0:1 res:1 AB:b498 RnW:1 PC:b498 A:73 X:22 Y:ff SP:f5 P:94 IR:c8 sync:1 r:b498=b1
+halfcycle:1657 phi0:0 res:1 AB:b499 RnW:1 PC:b499 A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0
+halfcycle:1658 phi0:1 res:1 AB:b499 RnW:1 PC:b499 A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0 r:b499=6f
+halfcycle:1659 phi0:0 res:1 AB:006f RnW:1 PC:b49a A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0
+halfcycle:1660 phi0:1 res:1 AB:006f RnW:1 PC:b49a A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0 r:006f=73
+halfcycle:1661 phi0:0 res:1 AB:0070 RnW:1 PC:b49a A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0
+halfcycle:1662 phi0:1 res:1 AB:0070 RnW:1 PC:b49a A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0 r:0070=e4
+halfcycle:1663 phi0:0 res:1 AB:e473 RnW:1 PC:b49a A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0
+halfcycle:1664 phi0:1 res:1 AB:e473 RnW:1 PC:b49a A:73 X:22 Y:00 SP:f5 P:16 IR:b1 sync:0 r:e473=93
+halfcycle:1665 phi0:0 res:1 AB:b49a RnW:1 PC:b49a A:93 X:22 Y:00 SP:f5 P:94 IR:b1 sync:1
+halfcycle:1666 phi0:1 res:1 AB:b49a RnW:1 PC:b49a A:93 X:22 Y:00 SP:f5 P:94 IR:b1 sync:1 r:b49a=f0
+halfcycle:1667 phi0:0 res:1 AB:b49b RnW:1 PC:b49b A:93 X:22 Y:00 SP:f5 P:94 IR:f0 sync:0
+halfcycle:1668 phi0:1 res:1 AB:b49b RnW:1 PC:b49b A:93 X:22 Y:00 SP:f5 P:94 IR:f0 sync:0 r:b49b=0c
+halfcycle:1669 phi0:0 res:1 AB:b49c RnW:1 PC:b49c A:93 X:22 Y:00 SP:f5 P:94 IR:f0 sync:1
+halfcycle:1670 phi0:1 res:1 AB:b49c RnW:1 PC:b49c A:93 X:22 Y:00 SP:f5 P:94 IR:f0 sync:1 r:b49c=c5
+halfcycle:1671 phi0:0 res:1 AB:b49d RnW:1 PC:b49d A:93 X:22 Y:00 SP:f5 P:94 IR:c5 sync:0
+halfcycle:1672 phi0:1 res:1 AB:b49d RnW:1 PC:b49d A:93 X:22 Y:00 SP:f5 P:94 IR:c5 sync:0 r:b49d=07
+halfcycle:1673 phi0:0 res:1 AB:0007 RnW:1 PC:b49e A:93 X:22 Y:00 SP:f5 P:94 IR:c5 sync:0
+halfcycle:1674 phi0:1 res:1 AB:0007 RnW:1 PC:b49e A:93 X:22 Y:00 SP:f5 P:94 IR:c5 sync:0 r:0007=22
+halfcycle:1675 phi0:0 res:1 AB:b49e RnW:1 PC:b49e A:93 X:22 Y:00 SP:f5 P:94 IR:c5 sync:1
+halfcycle:1676 phi0:1 res:1 AB:b49e RnW:1 PC:b49e A:93 X:22 Y:00 SP:f5 P:94 IR:c5 sync:1 r:b49e=f0
+halfcycle:1677 phi0:0 res:1 AB:b49f RnW:1 PC:b49f A:93 X:22 Y:00 SP:f5 P:15 IR:f0 sync:0
+halfcycle:1678 phi0:1 res:1 AB:b49f RnW:1 PC:b49f A:93 X:22 Y:00 SP:f5 P:15 IR:f0 sync:0 r:b49f=04
+halfcycle:1679 phi0:0 res:1 AB:b4a0 RnW:1 PC:b4a0 A:93 X:22 Y:00 SP:f5 P:15 IR:f0 sync:1
+halfcycle:1680 phi0:1 res:1 AB:b4a0 RnW:1 PC:b4a0 A:93 X:22 Y:00 SP:f5 P:15 IR:f0 sync:1 r:b4a0=c5
+halfcycle:1681 phi0:0 res:1 AB:b4a1 RnW:1 PC:b4a1 A:93 X:22 Y:00 SP:f5 P:15 IR:c5 sync:0
+halfcycle:1682 phi0:1 res:1 AB:b4a1 RnW:1 PC:b4a1 A:93 X:22 Y:00 SP:f5 P:15 IR:c5 sync:0 r:b4a1=08
+halfcycle:1683 phi0:0 res:1 AB:0008 RnW:1 PC:b4a2 A:93 X:22 Y:00 SP:f5 P:15 IR:c5 sync:0
+halfcycle:1684 phi0:1 res:1 AB:0008 RnW:1 PC:b4a2 A:93 X:22 Y:00 SP:f5 P:15 IR:c5 sync:0 r:0008=22
+halfcycle:1685 phi0:0 res:1 AB:b4a2 RnW:1 PC:b4a2 A:93 X:22 Y:00 SP:f5 P:15 IR:c5 sync:1
+halfcycle:1686 phi0:1 res:1 AB:b4a2 RnW:1 PC:b4a2 A:93 X:22 Y:00 SP:f5 P:15 IR:c5 sync:1 r:b4a2=d0
+halfcycle:1687 phi0:0 res:1 AB:b4a3 RnW:1 PC:b4a3 A:93 X:22 Y:00 SP:f5 P:15 IR:d0 sync:0
+halfcycle:1688 phi0:1 res:1 AB:b4a3 RnW:1 PC:b4a3 A:93 X:22 Y:00 SP:f5 P:15 IR:d0 sync:0 r:b4a3=f3
+halfcycle:1689 phi0:0 res:1 AB:b4a4 RnW:1 PC:b4a4 A:93 X:22 Y:00 SP:f5 P:15 IR:d0 sync:0
+halfcycle:1690 phi0:1 res:1 AB:b4a4 RnW:1 PC:b4a4 A:93 X:22 Y:00 SP:f5 P:15 IR:d0 sync:0 r:b4a4=c9
+halfcycle:1691 phi0:0 res:1 AB:b497 RnW:1 PC:b497 A:93 X:22 Y:00 SP:f5 P:15 IR:d0 sync:1
+halfcycle:1692 phi0:1 res:1 AB:b497 RnW:1 PC:b497 A:93 X:22 Y:00 SP:f5 P:15 IR:d0 sync:1 r:b497=c8
+halfcycle:1693 phi0:0 res:1 AB:b498 RnW:1 PC:b498 A:93 X:22 Y:00 SP:f5 P:15 IR:c8 sync:0
+halfcycle:1694 phi0:1 res:1 AB:b498 RnW:1 PC:b498 A:93 X:22 Y:00 SP:f5 P:15 IR:c8 sync:0 r:b498=b1
+halfcycle:1695 phi0:0 res:1 AB:b498 RnW:1 PC:b498 A:93 X:22 Y:00 SP:f5 P:15 IR:c8 sync:1
+halfcycle:1696 phi0:1 res:1 AB:b498 RnW:1 PC:b498 A:93 X:22 Y:00 SP:f5 P:15 IR:c8 sync:1 r:b498=b1
+halfcycle:1697 phi0:0 res:1 AB:b499 RnW:1 PC:b499 A:93 X:22 Y:01 SP:f5 P:15 IR:b1 sync:0
+halfcycle:1698 phi0:1 res:1 AB:b499 RnW:1 PC:b499 A:93 X:22 Y:01 SP:f5 P:15 IR:b1 sync:0 r:b499=6f
+halfcycle:1699 phi0:0 res:1 AB:006f RnW:1 PC:b49a A:93 X:22 Y:01 SP:f5 P:15 IR:b1 sync:0
+halfcycle:1700 phi0:1 res:1 AB:006f RnW:1 PC:b49a A:93 X:22 Y:01 SP:f5 P:15 IR:b1 sync:0 r:006f=73

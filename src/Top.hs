@@ -1,13 +1,13 @@
 
 module Top (main) where
 
-import EmuState (Sim)
-import GetLogic (Version(Raw,Simp,Minimal),Logic,getLogic)
-import Sim2 (simGivenLogic)
-import Sim3 (simGivenLogic)
+import Compile (compile)
+import GetLogic (Version(Raw,Simp,Min),getLogic)
+import Misc (generateFile)
 import System.Environment (getArgs)
 import qualified CBM (main)
-import qualified Compile (main)
+import qualified Sim2 (simGivenLogic)
+import qualified Sim3 (simGivenProg)
 
 main :: IO ()
 main = do
@@ -21,17 +21,16 @@ parse = loop config0
       [] ->acc
 
       -- what system? CBM or just compiling
-      "cbm":xs -> loop acc { sys = CBM } xs
-      "seecompile":xs -> loop acc { sys = SeeCompile } xs
+      -- "cbm":xs -> loop acc { sys = CBM } xs
 
       -- logic version
       "raw":xs -> loop acc { version = Raw } xs
       "simp":xs -> loop acc { version = Simp } xs
-      "minimal":xs -> loop acc { version = Minimal } xs
+      "min":xs -> loop acc { version = Min } xs
 
       -- which emulation mode
       "sim2":xs -> loop acc { mode = Sim2 } xs
-      "dev":xs -> loop acc { mode = DevCompiledSim } xs
+      "sim3":xs -> loop acc { mode = Sim3 } xs
 
       -- controlling the emulation
       "-max":max:xs -> loop acc { max = read max } xs
@@ -42,8 +41,8 @@ parse = loop config0
 
     config0 = Config
       { sys = CBM
-      , mode = DevCompiledSim
-      , version = Minimal
+      , mode = Sim2
+      , version = Min
       , max = 10
       , trace = False
       }
@@ -58,20 +57,22 @@ data Config = Config
 
 data Mode
   = Sim2 -- original simulation of set of mutually-dep assigns
-  | DevCompiledSim -- simulation of linearlzed bindings
+  | Sim3 -- simulation of linearlzed bindings
 
-data Sys = CBM | SeeCompile
+data Sys = CBM
 
 run :: Config -> IO ()
 run Config{sys,mode,version,max,trace} = do
   case sys of
-    SeeCompile -> Compile.main version
-    CBM -> do
-      logic <- getLogic version
-      sim <- getSim logic mode
-      CBM.main sim max trace
-
-getSim :: Logic -> Mode -> IO Sim
-getSim logic = \case
-  Sim2 -> pure $ Sim2.simGivenLogic logic
-  DevCompiledSim -> Sim3.simGivenLogic logic
+    CBM ->
+      case mode of
+        Sim2 -> do
+          logic <- getLogic version
+          sim <- pure $ Sim2.simGivenLogic logic
+          CBM.main sim max trace
+        Sim3 -> do
+          logic <- getLogic version
+          prog <- compile logic
+          generateFile ("prog-"++show version) prog
+          sim <- pure $ Sim3.simGivenProg prog
+          CBM.main sim max trace

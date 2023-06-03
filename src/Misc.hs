@@ -1,5 +1,5 @@
 
-module Misc (the,nub,hist,collate,zipMap) where
+module Misc (the,nub,hist,collate,zipMap,generateFile) where
 
 import Data.Map (Map)
 import qualified Data.Map as Map
@@ -19,3 +19,9 @@ collate xs = Map.toList (Map.fromListWith (++) [ (k,[v]) | (k,v) <- xs ])
 
 zipMap :: Ord k => Map k v1 -> Map k v2 -> Map k (v1,v2)
 zipMap = Map.intersectionWith (\a b -> (a,b))
+
+generateFile :: Show a => String -> a -> IO ()
+generateFile tag a = do
+  let fp :: FilePath = "gen/" ++ tag ++ ".out"
+  --putStrLn $ "Writing file: " <> fp
+  writeFile fp (show a)

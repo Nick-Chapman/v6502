@@ -1,20 +1,11 @@
 
-module Sim3 ( simGivenLogic ) where  -- compile & sim
+module Sim3 ( simGivenProg ) where
 
-import Compile (Prog(..),Comb(..),Func(..),Atom(..),Var,compile)
+import Compile (Prog(..),Comb(..),Func(..),Atom(..),Var)
 import Data.Map (Map)
 import EmuState (Sim(..),CycleKind(..),State,Inputs,makeState,updateState,applyInputs,lookState,posClk,negClk,resetHI,resetLO,setInputByte,getAB,getRW,getDB)
-import GetLogic (Logic(..))
 import Text.Printf (printf)
 import qualified Data.Map as Map
-
-
-simGivenLogic :: Logic -> IO Sim
-simGivenLogic logic = do
-  prog <- compile logic
-  generateFile "prog" prog
-  pure $ simGivenProg prog
-
 
 simGivenProg :: Prog -> Sim
 simGivenProg prog = do
@@ -92,12 +83,6 @@ initState :: Prog -> State
 initState = \case
   PWithState _regs _ -> makeState [ (n,False) | n <- _regs ]
   _ -> undefined
-
-generateFile :: Show a => String -> a -> IO ()
-generateFile tag a = do
-  let fp :: FilePath = "gen/" ++ tag ++ ".out"
-  --putStrLn $ "Writing file: " <> fp
-  writeFile fp (show a)
 
 runProg :: Prog -> Inputs -> State -> State
 runProg prog inputs s0 = do

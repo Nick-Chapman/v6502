@@ -1,25 +1,16 @@
 
-module Compile (main,compile,Prog(..),Comb(..),Func(..),Atom(..),Var) where
+module Compile (compile,Prog(..),Comb(..),Func(..),Atom(..),Var) where
 
 import Assigns (NodeId,Exp(..))
 import Control.Monad (ap,liftM)
 import Data.Map (Map)
 import Data.Set (Set)
 import EmuState (fixedInputs)
-import GetLogic (getLogic,Logic(..),Version(..))
+import GetLogic (Logic(..))
 import NodeNames (ofName)
 import Text.Printf (printf)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
-
-main :: Version -> IO () -- dev entry
-main version = do
-  logic <- getLogic version
-  --let _ = simGivenLogic logic
-  prog <- compile logic
-  print prog
-
-----------------------------------------------------------------------
 
 compile :: Logic -> IO Prog
 compile logic = runGen (genFromLogic logic)
