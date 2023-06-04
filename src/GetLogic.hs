@@ -3,6 +3,7 @@ module GetLogic
   ( Version(..)
   , Logic(..)
   , getLogic
+  , computeNeed
   ) where
 
 import Assigns (AssignDef(..),Exp(..),NodeId(..))

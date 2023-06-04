@@ -12,19 +12,48 @@ import Text.Printf (printf)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 
+import GetLogic(computeNeed)
+import Assigns (AssignDef(..))
+
 compile :: Logic -> IO Prog
 compile logic = runGen (genFromLogic logic)
 
 genFromLogic :: Logic -> Gen ()
 genFromLogic Logic{m} = do
 
+  sequence_ [ do f <- GUseLastState n; GShare n f | n <- need ]
+
   sequence_ [ GShare (ofName x) (fConst b) | (x,b) <- fixedInputs ]
   sequence_ [ GShare (ofName x) (fInput x) | x <- varyingInputs ++ inouts]
+
+  sequence_ [ do f <- genE (look n); GSetNextState n f | n <- need ]
+
   sequence_ [ output (ofName x)            | x <- outputs ]
   sequence_ [ GUnShare (ofName x)          | x <- inouts ]
   sequence_ [ output (ofName x)            | x <- inouts ++ probed ++ varyingInputs ]
 
+
   where
+    need = Set.toList (computeNeed (map ofName want) assigns)
+      where assigns = [ AssignDef n e | (n,e) <- Map.toList m ]
+
+    -- This want affects the simulation. dont know why.
+
+    want = [] -- wanted state
+        ++ [ "x"++show @Int n | n <- [0..7] ]
+        ++ [ "y"++show @Int n | n <- [0..7] ]
+        ++ [ "p"++show @Int n | n <- [0..7] ]
+        ++ [ "pcl"++show @Int n | n <- [0..7] ]
+        ++ [ "pch"++show @Int n | n <- [0..7] ]
+        ++ [ "ir"++show @Int n | n <- [0..7] ]
+        ++ [ "a"++show @Int n | n <- [0..7] ]
+        ++ [ "s"++show @Int n | n <- [0..7] ]
+
+--        ++ [ "ab"++show @Int n | n <- [0..15] ]
+--        ++ [ "db"++show @Int n | n <- [0..7] ]
+--        ++ [ "cp1", "cp2", "t3", "t4", "clock1","clock2" ]
+
+
     inouts = ["db"++show i | i <- [0::Int .. 7]]
 
     varyingInputs = [ "clk0", "res"]
@@ -52,13 +81,13 @@ genFromLogic Logic{m} = do
         Just f -> pure f
         Nothing -> do
           GAmDoing n >>= \case
-            True -> GUseLastState n
+            True -> undefined -- GUseLastState n
             False -> do
               GMarkAsDoing n $ do
                 f <- genE (look n)
-                GNeedState n >>= \case
+                {-GNeedState n >>= \case
                   False -> pure ()
-                  True -> GSetNextState n f
+                  True -> GSetNextState n f-}
                 GShare n f
                 pure f
 

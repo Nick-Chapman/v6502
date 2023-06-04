@@ -1,5 +1,5 @@
 
-top: diff.bug #reg
+top: diff.bugS #reg
 
 nn = 33154 # just before first chrin
 
@@ -15,11 +15,14 @@ $(exe): src/*.hs
 
 run: $(exe) Makefile
 #	$(exe) -beat -max $(nn) sim2 min # fastest so far. 1/40 of perfect6502
-	$(exe) -beat -max $(nn) sim3 min # about same speed
+	$(exe) -beat -max $(nn) sim3 raw # bit slower, but work now
 
 
 # show the bug in sim3/raw (also have bug in sim3/simp)
-diff.bug: gen/cbm-sim2-min.trace gen/cbm-sim3-raw.trace
+diff.bugR: gen/cbm-sim2-min.trace gen/cbm-sim3-raw.trace #fixed
+	git diff --no-index --word-diff=color $^
+
+diff.bugS: gen/cbm-sim2-min.trace gen/cbm-sim3-simp.trace #still bug. fixed too
 	git diff --no-index --word-diff=color $^
 
 
@@ -38,7 +41,7 @@ gen/cbm-sim2-raw.trace: $(exe) # quicker startup, then slower, but still works
 gen/cbm-sim3-min.trace: $(exe) # BIG (u5472); less state (392 regs); works (SLOW)
 	$(exe) sim3 min -max $(n) -trace > $@
 
-gen/cbm-sim3-raw.trace: $(exe) # SMALLER (u2752); more state (452 regs); broken!
+gen/cbm-sim3-raw.trace: $(exe) # SMALLER (u2752); more state (452 regs); broken! WORKS
 	$(exe) sim3 raw -max $(n) -trace > $@
 
 
@@ -46,7 +49,7 @@ gen/cbm-sim2-simp.trace: $(exe)
 	$(exe) sim2 simp -max $(n) -trace > $@
 
 gen/cbm-sim3-simp.trace: $(exe)
-	$(exe) sim3 simp -max $(n) -trace > $@
+	$(exe) sim3 simp -max $(n) -trace > $@ # still broken; dont care
 
 
 
@@ -67,7 +70,7 @@ gen/cbm-sim3-simp.trace: $(exe)
 
 
 speed: $(exe) Makefile
-	bash -c 'time $(exe) sim3 min -trace -max 100'
+	bash -c 'time $(exe) sim3 raw -max 100'
 
 reg0: gen/cbm-sim3-min.trace
 	git diff gen
